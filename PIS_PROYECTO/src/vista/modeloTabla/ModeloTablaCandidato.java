@@ -5,7 +5,9 @@
  */
 package vista.modeloTabla;
 
+import controlador.ed.listas.ListaEnlazada;
 import javax.swing.table.AbstractTableModel;
+import modelo.Candidato;
 
 /**
  *
@@ -13,19 +15,50 @@ import javax.swing.table.AbstractTableModel;
  */
 public class ModeloTablaCandidato extends AbstractTableModel{
 
+    private ListaEnlazada<Candidato> datos = new ListaEnlazada<>();
+
+    public ListaEnlazada<Candidato> getDatos() {
+        return datos;
+    }
+
+    public void setDatos(ListaEnlazada<Candidato> datos) {
+        this.datos = datos;
+    }
+    
     @Override
     public int getRowCount() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return datos.size();
     }
 
     @Override
     public int getColumnCount() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return 3;
     }
 
     @Override
     public Object getValueAt(int arg0, int arg1) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Candidato c = null;
+        try {
+            c = datos.obtener(arg0);
+        } catch (Exception e) {
+        }
+        switch(arg1){
+            case 0: return(arg0+1);
+            case 1: return c.getNombre_candidato();
+            case 2: return c.getPreparacion_candidato();
+            default: return null;
+        }
+        
+    }
+
+    @Override
+    public String getColumnName(int column) {
+        switch(column){
+            case 0: return "ID";
+            case 1: return "Nombre Candidato";
+            case 2: return "Preparacion Candidato";
+            default: return null;
+        }
     }
     
 }
