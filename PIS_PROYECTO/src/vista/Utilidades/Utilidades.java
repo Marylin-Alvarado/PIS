@@ -10,6 +10,8 @@ import javax.swing.JComboBox;
 import modelo.Persona;
 import modelo.enums.Generos;
 import modelo.enums.TipoIdentificacion;
+import java.util.Date;
+import java.text.SimpleDateFormat;
 
 /**
  *
@@ -53,6 +55,16 @@ public class Utilidades {
             cbx.addItem(identifiacion);
         }
         return cbx;
+    }
+    
+    public String generarFechaActual(){
+     Date fechaHoraActual = new Date();
+        SimpleDateFormat formatoFecha = new SimpleDateFormat("dd/MM/yyyy");
+        String fechaActual = formatoFecha.format(fechaHoraActual);
+         SimpleDateFormat formatoHora = new SimpleDateFormat("HH:mm:ss");
+        String horaActual = formatoHora.format(fechaHoraActual);
+      
+     return fechaActual +" " + horaActual ;  
     }
 
 }
