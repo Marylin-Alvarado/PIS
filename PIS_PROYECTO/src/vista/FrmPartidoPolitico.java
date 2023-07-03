@@ -5,11 +5,8 @@
  */
 package vista;
 
-import controlador.DAO.CandidatoDao;
+
 import controlador.DAO.PartidoPoliticoDao;
-import java.io.IOException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import vista.modeloTabla.ModeloTablaPartidoPolitico;
 

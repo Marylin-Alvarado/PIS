@@ -8,7 +8,6 @@ package vista;
 import controlador.DAO.CandidatoDao;
 import controlador.DAO.PartidoPoliticoDao;
 import javax.swing.JOptionPane;
-import modelo.Persona;
 import vista.modeloTabla.ModeloTablaCandidato;
 
 /**
@@ -58,6 +57,7 @@ public class FrmCandidato extends javax.swing.JDialog {
             } else {
                 candidato.getDatos().setNombre_candidato(txtNombre.getText());
                 candidato.getDatos().setPreparacion_candidato(txtPreparacion.getText());
+                partido.getDatos().getCandidato().insertar(candidato.getDatos());
                 candidato.guardar();
                 limpiar();
                 JOptionPane.showMessageDialog(null, "Datos Guardados Correctamente", "Infomacion", JOptionPane.INFORMATION_MESSAGE);
