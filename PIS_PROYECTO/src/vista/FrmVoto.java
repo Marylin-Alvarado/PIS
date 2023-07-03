@@ -9,7 +9,10 @@ import controlador.DAO.VotoDao;
 import javax.swing.JOptionPane;
 import vista.ModeloTabla.ModeloTablaVoto;
 import vista.Utilidades.Utilidades;
-
+import javax.swing.JLabel;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
+import java.awt.Image;  
 /**
  *
  * @author Marylin
@@ -27,8 +30,26 @@ public class FrmVoto extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
         cargarTabla();
-    }
+       cargarImagenes();
 
+        
+    }
+    
+    public void cargarImagenes(){
+     this.setLocationRelativeTo(this);
+        SetImageLabel(jblvoto1, "C:\\Users\\Gonzalez G\\OneDrive\\Desktop\\PROYECTO DE VOTACION\\PIS\\PIS_PROYECTO\\src\\imagenes\\voto.png");
+        SetImageLabel(jblestado, "C:\\Users\\Gonzalez G\\OneDrive\\Desktop\\PROYECTO DE VOTACION\\PIS\\PIS_PROYECTO\\src\\imagenes\\estadovoto.png");
+        SetImageLabel(jblubicacion, "C:\\Users\\Gonzalez G\\OneDrive\\Desktop\\PROYECTO DE VOTACION\\PIS\\PIS_PROYECTO\\src\\imagenes\\ubicacion.png");
+        SetImageLabel(jblVoto, "C:\\Users\\Gonzalez G\\OneDrive\\Desktop\\PROYECTO DE VOTACION\\PIS\\PIS_PROYECTO\\src\\imagenes\\votocolor.png");
+    
+    }
+    
+       private void SetImageLabel(JLabel labelName, String root) {
+        ImageIcon image = new ImageIcon(root);
+        Icon icon = new ImageIcon(image.getImage().getScaledInstance(labelName.getWidth(), labelName.getHeight(), Image.SCALE_DEFAULT));
+        labelName.setIcon(icon);
+        this.repaint();
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -50,10 +71,16 @@ public class FrmVoto extends javax.swing.JDialog {
         jPanel2 = new javax.swing.JPanel();
         jButton1 = new javax.swing.JButton();
         btnSeleccionar = new javax.swing.JButton();
+        jblVoto = new javax.swing.JLabel();
+        jblestado = new javax.swing.JLabel();
+        jblvoto1 = new javax.swing.JLabel();
+        jblubicacion = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblTabla = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+
+        jPanel1.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1, new java.awt.Color(131, 175, 155)));
 
         jLabel1.setText("Tipo de voto");
 
@@ -88,11 +115,16 @@ public class FrmVoto extends javax.swing.JDialog {
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jButton1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btnSeleccionar)
-                .addContainerGap(367, Short.MAX_VALUE))
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jButton1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btnSeleccionar))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(55, 55, 55)
+                        .addComponent(jblVoto, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(55, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -101,7 +133,9 @@ public class FrmVoto extends javax.swing.JDialog {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1)
                     .addComponent(btnSeleccionar))
-                .addContainerGap(145, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jblVoto, javax.swing.GroupLayout.DEFAULT_SIZE, 121, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -128,7 +162,15 @@ public class FrmVoto extends javax.swing.JDialog {
                             .addComponent(cbxTipo, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(cbxEstado, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txtLugar, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jblubicacion, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jblvoto1, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jblestado, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -137,18 +179,28 @@ public class FrmVoto extends javax.swing.JDialog {
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(19, 19, 19)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(cbxTipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel1))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 24, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(cbxEstado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jblvoto1, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(32, 32, 32))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(cbxTipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel1))
+                        .addGap(21, 21, 21)))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(0, 7, Short.MAX_VALUE)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel3)
+                            .addComponent(cbxEstado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(jblestado, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtLugar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2))
+                    .addComponent(jLabel2)
+                    .addComponent(jblubicacion, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(7, 7, 7)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(cbxEleccion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -158,6 +210,7 @@ public class FrmVoto extends javax.swing.JDialog {
                 .addContainerGap())
         );
 
+        tblTabla.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(131, 175, 155)));
         tblTabla.setAutoscrolls(false);
         jScrollPane1.setViewportView(tblTabla);
 
@@ -168,17 +221,17 @@ public class FrmVoto extends javax.swing.JDialog {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 503, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addGap(21, 21, 21))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 337, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -198,7 +251,7 @@ guardar();        // TODO add your handling code here:
                 txtLugar.setText(vd.getVoto().getLugar());
                 cbxTipo.setSelectedItem(vd.getVoto().gettipoVoto());
                 cbxEleccion.setSelectedItem(ABORT);
-                cbxEstado.setSelectedItem(vd.getVoto().getEstado());
+                cbxEstado.setSelectedItem(vd.getVoto().getEstado().booleanValue());
             } catch (Exception e) {
                 System.out.println(e);
             }
@@ -218,11 +271,11 @@ private void cargarTabla() {
             JOptionPane.showMessageDialog(null, "Ingrese todo los campos", "Error", JOptionPane.ERROR_MESSAGE);
         } else {
             try {
-                
+               
                 vd.getVoto().settipoVoto(cbxTipo.getSelectedItem().toString());
                 vd.getVoto().setLugar(txtLugar.getText());
                  
-                vd.getVoto().setEstado(cbxEstado.getSelectedItem().equals(vd));
+                vd.getVoto().setEstado(Boolean.getBoolean((String)cbxEstado.getSelectedItem()));
                 vd.getVoto().setId_Eleccion(PROPERTIES);
                 vd.getVoto().setFechadeEmision(u.generarFechaActual());
                 if (vd.getVoto().getId() != null) {
@@ -309,6 +362,10 @@ private void cargarTabla() {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel jblVoto;
+    private javax.swing.JLabel jblestado;
+    private javax.swing.JLabel jblubicacion;
+    private javax.swing.JLabel jblvoto1;
     private javax.swing.JTable tblTabla;
     private javax.swing.JTextField txtLugar;
     // End of variables declaration//GEN-END:variables

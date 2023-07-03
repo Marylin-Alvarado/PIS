@@ -6,6 +6,7 @@ package vista.ModeloTabla;
 
 import controlador.ed.listas.ListaEnlazada;
 import javax.swing.table.AbstractTableModel;
+import modelo.Dignidad;
 
 import modelo.Voto;
 /**
@@ -13,13 +14,13 @@ import modelo.Voto;
  * @author Gonzalez G
  */
 public class ModeloTablaDignidad  extends AbstractTableModel {
-    private ListaEnlazada<Voto> lista = new ListaEnlazada<>();
+    private ListaEnlazada<Dignidad> lista = new ListaEnlazada<>();
 
-    public ListaEnlazada<Voto> getLista() {
+    public ListaEnlazada<Dignidad> getLista() {
         return lista;
     }
 
-    public void setLista(ListaEnlazada<Voto> lista) {
+    public void setLista(ListaEnlazada<Dignidad> lista) {
         this.lista = lista;
     }
     
@@ -35,17 +36,17 @@ public class ModeloTablaDignidad  extends AbstractTableModel {
 
     @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
-Voto  v= null;
+Dignidad  v= null;
         try {
             v = lista.obtener(rowIndex);
         } catch (Exception e) {
         }
         switch (columnIndex) {
             case 0: return v.getId();
-            case 1 : return v.gettipoVoto();
-            case 2: return v.getLugar();
-            case 3 : return v.getEstado();
-            case 4 : return v .getFechadeEmision();
+            case 1 : return v.getTipo();
+            case 2: return v.getCategorias();
+            case 3 : return v.getNrocupos();
+            case 4 : return v.getId_Partido_Politico();
             default:
                 return null;
         }
@@ -56,10 +57,10 @@ Voto  v= null;
     public String  getColumnName (int column){
     switch (column) {
             case 0: return"ID";
-            case 1 :return "NUMERO DE VOTOS";
-            case 2: return"LUGAR";
-            case 3 : return"ESTADO";
-            case 4 :return "FECHA";
+            case 1 :return "Categorias";
+            case 2: return"tipo";
+            case 3 : return"Nro Cupos";
+            case 4 :return "Partido Politico";
             default:return null;
         }
     }
