@@ -6,7 +6,13 @@
 package vista.Utilidades;
 
 
+import controlador.DAO.PartidoPoliticoDao;
+import controlador.ed.listas.ListaEnlazada;
+import controlador.ed.listas.exception.ListaNullException;
+import controlador.ed.listas.exception.PosicionNoEncontradaException;
 import javax.swing.JComboBox;
+import modelo.Candidato;
+import modelo.PartidoPolitico;
 import modelo.Persona;
 import modelo.enums.Generos;
 import modelo.enums.TipoIdentificacion;
@@ -53,6 +59,29 @@ public class Utilidades {
             cbx.addItem(identifiacion);
         }
         return cbx;
+    }
+    /**
+     * Retorn el Partido Politico al cual pertenece el Candidato
+     * @param candidato
+     * @return PartidoPolitico
+     * @throws PosicionNoEncontradaException
+     * @throws ListaNullException 
+     */
+    public static PartidoPolitico retornarPartidoCandidato(Candidato candidato) throws PosicionNoEncontradaException, ListaNullException{
+        PartidoPoliticoDao ppd = new PartidoPoliticoDao();
+        ListaEnlazada<PartidoPolitico> lista = ppd.listar();
+        PartidoPolitico pp = null;
+        for (int i = 0; i < lista.size(); i++) {
+            PartidoPolitico aux = lista.obtener(i);
+            for (int j = 0; j < aux.getCandidato().size(); j++) {
+                Candidato auxCandidato = aux.getCandidato().obtener(j);
+                if (auxCandidato == candidato) {
+                    pp = aux;
+                    break;
+                }
+            }
+        }
+        return pp;
     }
 
 }

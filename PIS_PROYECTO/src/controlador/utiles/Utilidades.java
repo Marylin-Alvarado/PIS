@@ -5,6 +5,11 @@
  */
 package controlador.utiles;
 
+import controlador.DAO.EleccionDao;
+import controlador.DAO.PapeletaDao;
+import controlador.ed.listas.ListaEnlazada;
+import controlador.ed.listas.exception.ListaNullException;
+import controlador.ed.listas.exception.PosicionNoEncontradaException;
 import java.io.UnsupportedEncodingException;
 import java.lang.reflect.Field;
 import java.security.InvalidKeyException;
@@ -17,6 +22,9 @@ import javax.crypto.IllegalBlockSizeException;
 import javax.crypto.NoSuchPaddingException;
 import javax.crypto.SecretKey;
 import javax.crypto.spec.SecretKeySpec;
+import modelo.Eleccion;
+import modelo.Papeleta;
+import modelo.Persona;
 
 /**
  *
@@ -173,6 +181,29 @@ public class Utilidades {
             System.out.println("La Cédula ingresada es Incorrecta");
         }
         return cedulaCorrecta;
+    }
+    
+    public Eleccion buscarEleccionPorPersona(Persona persona) throws PosicionNoEncontradaException, ListaNullException{
+        Eleccion res = null;
+        EleccionDao eleccionDao = new EleccionDao();
+        PapeletaDao papeletaDao = new PapeletaDao();
+        ListaEnlazada<Eleccion> elecciones = eleccionDao.listar();
+        ListaEnlazada<Papeleta> papeletas = papeletaDao.listar();
+        
+        for (int i = 0; i < papeletas.size(); i++) {
+            Papeleta papeletaAux = papeletas.obtener(i);
+            if (papeletaAux.getId_persona().intValue() == persona.getId().intValue()) {
+                for (int j = 0; j < elecciones.size(); j++) {
+                    Eleccion eleccionAux = elecciones.obtener(j);
+                    if (papeletaAux.getId_eleccion().intValue() == eleccionAux.getId_Eleccion().intValue()) {
+                        res = eleccionAux;
+                        break;
+                    }
+                }
+            }
+        }
+        
+        return res;
     }
 
     public static void main(String[] args) {
