@@ -210,13 +210,16 @@ public class FrmDignidad extends javax.swing.JDialog {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         guardar();        // TODO add your handling code here:
     }//GEN-LAST:event_jButton1ActionPerformed
+ /**
+     * Este metodo me perimite guardar los datos del de la dignidad
+     * como los numeros de cupos,como el tipo ,la categoria entre otros.
+     */
     private void guardar() {
 
         if (txtxNroCupos.getText().trim().isEmpty() || cbxCategoria.getSelectedItem().toString().isEmpty()) {
             JOptionPane.showMessageDialog(null, "Ingrese todo los campos", "Error", JOptionPane.ERROR_MESSAGE);
         } else {
             try {
-
                 dd.getDignidad().setNrocupos(Integer.valueOf(txtxNroCupos.getText()));
                 dd.getDignidad().setTipo(cbxTipo.getSelectedItem().toString());
                 dd.getDignidad().setCategorias(cbxCategoria.getSelectedItem().toString());
@@ -225,7 +228,6 @@ public class FrmDignidad extends javax.swing.JDialog {
                     dd.modificar(fila);
                     limpiar();
                 } else {
-
                     dd.guardar();
                     limpiar();
                 }
@@ -237,12 +239,13 @@ public class FrmDignidad extends javax.swing.JDialog {
         }
 
     }
-   
+  /**
+     * Este metodo me permite cargar las imagenes
+     */
     public void cargarImagenes(){
      this.setLocationRelativeTo(this);
         SetImageLabel(jbllogo, "C:\\Users\\Gonzalez G\\OneDrive\\Desktop\\PROYECTO DE VOTACION\\PIS\\PIS_PROYECTO\\src\\imagenes\\logo.png");
-      
-    
+   
     }
         private void SetImageLabel(JLabel labelName, String root) {
         ImageIcon image = new ImageIcon(root);
@@ -250,7 +253,9 @@ public class FrmDignidad extends javax.swing.JDialog {
         labelName.setIcon(icon);
         this.repaint();
     }
-    
+     /**
+     * Este metodo me permite limpiar todos los datos 
+     */
     private void limpiar() {
         this.dd.setDignidad(null);
         txtxNroCupos.setText("");
@@ -258,7 +263,9 @@ public class FrmDignidad extends javax.swing.JDialog {
         fila = -1;
         cargarTabla();
     }
-
+/**
+     * Este metodo me permite guardar los datos 
+     */
     private void cargarTabla() {
         modelo.setLista(dd.listar());
         tblTabla.setModel(modelo);

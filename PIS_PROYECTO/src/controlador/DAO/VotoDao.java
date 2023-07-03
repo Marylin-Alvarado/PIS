@@ -32,7 +32,7 @@ public class VotoDao extends AdaptadorDAO<Voto> {
         return voto;
     }
 
-    public void setPersona(Voto persona) {
+    public void setVoto(Voto persona) {
         this.voto = persona;
     }
 

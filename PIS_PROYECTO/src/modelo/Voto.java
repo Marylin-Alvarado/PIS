@@ -32,7 +32,6 @@ public class Voto {
         this.tipoVoto = nroVoto;
     }
 
-    
 
     public String getFechadeEmision() {
         return fechadeEmision;
