@@ -5,7 +5,6 @@
  */
 package modelo;
 
-import controlador.ed.listas.ListaEnlazada;
 
 /**
  *
@@ -13,17 +12,16 @@ import controlador.ed.listas.ListaEnlazada;
  */
 public class PartidoPolitico {
 
-    private Integer id_partido;
+    private Integer id;
     private String nombre_partido;
     private Integer numero_candidatos;
-    private ListaEnlazada<Candidato> candidato = new ListaEnlazada<>();
 
-    public Integer getId_partido() {
-        return id_partido;
+    public Integer getId() {
+        return id;
     }
 
-    public void setId_partido(Integer id_partido) {
-        this.id_partido = id_partido;
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public String getNombre_partido() {
@@ -42,12 +40,9 @@ public class PartidoPolitico {
         this.numero_candidatos = numero_candidatos;
     }
 
-    public ListaEnlazada<Candidato> getCandidato() {
-        return candidato;
-    }
-
-    public void setCandidato(ListaEnlazada<Candidato> candidato) {
-        this.candidato = candidato;
+    @Override
+    public String toString() {
+        return nombre_partido;
     }
 
 }

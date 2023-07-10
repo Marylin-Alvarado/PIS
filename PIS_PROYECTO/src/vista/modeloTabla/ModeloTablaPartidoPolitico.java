@@ -34,7 +34,7 @@ public class ModeloTablaPartidoPolitico extends AbstractTableModel{
 
     @Override
     public int getColumnCount() {
-        return 4;
+        return 3;
     }
 
     @Override
@@ -48,7 +48,6 @@ public class ModeloTablaPartidoPolitico extends AbstractTableModel{
             case 0: return(arg0+1);
             case 1: return p.getNombre_partido();
             case 2: return p.getNumero_candidatos();
-            case 3: return p.getCandidato();
             default: return null;
         }
         
@@ -60,7 +59,6 @@ public class ModeloTablaPartidoPolitico extends AbstractTableModel{
             case 0:return "ID";
             case 1:return "Nombre Partido";
             case 2:return "Numero Candidatos";
-            case 3:return "Candidatos";
             default: return null;
         }
     }

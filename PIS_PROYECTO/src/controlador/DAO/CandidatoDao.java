@@ -35,7 +35,7 @@ public class CandidatoDao extends AdaptadorDAO<Candidato>{
     }
 
     public void guardar() throws IOException {
-        datos.setId_candidato(generateID());
+        datos.setId(generateID());
         this.guardar(datos);
     }
 
@@ -46,17 +46,92 @@ public class CandidatoDao extends AdaptadorDAO<Candidato>{
     private Integer generateID() {
         return listar().size() + 1;
     }
-        
-    public Candidato buscarPorNombre(String dato) throws ListaNullException, PosicionNoEncontradaException{
-        Candidato resultado = null;
-        ListaEnlazada<Candidato> lista = listar();
-        for (int i = 0; i < lista.size(); i++) {
-            Candidato aux = lista.obtener(i);
-            if (aux.getNombre_candidato().toLowerCase().equals(dato.toLowerCase())) {
-                resultado = aux;
-                break;
-            }
+      
+      /**
+     *
+     * @param lista
+     * @param tipoOrden
+     * @return
+     */
+    public ListaEnlazada<Candidato> quickSort(ListaEnlazada<Candidato> lista, Integer tipoOrden, Integer atributoOrden) {
+        // Comprueba si la lista está vacía o solo contiene un elemento, en cuyo caso ya está ordenada
+        if (lista == null || lista.size() <= 1) {
+            return lista;
         }
-        return resultado;
+        // Convierte la lista en un arreglo para facilitar el ordenamiento
+        Candidato[] arreglo = lista.toArray();
+        // Llama al método quickSort para ordenar el arreglo
+        quickSort(arreglo, 0, arreglo.length - 1, tipoOrden, atributoOrden);
+        // Convierte el arreglo ordenado nuevamente en una lista enlazada
+        return lista.toList(arreglo);
+    }
+
+    /**
+     *
+     * @param arreglo
+     * @param bajo
+     * @param alto
+     * @param tipoOrden
+     */
+    private static void quickSort(Candidato[] arreglo, int bajo, int alto, int tipoOrden, Integer atributoOrden) {
+        // Verifica si hay elementos para ordenar
+        if (bajo < alto) {
+            // Divide el arreglo y obtiene el índice de la división
+            int indiceDivision = division(arreglo, bajo, alto, tipoOrden, atributoOrden);
+            // Ordena recursivamente la mitad inferior antes de la división
+            quickSort(arreglo, bajo, indiceDivision - 1, tipoOrden, atributoOrden);
+            // Ordena recursivamente la mitad superior después de la división
+            quickSort(arreglo, indiceDivision + 1, alto, tipoOrden, atributoOrden);
+        }
+    }
+
+    /**
+     *
+     * @param arreglo
+     * @param bajo
+     * @param alto
+     * @param tipoOrden
+     * @return
+     */
+    private static int division(Candidato[] arreglo, int bajo, int alto, int tipoOrden, Integer atributoOrden) {
+        // Selecciona el pivote como el último elemento del arreglo
+        Candidato pivote = arreglo[alto];
+        int i = bajo - 1;
+        switch (atributoOrden) {
+            case 0:
+                // Itera sobre el arreglo desde el índice bajo hasta el índice alto - 1
+                for (int j = bajo; j < alto; j++) {
+                    // Comprueba el tipo de ordenamiento y realiza el intercambio si es necesario
+                    if (tipoOrden == 0) {
+                        if (arreglo[j].getId_partido()< pivote.getId_partido()) {
+                            i++;
+                            intercambio(arreglo, i, j);
+                        }
+                    } else {
+                        if (arreglo[j].getId_partido() > pivote.getId_partido()) {
+                            i++;
+                            intercambio(arreglo, i, j);
+                        }
+                    }
+                }
+                
+        }
+        // Intercambia el pivote con el elemento en la posición i + 1
+        intercambio(arreglo, i + 1, alto);
+        // Devuelve la posición del pivote después de la división
+        return i + 1;
+    }
+
+    /**
+     *
+     * @param arreglo
+     * @param i
+     * @param j
+     */
+    private static void intercambio(Candidato[] arreglo, int i, int j) {
+        // Intercambia los elementos en las posiciones i y j del arreglo
+        Candidato temp = arreglo[i];
+        arreglo[i] = arreglo[j];
+        arreglo[j] = temp;
     }
 }

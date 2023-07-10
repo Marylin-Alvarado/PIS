@@ -43,7 +43,7 @@ public class AdaptadorDAO<T> implements InterfazDAO<T> {
     @Override
     public void modificar(T obj, Integer pos) throws ListaNullException, PosicionNoEncontradaException, IOException {
         ListaEnlazada<T> lista = listar();
-        lista.update(pos, obj);
+        lista.modificar(pos, obj);
         //lista.update(obj, pos);
         conexion.getXstream().alias(lista.getClass().getName(), ListaEnlazada.class);
         conexion.getXstream().toXML(lista, new FileWriter(url));
