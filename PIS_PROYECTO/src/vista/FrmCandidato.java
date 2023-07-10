@@ -7,7 +7,9 @@ package vista;
 
 import controlador.DAO.CandidatoDao;
 import controlador.DAO.PartidoPoliticoDao;
+import java.awt.Toolkit;
 import javax.swing.JOptionPane;
+import vista.Utilidades.Utilidades;
 import vista.modeloTabla.ModeloTablaCandidato;
 
 /**
@@ -18,8 +20,9 @@ public class FrmCandidato extends javax.swing.JDialog {
 
     private ModeloTablaCandidato modelo = new ModeloTablaCandidato();
     private CandidatoDao candidato = new CandidatoDao();
-    private PartidoPoliticoDao partido;
-    private Integer fila = 0;
+    private PartidoPoliticoDao partido = new PartidoPoliticoDao();
+    private Integer fila = -1;
+    
 
     /**
      * Creates new form FrmCandidato
@@ -27,16 +30,13 @@ public class FrmCandidato extends javax.swing.JDialog {
     public FrmCandidato(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
-    }
-    
-    public FrmCandidato(java.awt.Frame parent, boolean modal, PartidoPoliticoDao pc) {
-        super(parent, modal);
-        initComponents();
         cargarTabla();
-        this.partido = pc;
-        lblNombrePartido.setText(pc.getDatos().getNombre_partido());
+        cargarCombo();
+        setResizable(false);
+        setLocationRelativeTo(this);
+        
     }
-
+   
     private void cargarTabla() {
         modelo.setDatos(candidato.listar());
         tblTabla.setModel(modelo);
@@ -48,6 +48,15 @@ public class FrmCandidato extends javax.swing.JDialog {
         txtPreparacion.setText("");
         candidato.setDatos(null);
         cargarTabla();
+        cargarCombo();
+    }
+    
+    private void cargarCombo(){
+        try {
+            Utilidades.cargarPartido(cbxPartido, partido);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e.getMessage()+" Error", "Error", JOptionPane.ERROR_MESSAGE);
+        }
     }
 
     private void guardar() {
@@ -57,9 +66,14 @@ public class FrmCandidato extends javax.swing.JDialog {
             } else {
                 candidato.getDatos().setNombre_candidato(txtNombre.getText());
                 candidato.getDatos().setPreparacion_candidato(txtPreparacion.getText());
-                partido.getDatos().getCandidato().insertar(candidato.getDatos());
-                candidato.guardar();
-                limpiar();
+                candidato.getDatos().setId_partido(partido.buscarPorNombre(cbxPartido.getSelectedItem().toString()).getId());
+                if (candidato.getDatos().getId() != null) {
+                    candidato.modificar(fila);
+                    limpiar();
+                } else {
+                    candidato.guardar();
+                    limpiar();
+                }   
                 JOptionPane.showMessageDialog(null, "Datos Guardados Correctamente", "Infomacion", JOptionPane.INFORMATION_MESSAGE);
             }
         } catch (Exception e) {
@@ -80,16 +94,17 @@ public class FrmCandidato extends javax.swing.JDialog {
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         txtNombre = new javax.swing.JTextField();
-        jLabel2 = new javax.swing.JLabel();
         lblNombrePartido = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         txtPreparacion = new javax.swing.JTextArea();
         btnRegistrar = new javax.swing.JButton();
         btnEditar = new javax.swing.JButton();
+        cbxPartido = new javax.swing.JComboBox<>();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         tblTabla = new javax.swing.JTable();
+        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -97,14 +112,21 @@ public class FrmCandidato extends javax.swing.JDialog {
 
         jLabel1.setText("Nombre Candidato");
 
-        jLabel2.setText("Partido Politico");
-
-        lblNombrePartido.setText("jLabel3");
+        txtNombre.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtNombreKeyTyped(evt);
+            }
+        });
 
         jLabel3.setText("Preparacion Candidato");
 
         txtPreparacion.setColumns(20);
         txtPreparacion.setRows(5);
+        txtPreparacion.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtPreparacionKeyTyped(evt);
+            }
+        });
         jScrollPane1.setViewportView(txtPreparacion);
 
         btnRegistrar.setText("Registrar Candidato");
@@ -121,6 +143,8 @@ public class FrmCandidato extends javax.swing.JDialog {
             }
         });
 
+        cbxPartido.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -129,14 +153,8 @@ public class FrmCandidato extends javax.swing.JDialog {
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(26, 26, 26))
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
-                        .addGap(22, 22, 22)
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(48, 48, 48)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(txtNombre)
                             .addComponent(lblNombrePartido, javax.swing.GroupLayout.DEFAULT_SIZE, 202, Short.MAX_VALUE)))
@@ -149,6 +167,10 @@ public class FrmCandidato extends javax.swing.JDialog {
                     .addComponent(btnRegistrar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnEditar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(24, 24, 24))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(197, 197, 197)
+                .addComponent(cbxPartido, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -157,21 +179,19 @@ public class FrmCandidato extends javax.swing.JDialog {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnRegistrar)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lblNombrePartido)
+                .addGap(21, 21, 21)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(27, 27, 27)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel2)
-                            .addComponent(lblNombrePartido)))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(34, 34, 34)
-                        .addComponent(btnRegistrar)))
-                .addGap(23, 23, 23)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel3)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnEditar))
-                .addContainerGap(37, Short.MAX_VALUE))
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(btnEditar)
+                        .addComponent(jLabel3))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(34, 34, 34)
+                .addComponent(cbxPartido, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Informacion Candidato", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION));
@@ -189,17 +209,31 @@ public class FrmCandidato extends javax.swing.JDialog {
         ));
         jScrollPane2.setViewportView(tblTabla);
 
+        jButton1.setText("Volver");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addComponent(jScrollPane2)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane2)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jButton1)))
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 13, Short.MAX_VALUE)
+                .addComponent(jButton1))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -218,7 +252,7 @@ public class FrmCandidato extends javax.swing.JDialog {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(18, 18, 18)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -231,10 +265,11 @@ public class FrmCandidato extends javax.swing.JDialog {
         fila = tblTabla.getSelectedRow();
         if (fila >= 0) {
             try {
-                Integer id = modelo.getDatos().obtener(fila).getId_candidato();
+                Integer id = modelo.getDatos().obtener(fila).getId();
                 candidato.setDatos(candidato.obtener(id));
                 txtNombre.setText(candidato.getDatos().getNombre_candidato());
                 txtPreparacion.setText(candidato.getDatos().getPreparacion_candidato());
+                cbxPartido.setSelectedItem(partido.obtener(candidato.getDatos().getId_partido()).getNombre_partido().toUpperCase());
             } catch (Exception e) {
             }
         } else {
@@ -247,68 +282,108 @@ public class FrmCandidato extends javax.swing.JDialog {
         guardar();
     }//GEN-LAST:event_btnRegistrarActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        this.dispose();
+    }//GEN-LAST:event_jButton1ActionPerformed
 
-}
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(FrmCandidato.class  
-
-.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+    private void txtNombreKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNombreKeyTyped
+        // TODO add your handling code here:
+        // TODO add your handling code here:
+        if (txtNombre.getText().length() >= 12) {
+            evt.consume();
+            Toolkit.getDefaultToolkit().beep();
+            JOptionPane.showMessageDialog(this, "No puede ingresar más caracteres, Maximo 20", "Error", JOptionPane.ERROR_MESSAGE);
         }
 
-catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(FrmCandidato.class  
+        char c = evt.getKeyChar();
+        if (Character.isDigit(c)) {
+            evt.consume();
+            Toolkit.getDefaultToolkit().beep();
+            JOptionPane.showMessageDialog(this, "No puede ingresar números", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_txtNombreKeyTyped
 
-.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+    private void txtPreparacionKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPreparacionKeyTyped
+        // TODO add your handling code here:
+        // TODO add your handling code here:
+        if (txtPreparacion.getText().length() >= 30) {
+            evt.consume();
+            Toolkit.getDefaultToolkit().beep();
+            JOptionPane.showMessageDialog(this, "No puede ingresar más caracteres, Maximo 30", "Error", JOptionPane.ERROR_MESSAGE);
         }
 
-catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(FrmCandidato.class  
-
-.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        char c = evt.getKeyChar();
+        if (Character.isDigit(c)) {
+            evt.consume();
+            Toolkit.getDefaultToolkit().beep();
+            JOptionPane.showMessageDialog(this, "No puede ingresar números", "Error", JOptionPane.ERROR_MESSAGE);
         }
+    }//GEN-LAST:event_txtPreparacionKeyTyped
 
-catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(FrmCandidato.class  
-
-.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the dialog */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                FrmCandidato dialog = new FrmCandidato(new javax.swing.JFrame(), true);
-                dialog.addWindowListener(new java.awt.event.WindowAdapter() {
-                    @Override
-public void windowClosing(java.awt.event.WindowEvent e) {
-                        System.exit(0);
-                    }
-                });
-                dialog.setVisible(true);
-            }
-        });
-    }
+//    /**
+//     * @param args the command line arguments
+//     */
+//    public static void main(String args[]) {
+//        /* Set the Nimbus look and feel */
+//        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+//        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+//         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+//         */
+//        try {
+//            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+//                if ("Nimbus".equals(info.getName())) {
+//                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+//                    break;
+//
+//}
+//            }
+//        } catch (ClassNotFoundException ex) {
+//            java.util.logging.Logger.getLogger(FrmCandidato.class  
+//
+//.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        }
+//
+//catch (InstantiationException ex) {
+//            java.util.logging.Logger.getLogger(FrmCandidato.class  
+//
+//.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        }
+//
+//catch (IllegalAccessException ex) {
+//            java.util.logging.Logger.getLogger(FrmCandidato.class  
+//
+//.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        }
+//
+//catch (javax.swing.UnsupportedLookAndFeelException ex) {
+//            java.util.logging.Logger.getLogger(FrmCandidato.class  
+//
+//.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        }
+//        //</editor-fold>
+//
+//        /* Create and display the dialog */
+//        java.awt.EventQueue.invokeLater(new Runnable() {
+//            public void run() {
+//                FrmCandidato dialog = new FrmCandidato(new javax.swing.JFrame(), true);
+//                dialog.addWindowListener(new java.awt.event.WindowAdapter() {
+//                    @Override
+//public void windowClosing(java.awt.event.WindowEvent e) {
+//                        System.exit(0);
+//                    }
+//                });
+//                dialog.setVisible(true);
+//            }
+//        });
+//    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnEditar;
     private javax.swing.JButton btnRegistrar;
+    private javax.swing.JComboBox<String> cbxPartido;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
