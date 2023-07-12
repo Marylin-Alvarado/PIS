@@ -56,15 +56,14 @@ public class Utilidades {
         }
         return cbx;
     }
-    
+    /**
+     * Este metodo me permite generar la fecha 
+     */
     public String generarFechaActual(){
      Date fechaHoraActual = new Date();
         SimpleDateFormat formatoFecha = new SimpleDateFormat("dd/MM/yyyy");
         String fechaActual = formatoFecha.format(fechaHoraActual);
-         SimpleDateFormat formatoHora = new SimpleDateFormat("HH:mm:ss");
-        String horaActual = formatoHora.format(fechaHoraActual);
-      
-     return fechaActual +" " + horaActual ;  
+     return fechaActual ;  
     }
 
 }

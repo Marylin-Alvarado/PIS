@@ -323,7 +323,7 @@ guardar();        // TODO add your handling code here:
          
     }
 /**
-     * Este metodo me perimite limpiar la tabla 
+     * Este metodo me permite limpiar los datos
      */
        private void limpiar() {
         this.vd.setVoto(null);
