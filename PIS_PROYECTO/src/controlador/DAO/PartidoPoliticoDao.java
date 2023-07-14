@@ -33,13 +33,13 @@ public class PartidoPoliticoDao extends AdaptadorDAO<PartidoPolitico>{
         this.datos = datos;
     }
 
-    public void guardar() throws IOException {
+    public void guardar() throws IOException, Exception {
         datos.setId(generateID());
         this.guardar(datos);
     }
 
-    public void modificar(Integer pos) throws ListaNullException, PosicionNoEncontradaException, IOException {
-        this.modificar(datos, pos);
+    public void modificar(Integer pos) throws ListaNullException, PosicionNoEncontradaException, IOException, Exception {
+        this.modificar(datos);
     }
 
     private Integer generateID() {

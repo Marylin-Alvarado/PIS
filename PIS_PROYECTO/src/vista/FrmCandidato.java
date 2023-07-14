@@ -7,7 +7,14 @@ package vista;
 
 import controlador.DAO.CandidatoDao;
 import controlador.DAO.PartidoPoliticoDao;
+
+import controlador.ed.listas.exception.ListaNullException;
+import controlador.ed.listas.exception.PosicionNoEncontradaException;
+import java.awt.HeadlessException;
 import java.awt.Toolkit;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import vista.Utilidades.Utilidades;
 import vista.modeloTabla.ModeloTablaCandidato;
@@ -38,15 +45,17 @@ public class FrmCandidato extends javax.swing.JDialog {
     }
    
     private void cargarTabla() {
+        try {
         modelo.setDatos(candidato.listar());
         tblTabla.setModel(modelo);
-        tblTabla.updateUI();
+        tblTabla.updateUI();    
+        } catch (Exception e) {
+        }
     }
 
     private void limpiar() {
         txtNombre.setText("");
         txtPreparacion.setText("");
-        candidato.setDatos(null);
         cargarTabla();
         cargarCombo();
     }
@@ -76,8 +85,16 @@ public class FrmCandidato extends javax.swing.JDialog {
                 }   
                 JOptionPane.showMessageDialog(null, "Datos Guardados Correctamente", "Infomacion", JOptionPane.INFORMATION_MESSAGE);
             }
-        } catch (Exception e) {
+        } catch (HeadlessException e) {
             JOptionPane.showMessageDialog(null, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        } catch (ListaNullException ex) {
+            Logger.getLogger(FrmCandidato.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (PosicionNoEncontradaException ex) {
+            Logger.getLogger(FrmCandidato.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(FrmCandidato.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (Exception ex) {
+            Logger.getLogger(FrmCandidato.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -261,7 +278,7 @@ public class FrmCandidato extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
-        // TODO add your handling code here:
+
         fila = tblTabla.getSelectedRow();
         if (fila >= 0) {
             try {
