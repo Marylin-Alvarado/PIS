@@ -16,6 +16,8 @@ import modelo.PartidoPolitico;
 import modelo.Persona;
 import modelo.enums.Generos;
 import modelo.enums.TipoIdentificacion;
+import java.util.Date;
+import java.text.SimpleDateFormat;
 
 /**
  *
@@ -60,6 +62,7 @@ public class Utilidades {
         }
         return cbx;
     }
+
     
     public static void cargarPartido(JComboBox cbx , PartidoPoliticoDao pd) throws ListaNullException, PosicionNoEncontradaException{
         cbx.removeAllItems();
@@ -67,6 +70,21 @@ public class Utilidades {
         for (int i = 0; i < lista.size(); i++) {
             cbx.addItem(lista.obtener(i).getNombre_partido());
         }
+    }
+    /**
+     * Este metodo me permite generar la fecha 
+     */
+
+    /**
+     * Este metodo me permite generar la fecha
+     * @return
+     */
+    public String generarFechaActual(){
+     Date fechaHoraActual = new Date();
+        SimpleDateFormat formatoFecha = new SimpleDateFormat("dd/MM/yyyy");
+        String fechaActual = formatoFecha.format(fechaHoraActual);
+       
+return fechaActual ;
     }
 
 }
