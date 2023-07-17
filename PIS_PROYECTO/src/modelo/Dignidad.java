@@ -9,19 +9,13 @@ package modelo;
  * @author Gonzalez G
  */
 public class Dignidad {
-    private Integer id_Partido_Politico;
+   
     private String tipo ;
     private Integer id;
-    private Integer Nrocupos;
+    private Integer NroDignidad;
     private String categorias ;
 
-    public Integer getId_Partido_Politico() {
-        return id_Partido_Politico;
-    }
-
-    public void setId_Partido_Politico(Integer id_Partido_Politico) {
-        this.id_Partido_Politico = id_Partido_Politico;
-    }
+   
 
     public String getTipo() {
         return tipo;
@@ -40,11 +34,11 @@ public class Dignidad {
     }
 
     public Integer getNrocupos() {
-        return Nrocupos;
+        return NroDignidad;
     }
 
     public void setNrocupos(Integer Nrocupos) {
-        this.Nrocupos = Nrocupos;
+        this.NroDignidad = Nrocupos;
     }
 
     public String getCategorias() {

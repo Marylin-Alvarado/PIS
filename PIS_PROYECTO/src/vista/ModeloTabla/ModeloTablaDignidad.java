@@ -46,7 +46,6 @@ Dignidad  v= null;
             case 1 : return v.getTipo();
             case 2: return v.getCategorias();
             case 3 : return v.getNrocupos();
-            case 4 : return v.getId_Partido_Politico();
             default:
                 return null;
         }

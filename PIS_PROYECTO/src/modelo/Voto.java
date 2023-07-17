@@ -10,11 +10,12 @@ package modelo;
  */
 public class Voto {
      private Integer id ;
-     private String tipoVoto ;
+     private TipoVoto tipoVoto;
      private String fechadeEmision;
+    //Estado del voto True si la persona voto y false si no voto
      private Boolean estado ;
      private Integer id_Eleccion ;
-     private String Lugar ;
+   
 
     public Integer getId() {
         return id;
@@ -24,13 +25,15 @@ public class Voto {
         this.id = id;
     }
 
-    public String gettipoVoto() {
+    public TipoVoto getTipoVoto() {
         return tipoVoto;
     }
 
-    public void settipoVoto(String nroVoto) {
-        this.tipoVoto = nroVoto;
+    public void setTipoVoto(TipoVoto tipoVoto) {
+        this.tipoVoto = tipoVoto;
     }
+
+   
 
 
     public String getFechadeEmision() {
@@ -57,13 +60,6 @@ public class Voto {
         this.id_Eleccion = id_Eleccion;
     }
 
-    public String getLugar() {
-        return Lugar;
-    }
-
-    public void setLugar(String Lugar) {
-        this.Lugar = Lugar;
-    }
-     
+  
      
 }

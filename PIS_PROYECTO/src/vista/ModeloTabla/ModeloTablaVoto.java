@@ -42,10 +42,9 @@ Voto  v= null;
         }
         switch (columnIndex) {
             case 0: return v.getId();
-            case 1 : return v.gettipoVoto();
-            case 2: return v.getLugar();
-            case 3 : return v.getEstado();
-            case 4 : return v.getFechadeEmision();
+            case 1 : return v.getTipoVoto();
+            case 2 : return v.getEstado();
+            case 3 : return v.getFechadeEmision();
             default:
                 return null;
         }
@@ -57,9 +56,8 @@ Voto  v= null;
     switch (column) {
             case 0: return"ID";
             case 1 :return "TIPO";
-            case 2: return"LUGAR";
-            case 3 : return"ESTADO";
-            case 4 :return "FECHA  HORA";
+            case 2 : return"ESTADO";
+            case 3 :return "FECHA  HORA";
             default:return null;
         }
     }

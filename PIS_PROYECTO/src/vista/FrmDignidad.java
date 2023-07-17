@@ -223,7 +223,6 @@ public class FrmDignidad extends javax.swing.JDialog {
                 dd.getDignidad().setNrocupos(Integer.valueOf(txtxNroCupos.getText()));
                 dd.getDignidad().setTipo(cbxTipo.getSelectedItem().toString());
                 dd.getDignidad().setCategorias(cbxCategoria.getSelectedItem().toString());
-                dd.getDignidad().setId_Partido_Politico(PROPERTIES);
                 if (dd.getDignidad().getId() != null) {
                     dd.modificar(fila);
                     limpiar();
