@@ -51,15 +51,15 @@ public class FrmPartidoPolitico extends javax.swing.JDialog {
             if (txtNombrePartido.getText().isEmpty() || txtNumeroCandidatos.getText().isEmpty()) {
                 JOptionPane.showMessageDialog(null, "Porfavor llene todos los campos", "Error", JOptionPane.ERROR_MESSAGE);
             } else {
-                partido.getDatos().setNombre_partido(txtNombrePartido.getText());
+                partido.getDatos().setNombre_partidoPolitico(txtNombrePartido.getText());
                 partido.getDatos().setNumero_candidatos(Integer.parseInt(txtNumeroCandidatos.getText()));
-                if (partido.getDatos().getId() != null) {
+                if (partido.getDatos().getId_partidoPolitico()!= null) {
                     partido.modificar(fila);
                     limpiar();
                 } else {
                     partido.guardar();
                     limpiar();
-                }
+                }  
                 JOptionPane.showMessageDialog(null, "Datos Guardados Correctamente", "Infomacion", JOptionPane.INFORMATION_MESSAGE);
             }
         } catch (Exception e) {
@@ -269,9 +269,9 @@ public class FrmPartidoPolitico extends javax.swing.JDialog {
         fila = tblTabla.getSelectedRow();
         if (fila >= 0) {
             try {
-                Integer id = modelo.getDatos().obtener(fila).getId();
+                Integer id = modelo.getDatos().obtener(fila).getId_partidoPolitico();
                 partido.setDatos(partido.obtener(id));
-                txtNombrePartido.setText(partido.getDatos().getNombre_partido());
+                txtNombrePartido.setText(partido.getDatos().getNombre_partidoPolitico());
                 txtNumeroCandidatos.setText(partido.getDatos().getNumero_candidatos().toString());               
             } catch (Exception e) {
             }

@@ -45,8 +45,8 @@ public class ModeloTablaPartidoPolitico extends AbstractTableModel{
         } catch (Exception e) {
         }
         switch(arg1){
-            case 0: return(arg0+1);
-            case 1: return p.getNombre_partido();
+            case 0: return p.getId_partidoPolitico()+1;
+            case 1: return p.getNombre_partidoPolitico();
             case 2: return p.getNumero_candidatos();
             default: return null;
         }

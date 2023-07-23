@@ -15,8 +15,9 @@ import modelo.PartidoPolitico;
  *
  * @author cobos
  */
-public class PartidoPoliticoDao extends AdaptadorDAO<PartidoPolitico>{
-     private PartidoPolitico datos;
+public class PartidoPoliticoDao extends AdaptadorDAO<PartidoPolitico> {
+
+    private PartidoPolitico datos;
 
     public PartidoPoliticoDao() {
         super(PartidoPolitico.class);
@@ -33,43 +34,43 @@ public class PartidoPoliticoDao extends AdaptadorDAO<PartidoPolitico>{
         this.datos = datos;
     }
 
-    public void guardar() throws IOException {
-        datos.setId(generateID());
+    public void guardar() throws IOException, Exception {
+        datos.setId_partidoPolitico(generateID());
         this.guardar(datos);
     }
 
-    public void modificar(Integer pos) throws ListaNullException, PosicionNoEncontradaException, IOException {
-        this.modificar(datos, pos);
+    public void modificar(Integer pos) throws ListaNullException, PosicionNoEncontradaException, IOException, Exception {
+        this.modificar(datos);
     }
 
     private Integer generateID() {
         return listar().size() + 1;
     }
-    
-    public PartidoPolitico buscarPorNombre(String dato) throws ListaNullException, PosicionNoEncontradaException{
+
+    public PartidoPolitico buscarPorNombre(String dato) throws ListaNullException, PosicionNoEncontradaException {
         PartidoPolitico resultado = null;
         ListaEnlazada<PartidoPolitico> lista = listar();
         for (int i = 0; i < lista.size(); i++) {
             PartidoPolitico aux = lista.obtener(i);
-            if (aux.getNombre_partido().toLowerCase().equals(dato.toLowerCase())) {
+            if (aux.getNombre_partidoPolitico().toLowerCase().equals(dato.toLowerCase())) {
                 resultado = aux;
                 break;
             }
         }
         return resultado;
     }
-    
-    public ListaEnlazada<PartidoPolitico> ordenarNombre(ListaEnlazada<PartidoPolitico> lista,  Integer tipo) {
+
+    public ListaEnlazada<PartidoPolitico> ordenarNombre(ListaEnlazada<PartidoPolitico> lista, Integer tipo) {
         try {
             PartidoPolitico[] matriz = lista.toArray();
             for (int i = 1; i < lista.size(); i++) {
                 PartidoPolitico key = matriz[i];
                 int j = i - 1;
-                switch(tipo){
-                    case 0: 
-                        
+                switch (tipo) {
+                    case 0:
+
                 }
-                while (j >= 0 && (matriz[j].getNombre_partido().compareToIgnoreCase(key.getNombre_partido())) > 0) {
+                while (j >= 0 && (matriz[j].getNombre_partidoPolitico().compareToIgnoreCase(key.getNombre_partidoPolitico())) > 0) {
                     //lista.update(j+1, lista.get(j));
                     matriz[j + 1] = matriz[j];
                     j = j - 1;
