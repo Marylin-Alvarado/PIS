@@ -14,14 +14,14 @@ import java.sql.SQLException;
  *
  * @author cobos
  */
-public class Conexion {
+public class ConexionB {
     //https://www.codejava.net/java-se/jdbc/connect-to-oracle-database-via-jdbc
     private Connection connection;
     // Librería de MySQL
     public String driver = "oracle.jdbc.driver.OracleDriver";//oracle.jdbc.driver.OracleDriver
 
     // Nombre de la base de datos
-    public String database = "pis";
+    public String database = "xe";
 
     // Host
     public String hostname = "localhost";
@@ -31,10 +31,10 @@ public class Conexion {
 
     // Ruta de nuestra base de datos (desactivamos el uso de SSL con "?useSSL=false")
     //String aux = "jdbc:oracle:thin:@"+hostname+":"+port+":"+database;
-    public String url = "jdbc:oracle:thin:@"+hostname+":"+port+":"+database + "?useSSL=false";//"jdbc:oracle:thin:@"+hostname+":"+port+":"+database;
+    public String url = "jdbc:oracle:thin:@"+hostname+":"+port+":"+database;//"jdbc:oracle:thin:@"+hostname+":"+port+":"+database;
 
     // Nombre de usuario
-    public String username = "pis_proyecto";
+    public String username = "pis_base";
 
     // Clave de usuario
     public String password = "123456789";
@@ -49,7 +49,7 @@ public class Conexion {
             conn = DriverManager.getConnection(url, username, password);
             System.out.println("Conected!");
         } catch (ClassNotFoundException | SQLException e) {
-            e.printStackTrace();
+            System.out.println(e);
         }
 
         return conn;
@@ -66,7 +66,7 @@ public class Conexion {
     }
 
     public static void main(String[] args) {
-        new Conexion().conectar();
+        new ConexionB().conectar();
     }
     
     /*private XStream xstream;

@@ -30,7 +30,7 @@ public class AdaptadorDAO<T> implements InterfazDAO<T> {
     /**
      * Obejto Conexion
      */
-    private Conexion conexion;
+    private ConexionB conexion;
     /**
      * Class del modelo a usar
      */
@@ -41,7 +41,7 @@ public class AdaptadorDAO<T> implements InterfazDAO<T> {
      * @param clazz El objeto de la clase del modelo Ejemplo: Persona.class
      */
     public AdaptadorDAO(Class clazz) {
-        this.conexion = new Conexion();
+        this.conexion = new ConexionB();
         this.clazz = clazz;
     }
     /**

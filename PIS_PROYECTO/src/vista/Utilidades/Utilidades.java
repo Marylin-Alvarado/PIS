@@ -65,7 +65,7 @@ public class Utilidades {
         cbx.removeAllItems();
         ListaEnlazada<PartidoPolitico> lista = pd.ordenarNombre(pd.listar(), 0);
         for (int i = 0; i < lista.size(); i++) {
-            cbx.addItem(lista.obtener(i).getNombre_partido());
+            cbx.addItem(lista.obtener(i).getNombre_partidoPolitico());
         }
     }
 

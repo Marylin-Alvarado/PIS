@@ -12,16 +12,16 @@ package modelo;
 public class Candidato {
 
     private Integer id_partido;
-    private Integer id;
+    private Integer id_candidato;
     private String nombre_candidato;
     private String preparacion_candidato;
 
-    public Integer getId() {
-        return id;
+    public Integer getId_candidato() {
+        return id_candidato;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public void setId_candidato(Integer id_candidato) {
+        this.id_candidato = id_candidato;
     }
 
     public String getNombre_candidato() {
@@ -50,7 +50,7 @@ public class Candidato {
 
     @Override
     public String toString() {
-        return "Candidato{" + "id_partido=" + id_partido + ", id=" + id + ", nombre_candidato=" + nombre_candidato + ", preparacion_candidato=" + preparacion_candidato + '}';
+        return "Candidato{" + "id_partido=" + id_partido + ", id=" + id_candidato + ", nombre_candidato=" + nombre_candidato + ", preparacion_candidato=" + preparacion_candidato + '}';
     }
     
     

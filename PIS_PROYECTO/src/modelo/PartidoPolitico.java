@@ -12,24 +12,26 @@ package modelo;
  */
 public class PartidoPolitico {
 
-    private Integer id;
-    private String nombre_partido;
+    private Integer id_partidoPolitico;
+    private String nombre_partidoPolitico;
     private Integer numero_candidatos;
+    private String esloganPartido;
+    private String lider_partidoPolitoco;
 
-    public Integer getId() {
-        return id;
+    public Integer getId_partidoPolitico() {
+        return id_partidoPolitico;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public void setId_partidoPolitico(Integer id_partidoPolitico) {
+        this.id_partidoPolitico = id_partidoPolitico;
     }
 
-    public String getNombre_partido() {
-        return nombre_partido;
+    public String getNombre_partidoPolitico() {
+        return nombre_partidoPolitico;
     }
 
-    public void setNombre_partido(String nombre_partido) {
-        this.nombre_partido = nombre_partido;
+    public void setNombre_partidoPolitico(String nombre_partidoPolitico) {
+        this.nombre_partidoPolitico = nombre_partidoPolitico;
     }
 
     public Integer getNumero_candidatos() {
@@ -40,9 +42,22 @@ public class PartidoPolitico {
         this.numero_candidatos = numero_candidatos;
     }
 
-    @Override
-    public String toString() {
-        return nombre_partido;
+    public String getEsloganPartido() {
+        return esloganPartido;
     }
+
+    public void setEsloganPartido(String esloganPartido) {
+        this.esloganPartido = esloganPartido;
+    }
+
+    public String getLider_partidoPolitoco() {
+        return lider_partidoPolitoco;
+    }
+
+    public void setLider_partidoPolitoco(String lider_partidoPolitoco) {
+        this.lider_partidoPolitoco = lider_partidoPolitoco;
+    }
+
+  
 
 }

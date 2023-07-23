@@ -35,7 +35,7 @@ public class CandidatoDao extends AdaptadorDAO<Candidato>{
     }
 
     public void guardar() throws IOException, Exception {
-        datos.setId(generateID());
+        datos.setId_candidato(generateID());
         this.guardar(datos);
     }
 
