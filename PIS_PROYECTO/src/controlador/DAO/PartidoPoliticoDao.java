@@ -5,54 +5,50 @@
  */
 package controlador.DAO;
 
+
 import controlador.ed.listas.ListaEnlazada;
 import controlador.ed.listas.exception.ListaNullException;
 import controlador.ed.listas.exception.PosicionNoEncontradaException;
-import java.io.IOException;
-import modelo.PartidoPolitico;
+import modelo.Partido_Politico;
 
 /**
  *
  * @author cobos
  */
-public class PartidoPoliticoDao extends AdaptadorDAO<PartidoPolitico> {
+public class PartidoPoliticoDao extends AdaptadorDAO<Partido_Politico> {
 
-    private PartidoPolitico datos;
+    private Partido_Politico datos;
 
     public PartidoPoliticoDao() {
-        super(PartidoPolitico.class);
+        super(Partido_Politico.class);
     }
 
-    public PartidoPolitico getDatos() {
+    public Partido_Politico getDatos() {
         if (this.datos == null) {
-            this.datos = new PartidoPolitico();
+            this.datos = new Partido_Politico();
         }
         return datos;
     }
 
-    public void setDatos(PartidoPolitico datos) {
+    public void setDatos(Partido_Politico datos) {
         this.datos = datos;
     }
 
-    public void guardar() throws IOException, Exception {
-        datos.setId_partidoPolitico(generateID());
-        this.guardar(datos);
+    public Integer guardar() throws Exception {
+        return this.guardar(datos);   
     }
 
-    public void modificar(Integer pos) throws ListaNullException, PosicionNoEncontradaException, IOException, Exception {
-        this.modificar(datos);
+    public boolean modificar() throws Exception {
+         this.modificar(datos);
+         return true;
     }
 
-    private Integer generateID() {
-        return listar().size() + 1;
-    }
-
-    public PartidoPolitico buscarPorNombre(String dato) throws ListaNullException, PosicionNoEncontradaException {
-        PartidoPolitico resultado = null;
-        ListaEnlazada<PartidoPolitico> lista = listar();
+    public Partido_Politico buscarPorNombre(String dato) throws ListaNullException, PosicionNoEncontradaException {
+        Partido_Politico resultado = null;
+        ListaEnlazada<Partido_Politico> lista = listar();
         for (int i = 0; i < lista.size(); i++) {
-            PartidoPolitico aux = lista.obtener(i);
-            if (aux.getNombre_partidoPolitico().toLowerCase().equals(dato.toLowerCase())) {
+            Partido_Politico aux = lista.obtener(i);
+            if (aux.getNombre_partido_politico().toLowerCase().equals(dato.toLowerCase())) {
                 resultado = aux;
                 break;
             }
@@ -60,17 +56,17 @@ public class PartidoPoliticoDao extends AdaptadorDAO<PartidoPolitico> {
         return resultado;
     }
 
-    public ListaEnlazada<PartidoPolitico> ordenarNombre(ListaEnlazada<PartidoPolitico> lista, Integer tipo) {
+    public ListaEnlazada<Partido_Politico> ordenarNombre(ListaEnlazada<Partido_Politico> lista, Integer tipo) {
         try {
-            PartidoPolitico[] matriz = lista.toArray();
+            Partido_Politico[] matriz = lista.toArray();
             for (int i = 1; i < lista.size(); i++) {
-                PartidoPolitico key = matriz[i];
+                Partido_Politico key = matriz[i];
                 int j = i - 1;
                 switch (tipo) {
                     case 0:
 
                 }
-                while (j >= 0 && (matriz[j].getNombre_partidoPolitico().compareToIgnoreCase(key.getNombre_partidoPolitico())) > 0) {
+                while (j >= 0 && (matriz[j].getNombre_partido_politico().compareToIgnoreCase(key.getNombre_partido_politico())) > 0) {
                     //lista.update(j+1, lista.get(j));
                     matriz[j + 1] = matriz[j];
                     j = j - 1;

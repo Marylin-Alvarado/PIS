@@ -11,8 +11,9 @@ package modelo;
  */
 public class Candidato {
 
-    private Integer id_partido;
+    private Integer id_partido_politico;
     private Integer id_candidato;
+    private Integer id_dignidad;
     private String nombre_candidato;
     private String preparacion_candidato;
 
@@ -40,18 +41,22 @@ public class Candidato {
         this.preparacion_candidato = preparacion_candidato;
     }
 
-    public Integer getId_partido() {
-        return id_partido;
+    public Integer getId_partido_politico() {
+        return id_partido_politico;
     }
 
-    public void setId_partido(Integer id_partido) {
-        this.id_partido = id_partido;
+    public void setId_partido_politico(Integer id_partido_politico) {
+        this.id_partido_politico = id_partido_politico;
     }
 
-    @Override
-    public String toString() {
-        return "Candidato{" + "id_partido=" + id_partido + ", id=" + id_candidato + ", nombre_candidato=" + nombre_candidato + ", preparacion_candidato=" + preparacion_candidato + '}';
+    public Integer getId_dignidad() {
+        return id_dignidad;
     }
+
+    public void setId_dignidad(Integer id_dignidad) {
+        this.id_dignidad = id_dignidad;
+    }
+    
     
     
 }

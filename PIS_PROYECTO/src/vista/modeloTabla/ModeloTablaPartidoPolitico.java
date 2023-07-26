@@ -9,7 +9,7 @@ import controlador.DAO.CandidatoDao;
 import controlador.ed.listas.ListaEnlazada;
 import javax.swing.table.AbstractTableModel;
 import modelo.Candidato;
-import modelo.PartidoPolitico;
+import modelo.Partido_Politico;
 
 /**
  *
@@ -17,13 +17,13 @@ import modelo.PartidoPolitico;
  */
 public class ModeloTablaPartidoPolitico extends AbstractTableModel{
     
-    private ListaEnlazada<PartidoPolitico> datos = new ListaEnlazada<>();
+    private ListaEnlazada<Partido_Politico> datos = new ListaEnlazada<>();
 
-    public ListaEnlazada<PartidoPolitico> getDatos() {
+    public ListaEnlazada<Partido_Politico> getDatos() {
         return datos;
     }
 
-    public void setDatos(ListaEnlazada<PartidoPolitico> datos) {
+    public void setDatos(ListaEnlazada<Partido_Politico> datos) {
         this.datos = datos;
     }
     
@@ -34,20 +34,21 @@ public class ModeloTablaPartidoPolitico extends AbstractTableModel{
 
     @Override
     public int getColumnCount() {
-        return 3;
+        return 4;
     }
 
     @Override
     public Object getValueAt(int arg0, int arg1) {
-        PartidoPolitico p = null;
+        Partido_Politico p = null;
         try {
             p = datos.obtener(arg0);
         } catch (Exception e) {
         }
         switch(arg1){
-            case 0: return p.getId_partidoPolitico()+1;
-            case 1: return p.getNombre_partidoPolitico();
+            case 0: return (arg0+1);
+            case 1: return p.getNombre_partido_politico();
             case 2: return p.getNumero_candidatos();
+            case 3: return p.getEslogan_partido();
             default: return null;
         }
         
@@ -59,6 +60,7 @@ public class ModeloTablaPartidoPolitico extends AbstractTableModel{
             case 0:return "ID";
             case 1:return "Nombre Partido";
             case 2:return "Numero Candidatos";
+            case 3:return "Eslogan Partido";
             default: return null;
         }
     }

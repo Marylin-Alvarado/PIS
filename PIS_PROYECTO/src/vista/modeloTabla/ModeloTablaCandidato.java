@@ -47,7 +47,7 @@ public class ModeloTablaCandidato extends AbstractTableModel{
             case 0: return(arg0+1);
             case 1: return c.getNombre_candidato();
             case 2: return c.getPreparacion_candidato();
-            case 3: return new PartidoPoliticoDao().obtener(c.getId_partido());
+            case 3: return new PartidoPoliticoDao().obtener(c.getId_partido_politico());
             default: return null;
         }
         

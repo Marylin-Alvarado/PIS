@@ -7,12 +7,14 @@ package vista.Utilidades;
 
 
 import controlador.DAO.AdaptadorDAO;
+import controlador.DAO.CandidatoDao;
 import controlador.DAO.PartidoPoliticoDao;
 import controlador.ed.listas.ListaEnlazada;
 import controlador.ed.listas.exception.ListaNullException;
 import controlador.ed.listas.exception.PosicionNoEncontradaException;
 import javax.swing.JComboBox;
-import modelo.PartidoPolitico;
+import modelo.Candidato;
+import modelo.Partido_Politico;
 import modelo.Persona;
 import modelo.enums.Generos;
 import modelo.enums.TipoIdentificacion;
@@ -63,10 +65,11 @@ public class Utilidades {
     
     public static void cargarPartido(JComboBox cbx , PartidoPoliticoDao pd) throws ListaNullException, PosicionNoEncontradaException{
         cbx.removeAllItems();
-        ListaEnlazada<PartidoPolitico> lista = pd.ordenarNombre(pd.listar(), 0);
+        ListaEnlazada<Partido_Politico> lista = pd.ordenarNombre(pd.listar(), 0);
         for (int i = 0; i < lista.size(); i++) {
-            cbx.addItem(lista.obtener(i).getNombre_partidoPolitico());
+            cbx.addItem(lista.obtener(i).getNombre_partido_politico());
         }
     }
+    
 
 }

@@ -10,6 +10,7 @@ import controlador.ed.listas.exception.ListaNullException;
 import controlador.ed.listas.exception.PosicionNoEncontradaException;
 import java.io.IOException;
 import modelo.Candidato;
+import modelo.Candidato;
 
 /**
  *
@@ -34,17 +35,13 @@ public class CandidatoDao extends AdaptadorDAO<Candidato>{
         this.datos = datos;
     }
 
-    public void guardar() throws IOException, Exception {
-        datos.setId_candidato(generateID());
-        this.guardar(datos);
+   public Integer guardar() throws Exception {
+        return this.guardar(datos);   
     }
 
-    public void modificar(Integer pos) throws ListaNullException, PosicionNoEncontradaException, IOException, Exception {
-        this.modificar(datos);
-    }
-
-    private Integer generateID() {
-        return listar().size() + 1;
+    public boolean modificar() throws Exception {
+         this.modificar(datos);
+         return true;
     }
       
       /**
@@ -103,12 +100,12 @@ public class CandidatoDao extends AdaptadorDAO<Candidato>{
                 for (int j = bajo; j < alto; j++) {
                     // Comprueba el tipo de ordenamiento y realiza el intercambio si es necesario
                     if (tipoOrden == 0) {
-                        if (arreglo[j].getId_partido()< pivote.getId_partido()) {
+                        if (arreglo[j].getId_partido_politico()< pivote.getId_partido_politico()) {
                             i++;
                             intercambio(arreglo, i, j);
                         }
                     } else {
-                        if (arreglo[j].getId_partido() > pivote.getId_partido()) {
+                        if (arreglo[j].getId_partido_politico()> pivote.getId_partido_politico()) {
                             i++;
                             intercambio(arreglo, i, j);
                         }
@@ -133,5 +130,42 @@ public class CandidatoDao extends AdaptadorDAO<Candidato>{
         Candidato temp = arreglo[i];
         arreglo[i] = arreglo[j];
         arreglo[j] = temp;
+    }
+    
+     public Candidato buscarPorNombre(String dato) throws ListaNullException, PosicionNoEncontradaException {
+        Candidato resultado = null;
+        ListaEnlazada<Candidato> lista = listar();
+        for (int i = 0; i < lista.size(); i++) {
+            Candidato aux = lista.obtener(i);
+            if (aux.getNombre_candidato().toLowerCase().equals(dato.toLowerCase())) {
+                resultado = aux;
+                break;
+            }
+        }
+        return resultado;
+    }
+     
+     public ListaEnlazada<Candidato> ordenarNombre(ListaEnlazada<Candidato> lista, Integer tipo) {
+        try {
+            Candidato[] matriz = lista.toArray();
+            for (int i = 1; i < lista.size(); i++) {
+                Candidato key = matriz[i];
+                int j = i - 1;
+                switch (tipo) {
+                    case 0:
+
+                }
+                while (j >= 0 && (matriz[j].getNombre_candidato().compareToIgnoreCase(key.getNombre_candidato())) > 0) {
+                    //lista.update(j+1, lista.get(j));
+                    matriz[j + 1] = matriz[j];
+                    j = j - 1;
+                }
+                //lista.update(j+1, key);
+                matriz[j + 1] = key;
+            }
+            lista.toList(matriz);
+        } catch (Exception e) {
+        }
+        return lista;
     }
 }
