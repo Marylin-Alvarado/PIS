@@ -40,6 +40,7 @@ public class FrmPartidoPolitico extends javax.swing.JDialog {
     private void limpiar() {
         txtNombrePartido.setText("");
         txtNumeroCandidatos.setText("");
+        txtEslogan.setText("");
         cargarTabla();
         partido.setDatos(null);
         fila = -1;
@@ -54,8 +55,13 @@ public class FrmPartidoPolitico extends javax.swing.JDialog {
                 partido.getDatos().setNombre_partido_politico(txtNombrePartido.getText());
                 partido.getDatos().setNumero_candidatos(Integer.parseInt(txtNumeroCandidatos.getText()));
                 partido.getDatos().setEslogan_partido(txtEslogan.getText());
-                partido.guardar();
-                limpiar();
+                if (partido.getDatos().getId() != null) {
+                    partido.modificar();
+                    limpiar();
+                } else {
+                    partido.guardar();
+                    limpiar();
+                }
                 JOptionPane.showMessageDialog(null, "Datos Guardados Correctamente", "Infomacion", JOptionPane.INFORMATION_MESSAGE);
             }
         } catch (Exception e) {
@@ -247,7 +253,7 @@ public class FrmPartidoPolitico extends javax.swing.JDialog {
 
     private void txtNombrePartidoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNombrePartidoKeyTyped
         // TODO add your handling code here:
-        if (txtNombrePartido.getText().length() >= 12) {
+        if (txtNombrePartido.getText().length() >= 45) {
             evt.consume();
             Toolkit.getDefaultToolkit().beep();
             JOptionPane.showMessageDialog(this, "No puede ingresar más caracteres", "Error", JOptionPane.ERROR_MESSAGE);
@@ -282,7 +288,7 @@ public class FrmPartidoPolitico extends javax.swing.JDialog {
         fila = tblTabla.getSelectedRow();
         if (fila >= 0) {
             try {
-                Integer id = modelo.getDatos().obtener(fila).getId_partido_politico();
+                Integer id = modelo.getDatos().obtener(fila).getId();
                 partido.setDatos(partido.obtener(id));
                 txtNombrePartido.setText(partido.getDatos().getNombre_partido_politico());
                 txtNumeroCandidatos.setText(partido.getDatos().getNumero_candidatos().toString());

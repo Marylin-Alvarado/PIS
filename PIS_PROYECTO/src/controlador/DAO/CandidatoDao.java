@@ -132,7 +132,7 @@ public class CandidatoDao extends AdaptadorDAO<Candidato>{
         arreglo[j] = temp;
     }
     
-     public Candidato buscarPorNombre(String dato) throws ListaNullException, PosicionNoEncontradaException {
+    public Candidato buscarPorNombre(String dato) throws ListaNullException, PosicionNoEncontradaException {
         Candidato resultado = null;
         ListaEnlazada<Candidato> lista = listar();
         for (int i = 0; i < lista.size(); i++) {

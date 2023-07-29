@@ -6,6 +6,7 @@
 package vista;
 
 import controlador.DAO.CandidatoDao;
+import controlador.DAO.DignidadDao;
 import controlador.DAO.PartidoPoliticoDao;
 
 import controlador.ed.listas.exception.ListaNullException;
@@ -28,6 +29,7 @@ public class FrmCandidato extends javax.swing.JDialog {
     private ModeloTablaCandidato modelo = new ModeloTablaCandidato();
     private CandidatoDao candidato = new CandidatoDao();
     private PartidoPoliticoDao partido = new PartidoPoliticoDao();
+    private DignidadDao dignidad = new DignidadDao();
     private Integer fila = -1;
 
     /**
@@ -37,7 +39,8 @@ public class FrmCandidato extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
         cargarTabla();
-        cargarCombo();
+        cargarComboPartido();
+        cargarComboDignidad();
         setResizable(false);
         setLocationRelativeTo(this);
 
@@ -56,12 +59,21 @@ public class FrmCandidato extends javax.swing.JDialog {
         txtNombre.setText("");
         txtPreparacion.setText("");
         cargarTabla();
-        cargarCombo();
+        cargarComboPartido();
+        cargarComboDignidad();
     }
 
-    private void cargarCombo() {
+    private void cargarComboPartido() {
         try {
             Utilidades.cargarPartido(cbxPartido, partido);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e.getMessage() + " Error", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+    
+     private void cargarComboDignidad() {
+        try {
+            Utilidades.cargarDignidad(cbxDignidad, dignidad);
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e.getMessage() + " Error", "Error", JOptionPane.ERROR_MESSAGE);
         }
@@ -74,21 +86,18 @@ public class FrmCandidato extends javax.swing.JDialog {
             } else {
                 candidato.getDatos().setNombre_candidato(txtNombre.getText());
                 candidato.getDatos().setPreparacion_candidato(txtPreparacion.getText());
-                candidato.getDatos().setId_partido_politico(partido.buscarPorNombre(cbxPartido.getSelectedItem().toString()).getId_partido_politico());
-                candidato.guardar();
-                limpiar();
+                candidato.getDatos().setId_partido_politico(partido.buscarPorNombre(cbxPartido.getSelectedItem().toString()).getId());
+//                candidato.getDatos().setId_dignidad(dignidad.categoriaDignidad(cbxDignidad.getSelectedItem().toString()).getId());
+                if (candidato.getDatos().getId() != null) {
+                    candidato.modificar();
+                    limpiar();
+                } else {
+                    candidato.guardar();
+                    limpiar();
+                }
                 JOptionPane.showMessageDialog(null, "Datos Guardados Correctamente", "Infomacion", JOptionPane.INFORMATION_MESSAGE);
             }
-        } catch (HeadlessException e) {
-            JOptionPane.showMessageDialog(null, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-        } catch (ListaNullException ex) {
-            Logger.getLogger(FrmCandidato.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (PosicionNoEncontradaException ex) {
-            Logger.getLogger(FrmCandidato.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (IOException ex) {
-            Logger.getLogger(FrmCandidato.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (Exception ex) {
-            Logger.getLogger(FrmCandidato.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (Exception e) {
         }
     }
 
@@ -299,7 +308,7 @@ public class FrmCandidato extends javax.swing.JDialog {
         fila = tblTabla.getSelectedRow();
         if (fila >= 0) {
             try {
-                Integer id = modelo.getDatos().obtener(fila).getId_candidato();
+                Integer id = modelo.getDatos().obtener(fila).getId();
                 candidato.setDatos(candidato.obtener(id));
                 txtNombre.setText(candidato.getDatos().getNombre_candidato());
                 txtPreparacion.setText(candidato.getDatos().getPreparacion_candidato());
@@ -324,7 +333,7 @@ public class FrmCandidato extends javax.swing.JDialog {
     private void txtNombreKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNombreKeyTyped
         // TODO add your handling code here:
         // TODO add your handling code here:
-        if (txtNombre.getText().length() >= 12) {
+        if (txtNombre.getText().length() >= 45) {
             evt.consume();
             Toolkit.getDefaultToolkit().beep();
             JOptionPane.showMessageDialog(this, "No puede ingresar más caracteres, Maximo 20", "Error", JOptionPane.ERROR_MESSAGE);
@@ -341,7 +350,7 @@ public class FrmCandidato extends javax.swing.JDialog {
     private void txtPreparacionKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPreparacionKeyTyped
         // TODO add your handling code here:
         // TODO add your handling code here:
-        if (txtPreparacion.getText().length() >= 30) {
+        if (txtPreparacion.getText().length() >= 45) {
             evt.consume();
             Toolkit.getDefaultToolkit().beep();
             JOptionPane.showMessageDialog(this, "No puede ingresar más caracteres, Maximo 30", "Error", JOptionPane.ERROR_MESSAGE);

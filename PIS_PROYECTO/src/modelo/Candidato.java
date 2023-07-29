@@ -12,17 +12,17 @@ package modelo;
 public class Candidato {
 
     private Integer id_partido_politico;
-    private Integer id_candidato;
+    private Integer id;
     private Integer id_dignidad;
     private String nombre_candidato;
     private String preparacion_candidato;
 
-    public Integer getId_candidato() {
-        return id_candidato;
+    public Integer getId() {
+        return id;
     }
 
-    public void setId_candidato(Integer id_candidato) {
-        this.id_candidato = id_candidato;
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public String getNombre_candidato() {

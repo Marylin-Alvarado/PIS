@@ -14,7 +14,7 @@ import java.sql.SQLException;
  *
  * @author cobos
  */
-public class ConexionB {
+public class Conexion{
    //https://www.codejava.net/java-se/jdbc/connect-to-oracle-database-via-jdbc
     private Connection connection;
     // Librería de MySQL
@@ -24,7 +24,7 @@ public class ConexionB {
     public String database = "pis";
 
     // Host
-    public String hostname = "192.168.16.105";
+    public String hostname = "localhost";
 
     // Puerto
     public String port = "3306";//1521
@@ -64,7 +64,7 @@ public class ConexionB {
     }
 
     public static void main(String[] args) {
-        new ConexionB().conectar();
+        new Conexion().conectar();
     }
     
     /*private XStream xstream;

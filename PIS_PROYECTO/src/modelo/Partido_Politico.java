@@ -12,17 +12,17 @@ package modelo;
  */
 public class Partido_Politico {
 
-    private Integer id_partido_politico;
+    private Integer id;
     private String nombre_partido_politico;
     private Integer numero_candidatos;
     private String eslogan_partido;
 
-    public Integer getId_partido_politico() {
-        return id_partido_politico;
+    public Integer getId() {
+        return id;
     }
 
-    public void setId_partido_politico(Integer id_partido_politico) {
-        this.id_partido_politico = id_partido_politico;
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public String getNombre_partido_politico() {
