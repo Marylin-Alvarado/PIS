@@ -5,6 +5,7 @@
  */
 package modelo;
 
+import java.util.Date;
 import modelo.enums.Generos;
 import modelo.enums.TipoIdentificacion;
 
@@ -15,16 +16,16 @@ import modelo.enums.TipoIdentificacion;
 public class Persona {
 
     private Integer id;
-    private String nombres;
-    private String apellidos;
+    private String nombres_completos;
     private String identificacion;
-    private TipoIdentificacion tipoIdentificacion;
+    private String codigoDac;
+
     private String direccion;
     private String telefono;
     private String ciudad;
-    private String fechaNacimiento;
+    private Date fechaNacimiento;
     private Generos genero;
-    private Cuenta cuenta;
+
     private String correo;
 
     public Persona() {
@@ -39,21 +40,15 @@ public class Persona {
         this.id = id;
     }
 
-    public String getNombres() {
-        return nombres;
+    public String getNombres_completos() {
+        return nombres_completos;
     }
 
-    public void setNombres(String nombres) {
-        this.nombres = nombres;
+    public void setNombres_completos(String nombres_completos) {
+        this.nombres_completos = nombres_completos;
     }
 
-    public String getApellidos() {
-        return apellidos;
-    }
-
-    public void setApellidos(String apellidos) {
-        this.apellidos = apellidos;
-    }
+    
 
     public String getIdentificacion() {
         return identificacion;
@@ -63,12 +58,12 @@ public class Persona {
         this.identificacion = identificacion;
     }
 
-    public TipoIdentificacion getTipoIdentificacion() {
-        return tipoIdentificacion;
+    public String getCodigoDac() {
+        return codigoDac;
     }
 
-    public void setTipoIdentificacion(TipoIdentificacion tipoIdentificacion) {
-        this.tipoIdentificacion = tipoIdentificacion;
+    public void setCodigoDac(String codigoDac) {
+        this.codigoDac = codigoDac;
     }
 
     public String getDireccion() {
@@ -95,11 +90,11 @@ public class Persona {
         this.ciudad = ciudad;
     }
 
-    public String getFechaNacimiento() {
+    public Date getFechaNacimiento() {
         return fechaNacimiento;
     }
 
-    public void setFechaNacimiento(String fechaNacimiento) {
+    public void setFechaNacimiento(Date fechaNacimiento) {
         this.fechaNacimiento = fechaNacimiento;
     }
 
@@ -109,14 +104,6 @@ public class Persona {
 
     public void setGenero(Generos genero) {
         this.genero = genero;
-    }
-
-    public Cuenta getCuenta() {
-        return cuenta;
-    }
-
-    public void setCuenta(Cuenta cuenta) {
-        this.cuenta = cuenta;
     }
 
     public String getCorreo() {

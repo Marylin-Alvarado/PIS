@@ -11,20 +11,22 @@ package modelo;
  */
 public class Cuenta {
 
-    private Integer id;
+    private Integer id_cuenta;
     private String usuario;
     private String tipoUser;
     private String contrasenia;
     private Boolean estado;
-    private Persona persona;
+    private Integer id_persona;
 
-    public Integer getId() {
-        return id;
+    public Integer getId_cuenta() {
+        return id_cuenta;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public void setId_cuenta(Integer id_cuenta) {
+        this.id_cuenta = id_cuenta;
     }
+
+    
 
     public String getUsuario() {
         return usuario;
@@ -50,13 +52,15 @@ public class Cuenta {
         this.estado = estado;
     }
 
-    public Persona getPersona() {
-        return persona;
+    public Integer getId_persona() {
+        return id_persona;
     }
 
-    public void setPersona(Persona persona) {
-        this.persona = persona;
+    public void setId_persona(Integer id_persona) {
+        this.id_persona = id_persona;
     }
+
+    
 
     public String getTipoUser() {
         return tipoUser;

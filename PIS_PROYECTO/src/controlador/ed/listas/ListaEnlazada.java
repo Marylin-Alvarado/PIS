@@ -12,7 +12,7 @@ import java.lang.reflect.Array;
 
 /**
  *
- * @author Marylin
+ * @author alyce
  */
 public class ListaEnlazada<E> {
 

@@ -19,13 +19,7 @@ public class Utilidades {
 
     private static Integer posicionAdministrador;
 
-    public static void generarUsuario(Persona persona) {
-        persona.getCuenta().setUsuario(persona.getNombres() + "." + persona.getApellidos());
-    }
-
-    public static void generarContrasenia(Persona persona) {
-        persona.getCuenta().setContrasenia(persona.getIdentificacion());
-    }
+    
 
     // Aqui se van a implementar los metodos de guardar y listar
     /**

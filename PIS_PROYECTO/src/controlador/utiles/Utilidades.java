@@ -126,6 +126,25 @@ public class Utilidades {
         byte[] datosDesencriptados = cipher.doFinal(bytesEncriptados);
         return new String(datosDesencriptados);
 
+    } 
+    
+    public static String encriptarContrasenia(String dato) {
+        if (dato != null) {
+            return Base64.getEncoder().encodeToString(dato.getBytes());
+        }
+        return "";
+    }
+
+    /**
+     * Permiute desencriptar la contrasenia
+     * @param dato
+     * @return contrasenia desencriptada
+     */
+    public static String desEncriptarContrasenia(String dato) {
+        if (dato != null) {
+            return new String(Base64.getDecoder().decode(dato));
+        }
+        return "";
     }
 
     public static boolean validadorDeCedula(String cedula) {
