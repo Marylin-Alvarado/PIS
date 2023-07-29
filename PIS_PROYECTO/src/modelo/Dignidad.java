@@ -14,6 +14,7 @@ public class Dignidad {
     private Integer id;
     private Integer NroDignidad;
     private String categorias ;
+    
 
    
 
@@ -33,11 +34,11 @@ public class Dignidad {
         this.id = id;
     }
 
-    public Integer getNrocupos() {
+    public Integer getNroDignidad() {
         return NroDignidad;
     }
 
-    public void setNrocupos(Integer Nrocupos) {
+    public void setNroDignidad(Integer Nrocupos) {
         this.NroDignidad = Nrocupos;
     }
 

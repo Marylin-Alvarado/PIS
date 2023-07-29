@@ -6,6 +6,7 @@
 package controlador.DAO;
 
 
+import controlador.ed.listas.ListaEnlazada;
 import controlador.ed.listas.exception.ListaNullException;
 import controlador.ed.listas.exception.PosicionNoEncontradaException;
 import java.io.IOException;
@@ -19,6 +20,7 @@ import modelo.Voto;
  * @author wilson7578
  */
 public class DignidadDao extends AdaptadorDAO<Dignidad> {
+    
 
     private Dignidad dignidad;
 
@@ -36,6 +38,7 @@ public class DignidadDao extends AdaptadorDAO<Dignidad> {
     public void setDignidad(Dignidad dignidad) {
         this.dignidad = dignidad;
     }
+    
 
     public void guardar() throws IOException {
         dignidad.setId(generateID());
@@ -50,5 +53,33 @@ public class DignidadDao extends AdaptadorDAO<Dignidad> {
         return listar().getSize()+ 1;
     }
 
+       public Integer buscarPorCategoria(String dato) throws Exception{
+        Dignidad resultado = null;
+        ListaEnlazada<Dignidad> lista = listar();
+        Integer contador = 0;
+        for (int i = 0; i < lista.size(); i++) {
+            Dignidad aux = lista.obtener(i);
+            if (aux.getCategorias().toLowerCase().equals(dato.toLowerCase())) {
+                resultado = aux;
+                if (i < lista.size()) {
+                    contador++;
+                }
+                
+            }
+        }
+        return contador;
+    }
+       public ListaEnlazada<Dignidad> buscarPorCategorias(String dato) throws Exception {
+    ListaEnlazada<Dignidad> lista = listar();
+    ListaEnlazada<Dignidad> resultados = new ListaEnlazada<>();
+    
+    for (int i = 0; i < lista.size(); i++) {
+        Dignidad aux = lista.obtener(i);
+        if (aux.getCategorias().toLowerCase().equals(dato.toLowerCase())) {
+            resultados.insertar(aux);
    
+        }
+    }
+    return resultados;
+}
 }
