@@ -14,6 +14,7 @@ import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import java.awt.Image;  
 import javax.swing.JComboBox;
+import java.util.Date;
 /**
  *
  * @author wilson7578
@@ -242,7 +243,7 @@ guardar();        // TODO add your handling code here:
             try {
                 Integer id = modelo.getLista().obtener(fila).getId();
                 vd.setVoto(vd.obtener(id));
-               
+                
                 cbxTipo.setSelectedItem(vd.getVoto().getTipoVoto());
                 cbxEstado.setSelectedItem(vd.getVoto().getEstado());
             } catch (Exception e) {
@@ -277,7 +278,8 @@ guardar();        // TODO add your handling code here:
                
                 vd.getVoto().setTipoVoto(Utilidades.getComboTipoVoto(cbxTipo));                 
                 vd.getVoto().setEstado(cbxEstado.getSelectedItem().equals("TRUE"));
-                vd.getVoto().setFechadeEmision(u.generarFechaActual());
+                vd.getVoto().setFechade_emision(u.generarFechaActual());
+                System.out.println();
                 if (vd.getVoto().getId() != null) {
                     vd.modificar(fila);
                     limpiar();

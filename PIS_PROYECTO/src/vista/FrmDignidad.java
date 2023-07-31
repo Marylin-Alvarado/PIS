@@ -280,53 +280,46 @@ public class FrmDignidad extends javax.swing.JDialog {
      * numeros de cupos,como el tipo ,la categoria entre otros.
      */
     private void guardar() {
-        String categoria = cbxCategoria.getSelectedItem().toString();
         if (txtxNroCupos.getText().trim().isEmpty() || cbxCategoria.getSelectedItem().toString().isEmpty()) {
             JOptionPane.showMessageDialog(null, "Ingrese todo los campos", "Error", JOptionPane.ERROR_MESSAGE);
         } else {
             try {
                 Integer aux = Integer.valueOf(txtxNroCupos.getText());
-                dd.getDignidad().setNroDignidad(Integer.valueOf(txtxNroCupos.getText()));
+                String categoria = cbxCategoria.getSelectedItem().toString();
 
                 for (int i = 0; i < aux; i++) {
                     dd.getDignidad().setTipo(cbxTipo.getSelectedItem().toString());
-                        if (dd.buscarPorCategoria(categoria) <= 20) {
-                           asignarCategoria();
-                            if (aux == i) {
-                                JOptionPane.showMessageDialog(null, "Se ha guardado de forma correcta", "OK", JOptionPane.INFORMATION_MESSAGE);    
+                    dd.getDignidad().setCategoria(cbxCategoria.getSelectedItem().toString());
+                    dd.getDignidad().setNro_cupo(20);
+                    System.out.println(dd.getDignidad().getNro_cupo());
 
-                            }else {
-                                JOptionPane.showMessageDialog(null, " NO SE PUEDE INGRESAR MAS DATOS", "Error", JOptionPane.ERROR_MESSAGE);
+                    if (dd.contadorCategoria(categoria) <= 20) { // 20 es valor quemado pero en realidad va aqui la lista de los partidos existentes
+                        asignarCategoria();
 
-                            }
-                        } else {
-                            if (aux>1) {
-                                
-                            }else {
-                                JOptionPane.showMessageDialog(null, "YA NO PUEDE INGRESAR MAS DATOS", "Error", JOptionPane.ERROR_MESSAGE);
-
-                            }
-                        }
-                        limpiar();
-                   
+                    }
 
                 }
+                if (dd.contadorCategoria(categoria) > 20) {
+                    JOptionPane.showMessageDialog(null, "No se puede agregar mas datos", "Error", JOptionPane.ERROR_MESSAGE);
+
+                } else {
+                    JOptionPane.showMessageDialog(null, "Guardado", "ok", JOptionPane.INFORMATION_MESSAGE);
+                }
+
             } catch (Exception e) {
                 JOptionPane.showMessageDialog(null, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
             }
         }
 
     }
-    
-    private void asignarCategoria(){
-        String categoria = cbxCategoria.getSelectedItem().toString();
-    dd.getDignidad().setCategorias(categoria);
+
+    private void asignarCategoria() throws Exception {
         try {
             dd.guardar();
         } catch (IOException ex) {
             Logger.getLogger(FrmDignidad.class.getName()).log(Level.SEVERE, null, ex);
         }
-    limpiar();
+        limpiar();
     }
 
     /**

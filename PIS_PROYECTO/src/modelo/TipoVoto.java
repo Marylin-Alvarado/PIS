@@ -9,5 +9,5 @@ package modelo;
  * @author Gonzalez G
  */
 public enum TipoVoto {
-    BLANCO,NULLO,VOTO
+    BLANCO,NULO,VOTO
 }

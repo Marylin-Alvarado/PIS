@@ -3,6 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package modelo;
+import java.util.Date;
 
 /**
  *
@@ -10,11 +11,10 @@ package modelo;
  */
 public class Voto {
      private Integer id ;
-     private TipoVoto tipoVoto;
-     private String fechadeEmision;
+     private TipoVoto tipo_voto;
+     private Date fechade_emision;
     //Estado del voto True si la persona voto y false si no voto
      private Boolean estado ;
-     private Integer id_Eleccion ;
    
 
     public Integer getId() {
@@ -26,23 +26,33 @@ public class Voto {
     }
 
     public TipoVoto getTipoVoto() {
-        return tipoVoto;
+        return tipo_voto;
     }
 
     public void setTipoVoto(TipoVoto tipoVoto) {
-        this.tipoVoto = tipoVoto;
+        this.tipo_voto = tipoVoto;
+    }
+
+    public TipoVoto getTipo_voto() {
+        return tipo_voto;
+    }
+
+    public void setTipo_voto(TipoVoto tipo_voto) {
+        this.tipo_voto = tipo_voto;
+    }
+
+    public Date getFechade_emision() {
+        return fechade_emision;
+    }
+
+    public void setFechade_emision(Date fechade_emision) {
+        this.fechade_emision = fechade_emision;
     }
 
    
 
 
-    public String getFechadeEmision() {
-        return fechadeEmision;
-    }
-
-    public void setFechadeEmision(String fechadeEmision) {
-        this.fechadeEmision = fechadeEmision;
-    }
+    
 
     public Boolean getEstado() {
         return estado;
@@ -50,14 +60,6 @@ public class Voto {
 
     public void setEstado(Boolean estado) {
         this.estado = estado;
-    }
-
-    public Integer getId_Eleccion() {
-        return id_Eleccion;
-    }
-
-    public void setId_Eleccion(Integer id_Eleccion) {
-        this.id_Eleccion = id_Eleccion;
     }
 
   

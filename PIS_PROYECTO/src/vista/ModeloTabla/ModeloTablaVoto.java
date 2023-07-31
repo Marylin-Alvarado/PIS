@@ -8,6 +8,7 @@ import controlador.ed.listas.ListaEnlazada;
 import javax.swing.table.AbstractTableModel;
 
 import modelo.Voto;
+import vista.Utilidades.Utilidades;
 /**
  *
  * @author Gonzalez G
@@ -30,7 +31,7 @@ public class ModeloTablaVoto  extends AbstractTableModel {
 
     @Override
     public int getColumnCount() {
-        return 5 ;
+        return 4 ;
     }
 
     @Override
@@ -43,8 +44,8 @@ Voto  v= null;
         switch (columnIndex) {
             case 0: return v.getId();
             case 1 : return v.getTipoVoto();
-            case 2 : return v.getEstado();
-            case 3 : return v.getFechadeEmision();
+            case 2 : return v.getEstado() ? "VOTADO" : "NOVOTADO";
+            case 3 : return Utilidades.cambiarFechaActualString(v.getFechade_emision());
             default:
                 return null;
         }

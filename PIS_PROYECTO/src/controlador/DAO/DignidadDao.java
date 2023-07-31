@@ -40,26 +40,26 @@ public class DignidadDao extends AdaptadorDAO<Dignidad> {
     }
     
 
-    public void guardar() throws IOException {
+    public void guardar() throws  Exception {
         dignidad.setId(generateID());
         this.guardar(dignidad);
     }
 
-    public void modificar(Integer pos) throws PosicionNoEncontradaException, ListaNullException, IOException{
-        this.modificar(dignidad, pos);
+    public void modificar(Integer pos) throws  Exception{
+        this.modificar(dignidad);
     }
 
     private Integer generateID() {
         return listar().getSize()+ 1;
     }
 
-       public Integer buscarPorCategoria(String dato) throws Exception{
+       public Integer contadorCategoria(String dato) throws Exception{
         Dignidad resultado = null;
         ListaEnlazada<Dignidad> lista = listar();
         Integer contador = 0;
         for (int i = 0; i < lista.size(); i++) {
             Dignidad aux = lista.obtener(i);
-            if (aux.getCategorias().toLowerCase().equals(dato.toLowerCase())) {
+            if (aux.getCategoria().toLowerCase().equals(dato.toLowerCase())) {
                 resultado = aux;
                 if (i < lista.size()) {
                     contador++;
@@ -75,7 +75,7 @@ public class DignidadDao extends AdaptadorDAO<Dignidad> {
     
     for (int i = 0; i < lista.size(); i++) {
         Dignidad aux = lista.obtener(i);
-        if (aux.getCategorias().toLowerCase().equals(dato.toLowerCase())) {
+        if (aux.getCategoria().toLowerCase().equals(dato.toLowerCase())) {
             resultados.insertar(aux);
    
         }

@@ -75,11 +75,16 @@ public class Utilidades {
      
 
      
-    public String generarFechaActual(){
+    public Date generarFechaActual(){
      Date fechaHoraActual = new Date();
-        SimpleDateFormat formatoFecha = new SimpleDateFormat("dd/MM/yyyy");
-        String fechaActual = formatoFecha.format(fechaHoraActual);
-     return fechaActual ;  
+        System.out.println(fechaHoraActual);
+     return fechaHoraActual ;  
     }
+    
+    public static String cambiarFechaActualString(Date date){
+        SimpleDateFormat formatoFecha = new SimpleDateFormat("yyyy-MM-dd");
+     return formatoFecha.format(date); 
+    }
+    
 
 }

@@ -9,22 +9,11 @@ package modelo;
  * @author Gonzalez G
  */
 public class Dignidad {
-   
+   private Integer id;
     private String tipo ;
-    private Integer id;
-    private Integer NroDignidad;
-    private String categorias ;
     
-
-   
-
-    public String getTipo() {
-        return tipo;
-    }
-
-    public void setTipo(String tipo) {
-        this.tipo = tipo;
-    }
+    private Integer nro_cupo;
+    private String categoria ;
 
     public Integer getId() {
         return id;
@@ -34,21 +23,33 @@ public class Dignidad {
         this.id = id;
     }
 
-    public Integer getNroDignidad() {
-        return NroDignidad;
+    public String getTipo() {
+        return tipo;
     }
 
-    public void setNroDignidad(Integer Nrocupos) {
-        this.NroDignidad = Nrocupos;
+    public void setTipo(String tipo) {
+        this.tipo = tipo;
     }
 
-    public String getCategorias() {
-        return categorias;
+    public Integer getNro_cupo() {
+        return nro_cupo;
     }
 
-    public void setCategorias(String categorias) {
-        this.categorias = categorias;
+    public void setNro_cupo(Integer nro_cupo) {
+        this.nro_cupo = nro_cupo;
     }
 
+    public String getCategoria() {
+        return categoria;
+    }
+
+    public void setCategoria(String categoria) {
+        this.categoria = categoria;
+    }
+    
+
+   
+
+   
   
 }
