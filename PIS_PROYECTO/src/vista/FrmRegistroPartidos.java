@@ -5,11 +5,20 @@
  */
 package vista;
 
+import controlador.DAO.RegistroPartidoPoliticoDao;
+import controlador.ed.listas.exception.ListaVaciaException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import vista.ModeloTabla.ModeloTablaRegistroPartido;
+
 /**
  *
  * @author Marylin
  */
 public class FrmRegistroPartidos extends javax.swing.JDialog {
+
+    private ModeloTablaRegistroPartido mta = new ModeloTablaRegistroPartido();
+    private RegistroPartidoPoliticoDao aD = new RegistroPartidoPoliticoDao();
 
     /**
      * Creates new form FrmRegistroPartidos
@@ -17,12 +26,44 @@ public class FrmRegistroPartidos extends javax.swing.JDialog {
     public FrmRegistroPartidos(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        cargarTabla();
     }
 
     public FrmRegistroPartidos() {
     }
-    
-    
+
+    public void cargarTabla() {
+
+        mta.setLista(aD.listar());
+
+//        aC.setListaLibro(utilidades.listarLibro());
+        //aC.setLista(utilidades.listarLibro());
+        tblRegistro_Partidos.setModel(mta);
+        tblRegistro_Partidos.updateUI();
+    }
+
+    public void guardar() {
+
+        try {
+            aD.getCargo().setNombre_partidoPolitico(txtNombre_Partido.getText());
+            aD.getCargo().setNumero_Lista(txtLista.getText());
+
+            aD.guardar();
+            cargarTabla();
+            Limpiar();
+
+        } catch (Exception e) {
+        }
+    }
+
+    private void Limpiar() {
+
+        txtNombre_Partido.setText("");
+        txtLista.setText("");
+        this.aD.setLibro(null);
+        cargarTabla();
+
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -41,16 +82,28 @@ public class FrmRegistroPartidos extends javax.swing.JDialog {
         btnEliminar = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblRegistro_Partidos = new javax.swing.JTable();
+        jLabel2 = new javax.swing.JLabel();
+        txtLista = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jLabel1.setText("Nombre del Partido:");
 
         btnGuardarPartido.setText("GUARDAR");
+        btnGuardarPartido.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnGuardarPartidoActionPerformed(evt);
+            }
+        });
 
         btnModificarPartido.setText("MODIFICAR");
 
         btnEliminar.setText("ELIMINAR");
+        btnEliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEliminarActionPerformed(evt);
+            }
+        });
 
         tblRegistro_Partidos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -65,6 +118,8 @@ public class FrmRegistroPartidos extends javax.swing.JDialog {
         ));
         jScrollPane1.setViewportView(tblRegistro_Partidos);
 
+        jLabel2.setText("Lista:");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -72,18 +127,25 @@ public class FrmRegistroPartidos extends javax.swing.JDialog {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 556, Short.MAX_VALUE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtNombre_Partido, javax.swing.GroupLayout.PREFERRED_SIZE, 203, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(btnGuardarPartido)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnModificarPartido)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(btnEliminar))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 452, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(42, Short.MAX_VALUE))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jLabel1)
+                                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(txtNombre_Partido, javax.swing.GroupLayout.PREFERRED_SIZE, 203, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txtLista, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(btnGuardarPartido)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(btnModificarPartido)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(btnEliminar)))
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -92,14 +154,18 @@ public class FrmRegistroPartidos extends javax.swing.JDialog {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(txtNombre_Partido, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(35, 35, 35)
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(txtLista, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnGuardarPartido)
                     .addComponent(btnModificarPartido)
                     .addComponent(btnEliminar))
                 .addGap(29, 29, 29)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(21, Short.MAX_VALUE))
+                .addGap(52, 52, 52))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -110,13 +176,40 @@ public class FrmRegistroPartidos extends javax.swing.JDialog {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 13, Short.MAX_VALUE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnGuardarPartidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarPartidoActionPerformed
+        // TODO add your handling code here:
+        guardar();
+    }//GEN-LAST:event_btnGuardarPartidoActionPerformed
+
+    private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
+        // TODO add your handling code here:
+        eliminar();
+    }//GEN-LAST:event_btnEliminarActionPerformed
+
+    public void eliminar() {
+
+        if (tblRegistro_Partidos.getSelectedRow() >= 0) {
+            try {
+                
+            } catch (Exception e) {
+                 Logger.getLogger(FrmRegistroPartidos.class.getName()).log(Level.SEVERE, null, e);
+            }
+//            try {
+//                Utilidades.eliminarPeriodo(tblRegistro_Partidos.getSelectedRow());
+//            } catch (ListaVaciaException ex) {
+//                Logger.getLogger(DialogPeriodo.class.getName()).log(Level.SEVERE, null, ex);
+//            } catch (PosicionNoEncontradaException ex) {
+//                Logger.getLogger(DialogPeriodo.class.getName()).log(Level.SEVERE, null, ex);
+//            }
+            cargarTabla();
+        }
+    }
 
     /**
      * @param args the command line arguments
@@ -166,9 +259,11 @@ public class FrmRegistroPartidos extends javax.swing.JDialog {
     private javax.swing.JButton btnGuardarPartido;
     private javax.swing.JButton btnModificarPartido;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tblRegistro_Partidos;
+    private javax.swing.JTextField txtLista;
     private javax.swing.JTextField txtNombre_Partido;
     // End of variables declaration//GEN-END:variables
 }

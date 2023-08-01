@@ -43,7 +43,7 @@ public class AdaptadorDAO<T> implements InterfazDAO<T> {
     @Override
     public void modificar(T obj, Integer pos) throws ListaNullException, PosicionNoEncontradaException, IOException {
         ListaEnlazada<T> lista = listar();
-        lista.update(pos, obj);
+        //lista.update(pos, obj);
         //lista.update(obj, pos);
         conexion.getXstream().alias(lista.getClass().getName(), ListaEnlazada.class);
         conexion.getXstream().toXML(lista, new FileWriter(url));
@@ -68,7 +68,7 @@ public class AdaptadorDAO<T> implements InterfazDAO<T> {
         for (int i = 0; i < lista.size(); i++) {
             try {
                 T dato = lista.obtener(i);
-                if (id.intValue() == ((Integer)getValueField(dato)).intValue()) {
+                if (id.intValue() == ((Integer) getValueField(dato)).intValue()) {
                     obj = dato;
                 }
             } catch (Exception e) {
@@ -81,7 +81,7 @@ public class AdaptadorDAO<T> implements InterfazDAO<T> {
     public Integer generarId() {
         return listar().size() + 1;
     }
-    
+
     private Object getValueField(T dato) throws IllegalAccessException, IllegalArgumentException, InvocationTargetException {
         Method metodo = null;
         for (Method aux : this.clazz.getDeclaredMethods()) {
@@ -99,5 +99,4 @@ public class AdaptadorDAO<T> implements InterfazDAO<T> {
         }
         return metodo.invoke(dato);
     }
-
 }

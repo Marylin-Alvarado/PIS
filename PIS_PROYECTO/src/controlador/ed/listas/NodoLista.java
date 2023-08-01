@@ -11,33 +11,34 @@ package controlador.ed.listas;
  */
 public class NodoLista<E> {
 
-    private E dato;
-    private NodoLista<E> siguiente;
-
-    public NodoLista(E dato, NodoLista<E> siguiente) {
-        this.dato = dato;
-        this.siguiente = siguiente;
-    }
+   private E info;
+    private NodoLista sig;
 
     public NodoLista() {
-        this.dato = null;
-        this.siguiente = null;
+        sig = null;
+        info = null;
     }
 
-    public E getDato() {
-        return dato;
+    public NodoLista(NodoLista sig, E info) {
+        this.sig = sig;
+        this.info = info;
+
     }
 
-    public void setDato(E dato) {
-        this.dato = dato;
+    public E getInfo() {
+        return info;
     }
 
-    public NodoLista<E> getSiguiente() {
-        return siguiente;
+    public void setInfo(E info) {
+        this.info = info;
     }
 
-    public void setSiguiente(NodoLista<E> siguiente) {
-        this.siguiente = siguiente;
+    public NodoLista getSig() {
+        return sig;
+    }
+
+    public void setSig(NodoLista sig) {
+        this.sig = sig;
     }
 
 }
