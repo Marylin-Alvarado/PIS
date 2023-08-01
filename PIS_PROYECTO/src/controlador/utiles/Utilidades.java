@@ -23,14 +23,36 @@ import javax.crypto.spec.SecretKeySpec;
  * @author Marylin
  */
 public class Utilidades {
-
-    public static String capitalizar(String nombre) {
-        char[] aux = nombre.toCharArray();
-        aux[0] = Character.toUpperCase(aux[0]);
-        return new String(aux);
+    
+    public static Boolean isNumber(Class clase) {
+        return clase.getSuperclass().getSimpleName().equalsIgnoreCase("Number");
     }
 
-    public static Field obtenerAtributo(Class clase, String nombre) {
+    public static Boolean isString(Class clase) {
+        return clase.getSimpleName().equalsIgnoreCase("String");
+    }
+
+    public static Boolean isCharacter(Class clase) {
+        return clase.getSimpleName().equalsIgnoreCase("Character");
+    }
+
+    public static Boolean isBoolean(Class clase) {
+        return clase.getSimpleName().equalsIgnoreCase("Boolean");
+    }
+
+    public static Boolean isDate(Class clase) {
+        return clase.getSimpleName().equalsIgnoreCase("Date");
+    }
+
+    public static Boolean isPrimitive(Class clase) {
+        return clase.isPrimitive();
+    }
+
+    public static Boolean isObject(Class clase) {
+        return (!isPrimitive(clase) && !isBoolean(clase) && !isCharacter(clase) && !isNumber(clase) && !isString(clase) && !isDate(clase));
+    }
+
+    public static Field obtenerAtributo(Class clase, String nombre) { //Devuelve que tipo de dato es el atributo enviado
         Field atributo = null;
         for (Field aux : clase.getDeclaredFields()) {
             if (nombre.equalsIgnoreCase(aux.getName())) {
@@ -39,6 +61,12 @@ public class Utilidades {
             }
         }
         return atributo;
+    }
+
+    public static String capitalizar(String nombre) {
+        char[] aux = nombre.toCharArray();
+        aux[0] = Character.toUpperCase(aux[0]);
+        return new String(aux);
     }
 
     public static Object transformarDato(Field atributo, String dato) {

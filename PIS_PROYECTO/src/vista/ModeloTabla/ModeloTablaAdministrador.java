@@ -5,7 +5,7 @@
  */
 package vista.ModeloTabla;
 
-import controlador.Utilidades.listas.ListaEnlazada;
+import controlador.ed.listas.ListaEnlazada;
 import javax.swing.table.AbstractTableModel;
 import modelo.Administrador;
 import modelo.Persona;
@@ -18,11 +18,19 @@ public class ModeloTablaAdministrador extends AbstractTableModel {
 
     private ListaEnlazada<Persona> lista = new ListaEnlazada<>();
     private ListaEnlazada<Administrador> administrador = new ListaEnlazada<>();
-
+    
+    /**
+     * Metodo getLista de Persona
+     * @return 
+     */
     public ListaEnlazada<Persona> getLista() {
         return lista;
     }
 
+    /**
+     * Metodo de setLista de Persona
+     * @param lista 
+     */
     public void setLista(ListaEnlazada<Persona> lista) {
         this.lista = lista;
     }
@@ -73,14 +81,6 @@ public class ModeloTablaAdministrador extends AbstractTableModel {
 
                 return null;
         }
-    }
-
-    public ListaEnlazada<Administrador> getAdministrador() {
-        return administrador;
-    }
-
-    public void setAdministrador(ListaEnlazada<Administrador> administrador) {
-        this.administrador = administrador;
     }
 
 }

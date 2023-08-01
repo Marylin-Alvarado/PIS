@@ -10,6 +10,6 @@ package modelo.enums;
  * @author Marylin
  */
 public enum TipoRol {
-    ADMINISTRADOR
+    ADMINISTRADOR, VOTANTE
     
 }

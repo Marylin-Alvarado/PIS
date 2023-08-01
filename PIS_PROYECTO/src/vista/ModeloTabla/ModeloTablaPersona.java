@@ -5,7 +5,7 @@
  */
 package vista.ModeloTabla;
 
-import controlador.Utilidades.listas.ListaEnlazada;
+import controlador.ed.listas.ListaEnlazada;
 import javax.swing.table.AbstractTableModel;
 import modelo.Persona;
 
