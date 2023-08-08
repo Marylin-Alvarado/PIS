@@ -275,7 +275,6 @@ guardar();        // TODO add your handling code here:
             JOptionPane.showMessageDialog(null, "Ingrese todo los campos", "Error", JOptionPane.ERROR_MESSAGE);
         } else {
             try {
-               
                 vd.getVoto().setTipoVoto(Utilidades.getComboTipoVoto(cbxTipo));                 
                 vd.getVoto().setEstado(cbxEstado.getSelectedItem().equals("TRUE"));
                 vd.getVoto().setFechade_emision(u.generarFechaActual());

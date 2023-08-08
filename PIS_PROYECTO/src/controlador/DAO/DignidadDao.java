@@ -82,4 +82,37 @@ public class DignidadDao extends AdaptadorDAO<Dignidad> {
     }
     return resultados;
 }
+       
+       public Dignidad categoriaDignidad(String dato) throws ListaNullException, PosicionNoEncontradaException {
+        Dignidad resultado = null;
+        ListaEnlazada<Dignidad> lista = listar();
+        for (int i = 0; i < lista.size(); i++) {
+            Dignidad aux = lista.obtener(i);
+            if (aux.getCategoria().toLowerCase().equals(dato.toLowerCase())) {
+                resultado = aux;
+                break;
+            }
+        }
+        return resultado;
+    }
+     
+     public ListaEnlazada<Dignidad> ordenarCategoria(ListaEnlazada<Dignidad> lista) {
+        try {
+            Dignidad[] matriz = lista.toArray();
+            for (int i = 1; i < lista.size(); i++) {
+                Dignidad key = matriz[i];
+                int j = i - 1;
+                while (j >= 0 && (matriz[j].getCategoria().compareToIgnoreCase(key.getTipo())) > 0) {
+                    //lista.update(j+1, lista.get(j));
+                    matriz[j + 1] = matriz[j];
+                    j = j - 1;
+                }
+                //lista.update(j+1, key);
+                matriz[j + 1] = key;
+            }
+            lista.toList(matriz);
+        } catch (Exception e) {
+        }
+        return lista;
+    }
 }

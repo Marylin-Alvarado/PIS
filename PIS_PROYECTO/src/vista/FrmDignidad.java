@@ -6,6 +6,8 @@ package vista;
 
 import controlador.DAO.DignidadDao;
 import java.awt.Image;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import static java.awt.image.ImageObserver.PROPERTIES;
 import java.io.IOException;
 import java.util.logging.Level;
@@ -14,6 +16,9 @@ import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.JTextField;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 import vista.ModeloTabla.ModeloTablaDignidad;
 
 /**
@@ -34,8 +39,51 @@ public class FrmDignidad extends javax.swing.JDialog {
         initComponents();
         cargarImagenes();
         cargarTabla();
+        controlJtextfield(txtCategoriabuscar);
+        controlJtextfieldS(txtxNroCupos);
     }
+    
+    private void controlJtextfield(JTextField dato){
+    dato.addKeyListener(new KeyListener() {
+            @Override
+            public void keyTyped(KeyEvent e) {
+                char c = e.getKeyChar();
+                if (Character.isDigit(c)) {
+                    e.consume(); // Ignorar la entrada del número
+                    JOptionPane.showMessageDialog(txtCategoriabuscar, "No se permiten números", "Error", JOptionPane.ERROR_MESSAGE);
+                }
+            }
 
+            @Override
+            public void keyPressed(KeyEvent e) {
+            }
+
+            @Override
+            public void keyReleased(KeyEvent e) {
+            }
+        });
+    
+    }
+    
+     private void controlJtextfieldS(JTextField dato){
+     dato.addKeyListener(new KeyListener() {
+            @Override
+            public void keyTyped(KeyEvent e) {
+                char c = e.getKeyChar();
+                if (Character.isLetter(c)) {
+                    e.consume(); // Ignorar la entrada de letra
+                    JOptionPane.showMessageDialog(dato, "No se permiten letras", "Error", JOptionPane.ERROR_MESSAGE);
+                }
+            }
+
+            @Override
+            public void keyPressed(KeyEvent e) {
+            }
+
+            @Override
+            public void keyReleased(KeyEvent e) {
+            }
+        });}
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -242,7 +290,7 @@ public class FrmDignidad extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        if (cbxCategoria.getSelectedItem().equals("Presidente")) {
+       if (cbxCategoria.getSelectedItem().equals("Presidente")) {
             try {
                 modelo.setLista(dd.buscarPorCategorias(txtCategoriabuscar.getText()));
                 tblTabla.setModel(modelo);
@@ -284,6 +332,8 @@ public class FrmDignidad extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(null, "Ingrese todo los campos", "Error", JOptionPane.ERROR_MESSAGE);
         } else {
             try {
+          
+
                 Integer aux = Integer.valueOf(txtxNroCupos.getText());
                 String categoria = cbxCategoria.getSelectedItem().toString();
 
@@ -357,7 +407,7 @@ public class FrmDignidad extends javax.swing.JDialog {
                 break;
             case "Legislativa":
                 cbxCategoria.removeAllItems();
-                cbxCategoria.addItem("Diputado");
+                cbxCategoria.addItem("Asambleistas");
                 break;
             case "Ejecutiva Local":
                 cbxCategoria.addItem("Alcalde");
