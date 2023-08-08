@@ -3,8 +3,10 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/LeoMah/Downloads/PIS_PROYECTO/src/vista/FrmEleccion.java</file>
-            <file>file:/C:/Users/LeoMah/Downloads/PIS_PROYECTO/src/vista/FrmPapeleta.java</file>
+            <file>file:/C:/Users/migue/Desktop/LH/PIS_PROYECTO/src/vista/FrmPapeletas.java</file>
+            <file>file:/C:/Users/migue/Desktop/LH/PIS_PROYECTO/src/controlador/DAO/PartidoPoliticoDao.java</file>
+            <file>file:/C:/Users/migue/Desktop/LH/PIS_PROYECTO/src/vista/FrmElementos.java</file>
+            <file>file:/C:/Users/migue/Desktop/LH/PIS_PROYECTO/src/vista/pnCandidatos.java</file>
         </group>
     </open-files>
 </project-private>
