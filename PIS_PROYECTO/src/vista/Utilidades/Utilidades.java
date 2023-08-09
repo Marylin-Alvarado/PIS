@@ -18,6 +18,7 @@ import modelo.enums.Generos;
 import modelo.enums.TipoIdentificacion;
 import java.util.Date;
 import java.text.SimpleDateFormat;
+import modelo.TipoVoto;
 
 /**
  *
@@ -25,6 +26,7 @@ import java.text.SimpleDateFormat;
  */
 public class Utilidades {
 
+<<<<<<< HEAD
     private static Integer posicionAdministrador;
 
     public static void generarUsuario(Persona persona) {
@@ -85,6 +87,36 @@ public class Utilidades {
         String fechaActual = formatoFecha.format(fechaHoraActual);
        
 return fechaActual ;
+=======
+    /**
+     * Este metodo me permite generar la fecha 
+     */
+    
+     public static JComboBox cargarComboTipoVoto(JComboBox cbx) {
+        cbx.removeAllItems();
+        for (TipoVoto tipo: TipoVoto.values()) {
+            cbx.addItem(tipo);
+        }
+        return cbx;
+>>>>>>> Wilson-Gonzales
     }
+     
+     public static TipoVoto getComboTipoVoto(JComboBox cbx) {
+        return  (TipoVoto) cbx.getSelectedItem();
+    }
+     
+
+     
+    public Date generarFechaActual(){
+     Date fechaHoraActual = new Date();
+        System.out.println(fechaHoraActual);
+     return fechaHoraActual ;  
+    }
+    
+    public static String cambiarFechaActualString(Date date){
+        SimpleDateFormat formatoFecha = new SimpleDateFormat("yyyy-MM-dd");
+     return formatoFecha.format(date); 
+    }
+    
 
 }

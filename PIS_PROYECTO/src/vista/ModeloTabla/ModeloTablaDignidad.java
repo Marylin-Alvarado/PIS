@@ -31,7 +31,7 @@ public class ModeloTablaDignidad  extends AbstractTableModel {
 
     @Override
     public int getColumnCount() {
-        return 5 ;
+        return 4 ;
     }
 
     @Override
@@ -44,9 +44,7 @@ Dignidad  v= null;
         switch (columnIndex) {
             case 0: return v.getId();
             case 1 : return v.getTipo();
-            case 2: return v.getCategorias();
-            case 3 : return v.getNrocupos();
-            case 4 : return v.getId_Partido_Politico();
+            case 2: return v.getCategoria();
             default:
                 return null;
         }
@@ -57,10 +55,8 @@ Dignidad  v= null;
     public String  getColumnName (int column){
     switch (column) {
             case 0: return"ID";
-            case 1 :return "Categorias";
-            case 2: return"tipo";
-            case 3 : return"Nro Cupos";
-            case 4 :return "Partido Politico";
+            case 1 :return "Tipo";
+            case 2: return"Categoria";
             default:return null;
         }
     }

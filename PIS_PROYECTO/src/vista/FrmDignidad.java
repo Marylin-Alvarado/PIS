@@ -6,11 +6,19 @@ package vista;
 
 import controlador.DAO.DignidadDao;
 import java.awt.Image;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import static java.awt.image.ImageObserver.PROPERTIES;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.JTextField;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 import vista.ModeloTabla.ModeloTablaDignidad;
 
 /**
@@ -30,8 +38,54 @@ public class FrmDignidad extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
         cargarImagenes();
+        cargarTabla();
+        controlJtextfield(txtCategoriabuscar);
+        controlJtextfieldS(txtxNroCupos);
     }
+    
+    private void controlJtextfield(JTextField dato){
+    dato.addKeyListener(new KeyListener() {
+            @Override
+            public void keyTyped(KeyEvent e) {
+                char c = e.getKeyChar();
+                if (Character.isDigit(c)) {
+                    e.consume(); // Ignorar la entrada del número
+                    JOptionPane.showMessageDialog(txtCategoriabuscar, "No se permiten números", "Error", JOptionPane.ERROR_MESSAGE);
+                    limpiar();
+                }
+            }
 
+            @Override
+            public void keyPressed(KeyEvent e) {
+            }
+
+            @Override
+            public void keyReleased(KeyEvent e) {
+            }
+        });
+    
+    }
+    
+     private void controlJtextfieldS(JTextField dato){
+     dato.addKeyListener(new KeyListener() {
+            @Override
+            public void keyTyped(KeyEvent e) {
+                char c = e.getKeyChar();
+                if (Character.isLetter(c)) {
+                    e.consume(); // Ignorar la entrada de letra
+                    JOptionPane.showMessageDialog(dato, "No se permiten letras", "Error", JOptionPane.ERROR_MESSAGE);
+                    limpiar();
+                }
+            }
+
+            @Override
+            public void keyPressed(KeyEvent e) {
+            }
+
+            @Override
+            public void keyReleased(KeyEvent e) {
+            }
+        });}
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -56,12 +110,15 @@ public class FrmDignidad extends javax.swing.JDialog {
         tblTabla = new javax.swing.JTable();
         jButton2 = new javax.swing.JButton();
         jbllogo = new javax.swing.JLabel();
+        txtCategoriabuscar = new javax.swing.JTextField();
+        jLabel4 = new javax.swing.JLabel();
+        jButton3 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jblTitulo.setText("ADMINISTRACION DE DIGNIDAD");
 
-        cbxCategoria.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Presidente", "Alcalde", "Concejal", "Diputado" }));
+        cbxCategoria.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Presidente", "Vicepresidente" }));
 
         jLabel1.setText("TIPO");
 
@@ -71,9 +128,14 @@ public class FrmDignidad extends javax.swing.JDialog {
             }
         });
 
-        jLabel2.setText("Nro Cupos");
+        jLabel2.setText("Nro Dignidades");
 
         cbxTipo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Ejecutiva", "Legislativa", "Ejecutiva Local", "Respresentativa Local", " " }));
+        cbxTipo.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                cbxTipoMouseClicked(evt);
+            }
+        });
         cbxTipo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cbxTipoActionPerformed(evt);
@@ -82,7 +144,7 @@ public class FrmDignidad extends javax.swing.JDialog {
 
         jLabel3.setText("Categoria");
 
-        jButton1.setText("REGISTRAR");
+        jButton1.setText("BUSCAR");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
@@ -111,7 +173,7 @@ public class FrmDignidad extends javax.swing.JDialog {
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 466, Short.MAX_VALUE)
+                .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 575, Short.MAX_VALUE)
                 .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
@@ -121,10 +183,26 @@ public class FrmDignidad extends javax.swing.JDialog {
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 8, Short.MAX_VALUE)
+                .addGap(27, 27, 27)
+                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 9, Short.MAX_VALUE)
                 .addComponent(jButton2))
         );
+
+        txtCategoriabuscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtCategoriabuscarActionPerformed(evt);
+            }
+        });
+
+        jLabel4.setText("Categorias");
+
+        jButton3.setText("REGISTRAR");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -132,24 +210,33 @@ public class FrmDignidad extends javax.swing.JDialog {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(14, 14, 14)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1)
-                    .addComponent(jLabel3)
-                    .addComponent(jLabel2))
-                .addGap(24, 24, 24)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(txtxNroCupos, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jButton1)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel1)
+                            .addComponent(jLabel3))
+                        .addGap(55, 55, 55)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addComponent(cbxCategoria, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(cbxTipo, javax.swing.GroupLayout.Alignment.LEADING, 0, 184, Short.MAX_VALUE))
+                            .addComponent(cbxTipo, javax.swing.GroupLayout.Alignment.LEADING, 0, 184, Short.MAX_VALUE)))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel4)
+                            .addComponent(jLabel2))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(txtCategoriabuscar, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(txtxNroCupos, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 184, Short.MAX_VALUE))))
+                .addGap(27, 27, 27)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jButton3)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jbllogo, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(36, 36, 36))))
+                        .addGap(36, 36, 36))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jButton1)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jblTitulo)
@@ -166,22 +253,27 @@ public class FrmDignidad extends javax.swing.JDialog {
                 .addComponent(jblTitulo)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jbllogo, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel1)
-                            .addComponent(cbxTipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(cbxTipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel3)
-                            .addComponent(cbxCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addComponent(jbllogo, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(15, 15, 15)
+                            .addComponent(cbxCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel2)
+                            .addComponent(txtxNroCupos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 11, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(txtxNroCupos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtCategoriabuscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel4)
                     .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
@@ -199,62 +291,107 @@ public class FrmDignidad extends javax.swing.JDialog {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+       if (cbxCategoria.getSelectedItem().equals("Presidente")) {
+            try {
+                modelo.setLista(dd.buscarPorCategorias(txtCategoriabuscar.getText()));
+                tblTabla.setModel(modelo);
+                tblTabla.updateUI();
+            } catch (Exception ex) {
+                Logger.getLogger(FrmDignidad.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void cbxTipoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxTipoActionPerformed
+        cbxCategoria.removeAllItems();
+        cargarcomboEjecutivo();
+    }//GEN-LAST:event_cbxTipoActionPerformed
+
     private void txtxNroCuposActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtxNroCuposActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtxNroCuposActionPerformed
 
-    private void cbxTipoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxTipoActionPerformed
+    private void txtCategoriabuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCategoriabuscarActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_cbxTipoActionPerformed
+    }//GEN-LAST:event_txtCategoriabuscarActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         guardar();        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
- /**
-     * Este metodo me perimite guardar los datos del de la dignidad
-     * como los numeros de cupos,como el tipo ,la categoria entre otros.
+    }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void cbxTipoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cbxTipoMouseClicked
+
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cbxTipoMouseClicked
+    /**
+     * Este metodo me perimite guardar los datos del de la dignidad como los
+     * numeros de cupos,como el tipo ,la categoria entre otros.
      */
     private void guardar() {
-
         if (txtxNroCupos.getText().trim().isEmpty() || cbxCategoria.getSelectedItem().toString().isEmpty()) {
             JOptionPane.showMessageDialog(null, "Ingrese todo los campos", "Error", JOptionPane.ERROR_MESSAGE);
         } else {
             try {
-                dd.getDignidad().setNrocupos(Integer.valueOf(txtxNroCupos.getText()));
-                dd.getDignidad().setTipo(cbxTipo.getSelectedItem().toString());
-                dd.getDignidad().setCategorias(cbxCategoria.getSelectedItem().toString());
-                dd.getDignidad().setId_Partido_Politico(PROPERTIES);
-                if (dd.getDignidad().getId() != null) {
-                    dd.modificar(fila);
-                    limpiar();
+          
+
+                Integer aux = Integer.valueOf(txtxNroCupos.getText());
+                String categoria = cbxCategoria.getSelectedItem().toString();
+
+                for (int i = 0; i < aux; i++) {
+                    dd.getDignidad().setTipo(cbxTipo.getSelectedItem().toString());
+                    dd.getDignidad().setCategoria(cbxCategoria.getSelectedItem().toString());
+                    dd.getDignidad().setNro_cupo(20);
+                    System.out.println(dd.getDignidad().getNro_cupo());
+
+                    if (dd.contadorCategoria(categoria) <= 20) { // 20 es valor quemado pero en realidad va aqui la lista de los partidos existentes
+                        asignarCategoria();
+
+                    }
+
+                }
+                if (dd.contadorCategoria(categoria) > 20) {
+                    JOptionPane.showMessageDialog(null, "No se puede agregar mas datos", "Error", JOptionPane.ERROR_MESSAGE);
+
                 } else {
-                    dd.guardar();
-                    limpiar();
+                    JOptionPane.showMessageDialog(null, "Guardado", "ok", JOptionPane.INFORMATION_MESSAGE);
                 }
 
-                JOptionPane.showMessageDialog(null, "Se ha guardado de forma correcta", "OK", JOptionPane.INFORMATION_MESSAGE);
             } catch (Exception e) {
                 JOptionPane.showMessageDialog(null, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
             }
         }
 
     }
-  /**
+
+    private void asignarCategoria() throws Exception {
+        try {
+            dd.guardar();
+        } catch (IOException ex) {
+            Logger.getLogger(FrmDignidad.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        limpiar();
+    }
+
+    /**
      * Este metodo me permite cargar las imagenes
      */
-    public void cargarImagenes(){
-     this.setLocationRelativeTo(this);
+    public void cargarImagenes() {
+        this.setLocationRelativeTo(this);
         SetImageLabel(jbllogo, "C:\\Users\\Gonzalez G\\OneDrive\\Desktop\\PROYECTO DE VOTACION\\PIS\\PIS_PROYECTO\\src\\imagenes\\logo.png");
-   
+
     }
-        private void SetImageLabel(JLabel labelName, String root) {
+
+    private void SetImageLabel(JLabel labelName, String root) {
         ImageIcon image = new ImageIcon(root);
         Icon icon = new ImageIcon(image.getImage().getScaledInstance(labelName.getWidth(), labelName.getHeight(), Image.SCALE_DEFAULT));
         labelName.setIcon(icon);
         this.repaint();
     }
-     /**
-     * Este metodo me permite limpiar todos los datos 
+
+    /**
+     * Este metodo me permite limpiar todos los datos
      */
     private void limpiar() {
         this.dd.setDignidad(null);
@@ -263,8 +400,33 @@ public class FrmDignidad extends javax.swing.JDialog {
         fila = -1;
         cargarTabla();
     }
-/**
-     * Este metodo me permite guardar los datos 
+
+    private void cargarcomboEjecutivo() {
+        switch (cbxTipo.getSelectedItem().toString()) {
+            case "Ejecutiva":
+                cbxCategoria.addItem("Presidente");
+                cbxCategoria.addItem("Vicepresidente");
+                break;
+            case "Legislativa":
+                cbxCategoria.removeAllItems();
+                cbxCategoria.addItem("Asambleistas");
+                break;
+            case "Ejecutiva Local":
+                cbxCategoria.addItem("Alcalde");
+                cbxCategoria.addItem("ViceAlcalde");
+                break;
+            case "Respresentativa Local":
+                cbxCategoria.addItem("Concejal");
+                break;
+            default:
+                throw new AssertionError();
+        }
+
+    }
+
+    /**
+     * /**
+     * Este metodo me permite guardar los datos
      */
     private void cargarTabla() {
         modelo.setLista(dd.listar());
@@ -320,9 +482,11 @@ public class FrmDignidad extends javax.swing.JDialog {
     private javax.swing.JComboBox<String> cbxTipo;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
@@ -330,6 +494,7 @@ public class FrmDignidad extends javax.swing.JDialog {
     private javax.swing.JLabel jblTitulo;
     private javax.swing.JLabel jbllogo;
     private javax.swing.JTable tblTabla;
+    private javax.swing.JTextField txtCategoriabuscar;
     private javax.swing.JTextField txtxNroCupos;
     // End of variables declaration//GEN-END:variables
 }

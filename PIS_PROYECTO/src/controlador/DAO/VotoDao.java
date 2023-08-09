@@ -36,13 +36,13 @@ public class VotoDao extends AdaptadorDAO<Voto> {
         this.voto = persona;
     }
 
-    public void guardar() throws IOException {
+    public void guardar() throws Exception {
         voto.setId(generateID());
         this.guardar(voto);
     }
 
-    public void modificar(Integer pos) throws PosicionNoEncontradaException, ListaNullException, IOException{
-        this.modificar(voto, pos);
+    public void modificar(Integer pos) throws Exception{
+        this.modificar(voto);
     }
 
     private Integer generateID() {

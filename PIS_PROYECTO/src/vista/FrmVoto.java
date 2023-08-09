@@ -13,6 +13,8 @@ import javax.swing.JLabel;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import java.awt.Image;  
+import javax.swing.JComboBox;
+import java.util.Date;
 /**
  *
  * @author wilson7578
@@ -31,6 +33,7 @@ public class FrmVoto extends javax.swing.JDialog {
         initComponents();
         cargarTabla();
        cargarImagenes();
+      cargaCombo();
     }
  /**
  *
@@ -67,13 +70,9 @@ public class FrmVoto extends javax.swing.JDialog {
 
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        txtLugar = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         cbxEstado = new javax.swing.JComboBox<>();
         cbxTipo = new javax.swing.JComboBox<>();
-        cbxEleccion = new javax.swing.JComboBox<>();
-        jLabel4 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jButton1 = new javax.swing.JButton();
         btnSeleccionar = new javax.swing.JButton();
@@ -91,17 +90,9 @@ public class FrmVoto extends javax.swing.JDialog {
 
         jLabel1.setText("Tipo de voto");
 
-        jLabel2.setText("Lugar");
-
         jLabel3.setText("Estado");
 
         cbxEstado.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "TRUE", "FALSE" }));
-
-        cbxTipo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "BLANCO", "NULLO" }));
-
-        cbxEleccion.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
-        jLabel4.setText("Eleccion");
 
         jButton1.setText("REGISTRAR");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -160,22 +151,13 @@ public class FrmVoto extends javax.swing.JDialog {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addComponent(jLabel4)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(cbxEleccion, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                .addComponent(jLabel3)
-                                                .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING)))
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                            .addComponent(cbxTipo, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(cbxEstado, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(txtLugar, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel3)
+                                    .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(cbxTipo, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(cbxEstado, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                                 .addComponent(jLabel5)
@@ -203,7 +185,7 @@ public class FrmVoto extends javax.swing.JDialog {
                         .addComponent(jblestado, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jblubicacion, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(7, 7, 7))
+                        .addGap(29, 29, 29))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(0, 14, Short.MAX_VALUE)
                         .addComponent(jLabel5)
@@ -215,15 +197,7 @@ public class FrmVoto extends javax.swing.JDialog {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(cbxEstado, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(txtLugar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel2))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)))
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(cbxEleccion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel4))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGap(68, 68, 68)))
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -269,9 +243,8 @@ guardar();        // TODO add your handling code here:
             try {
                 Integer id = modelo.getLista().obtener(fila).getId();
                 vd.setVoto(vd.obtener(id));
-                txtLugar.setText(vd.getVoto().getLugar());
-                cbxTipo.setSelectedItem(vd.getVoto().gettipoVoto());
-                cbxEleccion.setSelectedItem(ABORT);
+                
+                cbxTipo.setSelectedItem(vd.getVoto().getTipoVoto());
                 cbxEstado.setSelectedItem(vd.getVoto().getEstado());
             } catch (Exception e) {
                 System.out.println(e);
@@ -288,23 +261,24 @@ guardar();        // TODO add your handling code here:
         tblTabla.updateUI();
 
     }
+    
+    private void cargaCombo(){
+    Utilidades.cargarComboTipoVoto(cbxTipo);
+    }
 /**
      * Este metodo me perimite guardar los datos del voto tanto
      * como el tipo ,asi como el lugar y el estado del voto
      */
      private void guardar() {
          
-         if (txtLugar.getText().trim().isEmpty() || cbxTipo.getSelectedItem().toString().isEmpty()) {
+         if ( cbxTipo.getSelectedItem().toString().isEmpty()) {
             JOptionPane.showMessageDialog(null, "Ingrese todo los campos", "Error", JOptionPane.ERROR_MESSAGE);
         } else {
             try {
-               
-                vd.getVoto().settipoVoto(cbxTipo.getSelectedItem().toString());
-                vd.getVoto().setLugar(txtLugar.getText());
-                 
-                vd.getVoto().setEstado(Boolean.getBoolean((String)cbxEstado.getSelectedItem()));
-                vd.getVoto().setId_Eleccion(PROPERTIES);
-                vd.getVoto().setFechadeEmision(u.generarFechaActual());
+                vd.getVoto().setTipoVoto(Utilidades.getComboTipoVoto(cbxTipo));                 
+                vd.getVoto().setEstado(cbxEstado.getSelectedItem().equals("TRUE"));
+                vd.getVoto().setFechade_emision(u.generarFechaActual());
+                System.out.println();
                 if (vd.getVoto().getId() != null) {
                     vd.modificar(fila);
                     limpiar();
@@ -327,7 +301,6 @@ guardar();        // TODO add your handling code here:
      */
        private void limpiar() {
         this.vd.setVoto(null);
-        txtLugar.setText("");
         fila = -1;
         cargarTabla();
     }
@@ -379,14 +352,11 @@ guardar();        // TODO add your handling code here:
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnSeleccionar;
-    private javax.swing.JComboBox<String> cbxEleccion;
     private javax.swing.JComboBox<String> cbxEstado;
     private javax.swing.JComboBox<String> cbxTipo;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
@@ -396,6 +366,5 @@ guardar();        // TODO add your handling code here:
     private javax.swing.JLabel jblubicacion;
     private javax.swing.JLabel jblvoto1;
     private javax.swing.JTable tblTabla;
-    private javax.swing.JTextField txtLugar;
     // End of variables declaration//GEN-END:variables
 }

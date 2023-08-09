@@ -9,18 +9,18 @@ package modelo;
  * @author Gonzalez G
  */
 public class Dignidad {
-    private Integer id_Partido_Politico;
+   private Integer id;
     private String tipo ;
-    private Integer id;
-    private Integer Nrocupos;
-    private String categorias ;
+    
+    private Integer nro_cupo;
+    private String categoria ;
 
-    public Integer getId_Partido_Politico() {
-        return id_Partido_Politico;
+    public Integer getId() {
+        return id;
     }
 
-    public void setId_Partido_Politico(Integer id_Partido_Politico) {
-        this.id_Partido_Politico = id_Partido_Politico;
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public String getTipo() {
@@ -31,29 +31,25 @@ public class Dignidad {
         this.tipo = tipo;
     }
 
-    public Integer getId() {
-        return id;
+    public Integer getNro_cupo() {
+        return nro_cupo;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public void setNro_cupo(Integer nro_cupo) {
+        this.nro_cupo = nro_cupo;
     }
 
-    public Integer getNrocupos() {
-        return Nrocupos;
+    public String getCategoria() {
+        return categoria;
     }
 
-    public void setNrocupos(Integer Nrocupos) {
-        this.Nrocupos = Nrocupos;
+    public void setCategoria(String categoria) {
+        this.categoria = categoria;
     }
+    
 
-    public String getCategorias() {
-        return categorias;
-    }
+   
 
-    public void setCategorias(String categorias) {
-        this.categorias = categorias;
-    }
-
+   
   
 }

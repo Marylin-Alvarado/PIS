@@ -15,27 +15,21 @@ import java.io.IOException;
  * @author cobos
  */
 public interface InterfazDAO <T>{
-    /**
-     * Metodo que permite guardar
+     /* Metodo que permite realizar el guardaddo
      * @param obj Objeto del modelo
+     * @return El id generado producto del guardado
      */
-    public void guardar(T obj) throws IOException;
+    public Integer guardar(T obj) throws Exception;
     /**
      * Permite modificar los datos en un repositorio de datos
-     * @param obj Objeto a modificar
-     * @param pos posicion del arreglo
+     * @param obj Objeto a modificar     
      */
-    public void modificar(T obj, Integer pos) throws ListaNullException, PosicionNoEncontradaException,IOException;
+    public void modificar(T obj) throws Exception;
     /**
-     * Permite listar los elementos
-     * @return una lista enlazada
+     * LIstado de objetos en la BD
+     * @return Una ListaEnlazada
      */
     public ListaEnlazada<T> listar();
-    /**
-     * Permite obtener un elemento del arreglo
-     * @param id Posicion
-     * @return returna un dato
-     */
     public T obtener(Integer id);
       
 }
