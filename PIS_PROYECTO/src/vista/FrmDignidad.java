@@ -51,6 +51,7 @@ public class FrmDignidad extends javax.swing.JDialog {
                 if (Character.isDigit(c)) {
                     e.consume(); // Ignorar la entrada del número
                     JOptionPane.showMessageDialog(txtCategoriabuscar, "No se permiten números", "Error", JOptionPane.ERROR_MESSAGE);
+                    limpiar();
                 }
             }
 
@@ -73,6 +74,7 @@ public class FrmDignidad extends javax.swing.JDialog {
                 if (Character.isLetter(c)) {
                     e.consume(); // Ignorar la entrada de letra
                     JOptionPane.showMessageDialog(dato, "No se permiten letras", "Error", JOptionPane.ERROR_MESSAGE);
+                    limpiar();
                 }
             }
 
