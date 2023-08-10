@@ -1,8 +1,11 @@
+<<<<<<< HEAD
+=======
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+>>>>>>> main
 package modelo;
 
 /**
@@ -56,7 +59,11 @@ public class Candidato {
     public void setId_dignidad(Integer id_dignidad) {
         this.id_dignidad = id_dignidad;
     }
+<<<<<<< HEAD
+
+=======
     
     
     
+>>>>>>> main
 }

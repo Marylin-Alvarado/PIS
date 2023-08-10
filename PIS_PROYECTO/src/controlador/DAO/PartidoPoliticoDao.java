@@ -5,10 +5,17 @@
  */
 package controlador.DAO;
 
+<<<<<<< HEAD
+import controlador.ed.listas.ListaEnlazada;
+import controlador.ed.listas.exception.ListaNullException;
+import controlador.ed.listas.exception.PosicionNoEncontradaException;
+import java.util.Objects;
+=======
 
 import controlador.ed.listas.ListaEnlazada;
 import controlador.ed.listas.exception.ListaNullException;
 import controlador.ed.listas.exception.PosicionNoEncontradaException;
+>>>>>>> main
 import modelo.Partido_Politico;
 
 /**
@@ -43,11 +50,14 @@ public class PartidoPoliticoDao extends AdaptadorDAO<Partido_Politico> {
          return true;
     }
 
+<<<<<<< HEAD
+=======
     public boolean eliminar() throws Exception{
         this.eliminar(datos);
         return true;
     }
     
+>>>>>>> main
     public Partido_Politico buscarPorNombre(String dato) throws ListaNullException, PosicionNoEncontradaException {
         Partido_Politico resultado = null;
         ListaEnlazada<Partido_Politico> lista = listar();
@@ -60,6 +70,22 @@ public class PartidoPoliticoDao extends AdaptadorDAO<Partido_Politico> {
         }
         return resultado;
     }
+<<<<<<< HEAD
+    
+    public Partido_Politico buscarPorId(Integer dato) throws ListaNullException, PosicionNoEncontradaException {
+        Partido_Politico resultado = null;
+        ListaEnlazada<Partido_Politico> lista = listar();
+        for (int i = 0; i < lista.size(); i++) {
+            Partido_Politico aux = lista.obtener(i);
+            if (Objects.equals(dato, aux.getNombre_partido_politico())) {
+                resultado = aux;
+                break;
+            }
+        }
+        return resultado;
+    }
+=======
+>>>>>>> main
 
     public ListaEnlazada<Partido_Politico> ordenarNombre(ListaEnlazada<Partido_Politico> lista, Integer tipo) {
         try {
@@ -84,4 +110,8 @@ public class PartidoPoliticoDao extends AdaptadorDAO<Partido_Politico> {
         }
         return lista;
     }
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> main

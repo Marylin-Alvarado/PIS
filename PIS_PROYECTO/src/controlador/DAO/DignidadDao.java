@@ -1,3 +1,12 @@
+<<<<<<< HEAD
+package controlador.DAO;
+
+import controlador.ed.listas.ListaEnlazada;
+import controlador.ed.listas.exception.ListaNullException;
+import controlador.ed.listas.exception.PosicionNoEncontradaException;
+import modelo.Dignidad;
+
+=======
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -5,21 +14,73 @@
  */
 package controlador.DAO;
 
+>>>>>>> main
 /**
  *
  * @author wilson7578
  */
+<<<<<<< HEAD
+
+public class DignidadDao extends AdaptadorDAO<Dignidad> {
+
+    private Dignidad datos;
+
+    public DignidadDao() {
+        super(Dignidad.class);
+    }
+
+    public Dignidad getDatos() {
+        if (this.datos == null) {
+            this.datos = new Dignidad();
+        }
+        return datos;
+    }
+
+    public void setDatos(Dignidad datos) {
+        this.datos = datos;
+    }
+
+    public Integer guardar() throws Exception {
+        return this.guardar(datos);
+    }
+
+    public boolean modificar() throws Exception {
+        this.modificar(datos);
+        return true;
+    }
+    
+    public Dignidad buscarPorId(int id) throws Exception {
+        
+        Dignidad resultado = null;
+        ListaEnlazada<Dignidad> lista = listar();
+        
+        for(int i = 0 ; i < lista.size() ; i++){
+            if(lista.obtener(i).getId() == id){
+                resultado = lista.obtener(i);
+            }
+        }
+        
+        return resultado;
+    }
+
+    public Integer buscarPorCategoria(String dato) throws Exception {
+=======
 public class DignidadDao extends AdaptadorDAO<Dignidad> {
 
     public DignidadDao() {
         super(Dignidad.class);
     }
+>>>>>>> main
         Dignidad resultado = null;
         ListaEnlazada<Dignidad> lista = listar();
         Integer contador = 0;
         for (int i = 0; i < lista.size(); i++) {
             Dignidad aux = lista.obtener(i);
+<<<<<<< HEAD
+            if (aux.getCategorias().toLowerCase().equals(dato.toLowerCase())) {
+=======
 
+>>>>>>> main
                 resultado = aux;
                 if (i < lista.size()) {
                     contador++;
@@ -30,11 +91,32 @@ public class DignidadDao extends AdaptadorDAO<Dignidad> {
         return contador;
     }
 
+<<<<<<< HEAD
+    public ListaEnlazada<Dignidad> buscarPorCategorias(String dato) throws Exception {
+        ListaEnlazada<Dignidad> lista = listar();
+        ListaEnlazada<Dignidad> resultados = new ListaEnlazada<>();
+
+        for (int i = 0; i < lista.size(); i++) {
+            Dignidad aux = lista.obtener(i);
+            if (aux.getCategorias().toLowerCase().equals(dato.toLowerCase())) {
+                resultados.insertar(aux);
+            }
+        }
+        return resultados;
+    }
+    
+    public Dignidad categoriaDignidad(String dato) throws ListaNullException, PosicionNoEncontradaException {
+=======
+>>>>>>> main
         Dignidad resultado = null;
         ListaEnlazada<Dignidad> lista = listar();
         for (int i = 0; i < lista.size(); i++) {
             Dignidad aux = lista.obtener(i);
+<<<<<<< HEAD
+            if (aux.getCategorias().toLowerCase().equals(dato.toLowerCase())) {
+=======
 
+>>>>>>> main
                 resultado = aux;
                 break;
             }
@@ -48,6 +130,10 @@ public class DignidadDao extends AdaptadorDAO<Dignidad> {
             for (int i = 1; i < lista.size(); i++) {
                 Dignidad key = matriz[i];
                 int j = i - 1;
+<<<<<<< HEAD
+                while (j >= 0 && (matriz[j].getCategorias().compareToIgnoreCase(key.getTipo())) > 0) {
+=======
+>>>>>>> main
                     //lista.update(j+1, lista.get(j));
                     matriz[j + 1] = matriz[j];
                     j = j - 1;
@@ -60,4 +146,8 @@ public class DignidadDao extends AdaptadorDAO<Dignidad> {
         }
         return lista;
     }
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> main

@@ -1,0 +1,39 @@
+{
+    "controlador.ed.listas.ListaEnlazada": {
+        "cabecera": {
+            "dato": {
+                "@class": "modelo.Candidato",
+                "id_candidato": 1,
+                "nombre_candidato": "Alyce ",
+                "preparacion_candidato": "Ingeniero en sistemas"
+            },
+            "siguiente": {
+                "dato": {
+                    "@class": "modelo.Candidato",
+                    "id_candidato": 2,
+                    "nombre_candidato": "Danny Cobos",
+                    "preparacion_candidato": "Ingeniero sistemas"
+                },
+                "siguiente": {
+                    "dato": {
+                        "@class": "modelo.Candidato",
+                        "id_candidato": 3,
+                        "nombre_candidato": "dasdas",
+                        "preparacion_candidato": "adasdasd"
+                    },
+                    "siguiente": {
+                        "dato": {
+                            "@class": "modelo.Candidato",
+                            "id_candidato": 4,
+                            "nombre_candidato": "Miguel",
+                            "preparacion_candidato": "asda"
+                        }
+                    }
+                }
+            }
+        },
+        "size": 4,
+        "ascendente": 1,
+        "descendente": 2
+    }
+}
