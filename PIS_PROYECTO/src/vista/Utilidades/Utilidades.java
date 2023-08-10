@@ -5,11 +5,12 @@
  */
 package vista.Utilidades;
 
-
+import controlador.DAO.DignidadDao;
+import controlador.DAO.PartidoPoliticoDao;
+import controlador.ed.listas.ListaEnlazada;
+import controlador.ed.listas.exception.ListaNullException;
+import controlador.ed.listas.exception.PosicionNoEncontradaException;
 import javax.swing.JComboBox;
-import modelo.Persona;
-import modelo.enums.Generos;
-import modelo.enums.TipoIdentificacion;
 
 /**
  *
@@ -17,36 +18,39 @@ import modelo.enums.TipoIdentificacion;
  */
 public class Utilidades {
 
-    private static Integer posicionAdministrador;
+        cbx.removeAllItems();
+        ListaEnlazada<Partido_Politico> lista = pd.ordenarNombre(pd.listar(), 0);
+        for (int i = 0; i < lista.size(); i++) {
+            cbx.addItem(lista.obtener(i).getNombre_partido_politico());
+        }
+    }
 
     
-
-    // Aqui se van a implementar los metodos de guardar y listar
-    /**
-     * Metodo para cargar los generos que se encuentran en un enum dentro de un
-     * JComboBox
-     *
-     * @param cbx
-     * @return
-     */
-    public static JComboBox cargarComboGenero(JComboBox cbx) {
+    public static void cargarDignidad(JComboBox cbx , DignidadDao dd) throws ListaNullException, PosicionNoEncontradaException{
         cbx.removeAllItems();
-        for (Generos genero : Generos.values()) {
-            cbx.addItem(genero);
+        ListaEnlazada<Dignidad> lista = dd.ordenarCategoria(dd.listar());
+        for (int i = 0; i < lista.size(); i++) {
+            cbx.addItem(lista.obtener(i).getTipo());
         }
-        return cbx;
     }
 
-    public static Generos getComboGenero(JComboBox cbx) {
-        return (Generos) cbx.getSelectedItem();
     }
-
-    public static JComboBox cargarTipoIdentificacion(JComboBox cbx) {
-        cbx.removeAllItems();
-        for (TipoIdentificacion identifiacion : TipoIdentificacion.values()) {
-            cbx.addItem(identifiacion);
-        }
-        return cbx;
+     
+     public static TipoVoto getComboTipoVoto(JComboBox cbx) {
+        return  (TipoVoto) cbx.getSelectedItem();
     }
+     
 
+     
+    public Date generarFechaActual(){
+     Date fechaHoraActual = new Date();
+        System.out.println(fechaHoraActual);
+     return fechaHoraActual ;  
+    }
+    
+    public static String cambiarFechaActualString(Date date){
+        SimpleDateFormat formatoFecha = new SimpleDateFormat("yyyy-MM-dd");
+     return formatoFecha.format(date); 
+    }
+    
 }
