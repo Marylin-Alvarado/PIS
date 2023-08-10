@@ -9,6 +9,11 @@ import controlador.ed.listas.ListaEnlazada;
 import controlador.ed.listas.exception.ListaNullException;
 import controlador.ed.listas.exception.ListaVaciaException;
 import controlador.ed.listas.exception.PosicionNoEncontradaException;
+
+import controlador.login.exceptions.DatoIncorrectoException;
+import controlador.login.exceptions.IntentoExcedidoException;
+import controlador.login.exceptions.UsuarioNoExisteException;
+import controlador.utiles.Utilidades;
 import java.io.IOException;
 import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
@@ -22,6 +27,7 @@ public class CuentaDAO extends AdaptadorDAO<Cuenta> {
 
     private ListaEnlazada<Cuenta> cuent = new ListaEnlazada<>();
     private Cuenta cuenta;
+    protected Integer limite = 5;
 
     public CuentaDAO() {
         super(Cuenta.class);
@@ -58,9 +64,6 @@ public class CuentaDAO extends AdaptadorDAO<Cuenta> {
         return true;
     }
 
-    private Integer generateID() {
-        return listar().size() + 1;
-    }
 
 //    public Cuenta obtener(String usuario) throws ListaVaciaException, PosicionNoEncontradaException, IllegalArgumentException, IllegalAccessException, Exception {
 //        try {
@@ -94,7 +97,7 @@ public class CuentaDAO extends AdaptadorDAO<Cuenta> {
             // Manejar cualquier excepción aquí si es necesario
         }
 
-        // Si no se encuentra la cuenta, o ha habido alguna excepción, devolver null
+       
         return null;
     }
 
@@ -135,7 +138,33 @@ public class CuentaDAO extends AdaptadorDAO<Cuenta> {
     public ListaEnlazada<Cuenta> buscarNombreCliente(String dato) {
         ListaEnlazada<Cuenta> lista = listar();
         quicksortAs(lista);
+        lista.imprimir();
         return busBinaria(lista, dato);
+    }
+    
+    public Cuenta buscarUsaurio(String user) throws Exception {
+        Cuenta c = null;
+        ListaEnlazada<Cuenta> lista = listar();
+        for(int i = 0; i < lista.size();i++) {
+            Cuenta aux = lista.obtener(i);
+            if(user.equals(aux.getUsuario())) {
+                c = aux;
+                break;
+            }
+        }
+        return c;
+    }
+    
+    public Cuenta inicioSesion(String user, String clave) throws Exception {
+        Cuenta c = buscarUsaurio(user);
+        if(c != null) {
+            System.out.println(c+"  "+c.getContrasenia()+ " "+clave);
+            if(!c.getContrasenia().equals(clave)) {
+                c = null;
+            }
+        }
+        
+        return c;
     }
 
     public ListaEnlazada<Cuenta> quicksortAs(ListaEnlazada<Cuenta> lista) {
@@ -173,5 +202,7 @@ public class CuentaDAO extends AdaptadorDAO<Cuenta> {
         lista[i] = lista[j];
         lista[j] = temp;
     }
+    
+   
 
 }

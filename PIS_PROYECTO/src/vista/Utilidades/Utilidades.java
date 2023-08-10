@@ -9,7 +9,7 @@ package vista.Utilidades;
 import javax.swing.JComboBox;
 import modelo.Persona;
 import modelo.enums.Generos;
-
+import modelo.enums.TipoIdentificacion;
 
 /**
  *
@@ -41,6 +41,12 @@ public class Utilidades {
         return (Generos) cbx.getSelectedItem();
     }
 
-    
+    public static JComboBox cargarTipoIdentificacion(JComboBox cbx) {
+        cbx.removeAllItems();
+        for (TipoIdentificacion identifiacion : TipoIdentificacion.values()) {
+            cbx.addItem(identifiacion);
+        }
+        return cbx;
+    }
 
 }

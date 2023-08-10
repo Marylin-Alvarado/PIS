@@ -16,7 +16,8 @@ import modelo.Persona;
  */
 public class ModeloTablaRegistrados extends AbstractTableModel{
 
-    private ListaEnlazada<Persona> lista = new ListaEnlazada<>();    
+    private ListaEnlazada<Persona> lista = new ListaEnlazada<>();
+    
 
     public ListaEnlazada<Persona> getLista() {
         return lista;
@@ -28,7 +29,7 @@ public class ModeloTablaRegistrados extends AbstractTableModel{
     
     @Override
     public int getColumnCount() {
-        return 6;
+        return 5;
     }
 
     @Override
@@ -42,10 +43,10 @@ public class ModeloTablaRegistrados extends AbstractTableModel{
         switch(i) {
             case 0: return"id";
             case 1: return "Nombres Completos";   
-            case 2: return "Correo Electronico";
-            case 3: return "Codigo Dactilar";
-            case 4: return "Numero de Cedula";
-            case 5: return "Fecha de nacimiento";
+            case 2: return "Identificacion";
+            case 3: return "Genero";
+            case 4: return "Correo Electronico";
+         
             default: return null;
 
         }
@@ -54,18 +55,20 @@ public class ModeloTablaRegistrados extends AbstractTableModel{
     @Override
     public Object getValueAt(int i, int i1) {
         Persona s = null;
+     
         try {
             s = lista.obtener(i);
+      
         } catch (Exception e) {
         }
         switch(i1) {
             
             case 0: return (s != null)? s.getId():"-";
             case 1: return (s != null)? s.getNombres_completos():"NO DEFINIDO";
-            case 2: return (s != null)? s.getCorreo():"NO DEFINIDO";
-            case 3: return (s != null)? s.getCodigoDac():"NO DEFINIDO";
-            case 4: return (s != null)? s.getIdentificacion():"NO DEFINIDO";
-            case 5: return (s != null)? s.getFechaNacimiento():"NO DEFINIDO";
+            case 2: return (s != null)? s.getIdentificacion():"NO DEFINIDO";
+            case 3: return (s != null)? s.getGenero():"NO DEFINIDO";
+            case 4: return (s != null)? s.getCorreo():"NO DEFINIDO";
+
             
    
             default: return null;

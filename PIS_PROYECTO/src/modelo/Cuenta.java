@@ -11,21 +11,18 @@ package modelo;
  */
 public class Cuenta {
 
-    private Integer id_cuenta;
+    private Integer id;
     private String usuario;
-    private String tipoUser;
     private String contrasenia;
-    private Boolean estado;
-    private Integer id_persona;
 
-    public Integer getId_cuenta() {
-        return id_cuenta;
+    public Integer getId() {
+        return id;
     }
 
-    public void setId_cuenta(Integer id_cuenta) {
-        this.id_cuenta = id_cuenta;
+    public void setId(Integer id) {
+        this.id = id;
     }
-
+    
     
 
     public String getUsuario() {
@@ -44,30 +41,11 @@ public class Cuenta {
         this.contrasenia = contrasenia;
     }
 
-    public Boolean getEstado() {
-        return estado;
-    }
-
-    public void setEstado(Boolean estado) {
-        this.estado = estado;
-    }
-
-    public Integer getId_persona() {
-        return id_persona;
-    }
-
-    public void setId_persona(Integer id_persona) {
-        this.id_persona = id_persona;
+    @Override
+    public String toString() {
+        return id+"   "+usuario; //To change body of generated methods, choose Tools | Templates.
     }
 
     
-
-    public String getTipoUser() {
-        return tipoUser;
-    }
-
-    public void setTipoUser(String tipoUser) {
-        this.tipoUser = tipoUser;
-    }
 
 }

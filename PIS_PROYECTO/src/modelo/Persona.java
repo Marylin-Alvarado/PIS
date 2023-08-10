@@ -7,7 +7,7 @@ package modelo;
 
 import java.util.Date;
 import modelo.enums.Generos;
-
+import modelo.enums.TipoIdentificacion;
 
 /**
  *
@@ -17,7 +17,7 @@ public class Persona {
 
     private Integer id;
     private String nombres_completos;
-    private String identificacion;
+    private Integer identificacion;
     private String codigoDac;
 
     private String direccion;
@@ -48,15 +48,15 @@ public class Persona {
         this.nombres_completos = nombres_completos;
     }
 
-    
-
-    public String getIdentificacion() {
+    public Integer getIdentificacion() {
         return identificacion;
     }
 
-    public void setIdentificacion(String identificacion) {
+    public void setIdentificacion(Integer identificacion) {
         this.identificacion = identificacion;
     }
+
+    
 
     public String getCodigoDac() {
         return codigoDac;
