@@ -21,6 +21,10 @@ import java.util.Map;
  * @author cobos
  */
 public class AdaptadorDAO<T> implements InterfazDAO<T> {
+<<<<<<< HEAD
+=======
+
+>>>>>>> main
     /**
      * Obejto Conexion
      */
@@ -29,34 +33,55 @@ public class AdaptadorDAO<T> implements InterfazDAO<T> {
      * Class del modelo a usar
      */
     private Class clazz;
+<<<<<<< HEAD
     
     /**
      * Constructor de la clase
+=======
+    /**
+     * Constructor de la clase
+     *
+>>>>>>> main
      * @param clazz El objeto de la clase del modelo Ejemplo: Persona.class
      */
     public AdaptadorDAO(Class clazz) {
         this.conexion = new Conexion();
         this.clazz = clazz;
     }
+<<<<<<< HEAD
     /**
      * Metodo que permite guardar
      * @param obj El objeto del modelo lleno
      * @return La llave primaria generada por el motor de base de datos (se sugiere construir la tabla de base de datos con la generacion de id auto incementable) 
+=======
+
+    /**
+     * Metodo que permite guardar
+     *
+     * @param obj El objeto del modelo lleno
+     * @return La llave primaria generada por el motor de base de datos (se
+     * sugiere construir la tabla de base de datos con la generacion de id auto
+     * incementable)
+>>>>>>> main
      * @throws Exception Cuando no se puede guardar en la base de datos
      */
     @Override
     public Integer guardar(T obj) throws Exception {
+<<<<<<< HEAD
         //INSERT INTO <TABLA> (..) value (...)
         String query = queryInsert(obj);
         Integer idGenerado = -1;
         PreparedStatement statement
                 = conexion.getConnection().prepareStatement(query,
                         Statement.RETURN_GENERATED_KEYS);
+=======
+>>>>>>> main
         statement.executeUpdate();
         ResultSet generatedKeys = statement.getGeneratedKeys();
         if (generatedKeys.next()) {
             idGenerado = generatedKeys.getInt(1);
         }
+<<<<<<< HEAD
 
         conexion.getConnection().close();
         conexion.setConnection(null);
@@ -64,10 +89,28 @@ public class AdaptadorDAO<T> implements InterfazDAO<T> {
     }
     /**
      * Metodo que permite modificar un registro en la base de datos, para modificar se debe primero consultar el Objeto haciendo uso del metodo Obtener
+=======
+
+
+        conexion.getConnection().close();
+        conexion.setConnection(null);
+        return idGenerado;
+    }
+
+    /**
+     * Metodo que permite modificar un registro en la base de datos, para
+     * modificar se debe primero consultar el Objeto haciendo uso del metodo
+     * Obtener
+     *
+>>>>>>> main
      * @param obj El objeto del modelo a modificar
      * @throws Exception Alguna Excepcion si no modifica
      */
     @Override
+<<<<<<< HEAD
+=======
+
+>>>>>>> main
     public void modificar(T obj) throws Exception {
         String query = queryUpdate(obj);
         Statement st = conexion.getConnection().createStatement();
@@ -75,8 +118,26 @@ public class AdaptadorDAO<T> implements InterfazDAO<T> {
         conexion.getConnection().close();
         conexion.setConnection(null);
     }
+<<<<<<< HEAD
     /**
      * Metodo que permite sacar los datos de la base de datos
+=======
+
+    public void eliminar(T obj) throws Exception {
+        // DELETE FROM <TABLA> WHERE <CONDICION>
+        String query = queryDelete(obj);
+
+        PreparedStatement statement = conexion.getConnection().prepareStatement(query);
+        statement.executeUpdate();
+
+        conexion.getConnection().close();
+        conexion.setConnection(null);
+    }
+
+    /**
+     * Metodo que permite sacar los datos de la base de datos
+     *
+>>>>>>> main
      * @return Un Objeto de la ListaEnlazada con los datos llenos
      */
     @Override
@@ -96,8 +157,15 @@ public class AdaptadorDAO<T> implements InterfazDAO<T> {
         }
         return lista;
     }
+<<<<<<< HEAD
     /**
      * Permite obtener un objeto de la base de datos a travez del Id
+=======
+
+    /**
+     * Permite obtener un objeto de la base de datos a travez del Id
+     *
+>>>>>>> main
      * @param id El id a buscar en la base de datos
      * @return El objeto buscado, es null si no esxiste el objeto
      */
@@ -116,8 +184,11 @@ public class AdaptadorDAO<T> implements InterfazDAO<T> {
         return data;
     }
 
+<<<<<<< HEAD
     //--------------ESTO ES DEL CRUD NO MODIFICAR AL MENOS QUE LO AMERITE------
     
+=======
+>>>>>>> main
     private T llenarObjeto(ResultSet rs) {
         T data = null;
         try {
@@ -129,12 +200,166 @@ public class AdaptadorDAO<T> implements InterfazDAO<T> {
             for (Field f : clazz.getSuperclass().getDeclaredFields()) {
                 String atributo = f.getName().substring(0, 1).toUpperCase() + f.getName().substring(1);
                 fijarDatos(f, rs, data, atributo);
+<<<<<<< HEAD
+=======
             }
 
         } catch (Exception e) {
             System.out.println("error " + e);
         }
         return data;
+    }
+
+    private void fijarDatos(Field f, ResultSet rs, T data, String atributo) {
+        try {
+            Method m = null;
+
+            if (f.getType().getSimpleName().equalsIgnoreCase("String")) {
+                m = clazz.getMethod("set" + atributo, String.class);
+                m.invoke(data, rs.getString(atributo));
+            }
+
+            if (f.getType().getSimpleName().equalsIgnoreCase("Integer")) {
+                m = clazz.getMethod("set" + atributo, Integer.class);
+                m.invoke(data, rs.getInt(atributo));
+            }
+
+            if (f.getType().getSimpleName().equalsIgnoreCase("Double")) {
+                m = clazz.getMethod("set" + atributo, Double.class);
+                m.invoke(data, rs.getDouble(atributo));
+            }
+
+            if (f.getType().getSimpleName().equalsIgnoreCase("Boolean")) {
+                m = clazz.getMethod("set" + atributo, Boolean.class);
+                m.invoke(data, rs.getBoolean(atributo));
+            }
+
+            if (f.getType().getSimpleName().equalsIgnoreCase("Date")) {
+                m = clazz.getMethod("set" + atributo, Date.class);
+                m.invoke(data, rs.getDate(atributo));
+            }
+
+            if (f.getType().isEnum()) {
+
+                m = clazz.getMethod("set" + atributo, (Class<Enum>) f.getType());
+                m.invoke(data, Enum.valueOf((Class<Enum>) f.getType(), rs.getString(atributo)));
+            }
+        } catch (Exception e) {
+            System.out.println("chiqui error " + e);
+        }
+    }
+
+    private HashMap<String, Object> obtenerObjeto(T obj) {
+        HashMap<String, Object> mapa = new HashMap<>();
+        try {
+            for (Field f : clazz.getDeclaredFields()) {
+                Method m = null;
+                String atributo = f.getName().substring(0, 1).toUpperCase() + f.getName().substring(1);
+                m = clazz.getMethod("get" + atributo);
+                Object aux = m.invoke(obj);
+                if (aux != null) {
+                    mapa.put(atributo.toLowerCase(), aux);
+                }
+            }
+
+            for (Field f : clazz.getSuperclass().getDeclaredFields()) {
+                Method m = null;
+                String atributo = f.getName().substring(0, 1).toUpperCase() + f.getName().substring(1);
+                m = clazz.getMethod("get" + atributo);
+                Object aux = m.invoke(obj);
+                if (aux != null) {
+                    mapa.put(atributo.toLowerCase(), aux);
+                }
+            }
+        } catch (Exception e) {
+            System.out.println("No se pudo tener dato");
+        }
+        return mapa;
+    }
+
+    private String queryInsert(T obj) {
+        HashMap<String, Object> mapa = obtenerObjeto(obj);
+        String query = "INSERT INTO " + clazz.getSimpleName().toLowerCase() + " (";
+        for (Map.Entry<String, Object> entry : mapa.entrySet()) {
+            query += entry.getKey() + ",";
+
+        }
+        query = query.substring(0, query.length() - 1);
+        query += ") VALUES (";
+        for (Map.Entry<String, Object> entry : mapa.entrySet()) {
+
+            if (entry.getValue().getClass().getSuperclass().getSimpleName().equalsIgnoreCase("Number") || entry.getValue().getClass().getSimpleName().equalsIgnoreCase("Boolean")) {
+                query += entry.getValue() + ", ";
+            }
+            if (entry.getValue().getClass().getSimpleName().equalsIgnoreCase("Date")) {
+                SimpleDateFormat formato = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+                query += '"' + formato.format(entry.getValue()) + '"' + ", ";
+            }
+            if (entry.getValue().getClass().isEnum() || entry.getValue().getClass().getSimpleName().equalsIgnoreCase("String")) {
+                query += '"' + entry.getValue().toString() + '"' + ", ";
+            }
+        }
+        query = query.substring(0, query.length() - 2);
+        query += ")";
+        return query;
+    }
+
+    private String queryUpdate(T obj) {
+        HashMap<String, Object> mapa = obtenerObjeto(obj);
+        String query = "UPDATE " + clazz.getSimpleName().toLowerCase() + " SET ";
+        Integer id = 0;
+        for (Map.Entry<String, Object> entry : mapa.entrySet()) {
+            if (entry.getKey().toString().equalsIgnoreCase("id")) {
+                id = (Integer) entry.getValue();
+            } else {
+                query += entry.getKey() + " = ";
+                if (entry.getValue().getClass().getSuperclass().getSimpleName().equalsIgnoreCase("Number") || entry.getValue().getClass().getSimpleName().equalsIgnoreCase("Boolean")) {
+                    query += entry.getValue() + ", ";
+                }
+                if (entry.getValue().getClass().getSimpleName().equalsIgnoreCase("Date")) {
+                    SimpleDateFormat formato = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+                    query += '"' + formato.format(entry.getValue()) + '"' + ", ";
+                }
+                if (entry.getValue().getClass().isEnum() || entry.getValue().getClass().getSimpleName().equalsIgnoreCase("String")) {
+                    query += '"' + entry.getValue().toString() + '"' + ", ";
+                }
+            }
+
+        }
+
+        query += "";
+
+        query = query.substring(0, query.length() - 2);
+        query += " WHERE id = " + id;
+        return query;
+    }
+
+    private String queryDelete(T obj) {
+        HashMap<String, Object> mapa = obtenerObjeto(obj);
+        String query = "DELETE FROM " + clazz.getSimpleName().toLowerCase();
+        Integer id = 0;
+
+        for (Map.Entry<String, Object> entry : mapa.entrySet()) {
+            if (entry.getKey().toString().equalsIgnoreCase("id")) {
+                id = (Integer) entry.getValue();
+                break; // Salimos del bucle si encontramos el ID
+>>>>>>> main
+            }
+
+<<<<<<< HEAD
+        } catch (Exception e) {
+            System.out.println("error " + e);
+        }
+        return data;
+=======
+        if (id != 0) {
+            query += " WHERE id = " + id;
+        } else {
+            throw new IllegalArgumentException("El objeto no tiene un campo 'id' válido.");
+        }
+
+        return query;
+>>>>>>> main
     }
 
     private void fijarDatos(Field f, ResultSet rs, T data, String atributo) {

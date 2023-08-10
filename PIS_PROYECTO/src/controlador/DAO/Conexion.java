@@ -15,7 +15,11 @@ import java.sql.SQLException;
  * @author cobos
  */
 public class Conexion{
+<<<<<<< HEAD
     
+=======
+   //https://www.codejava.net/java-se/jdbc/connect-to-oracle-database-via-jdbc
+>>>>>>> main
     private Connection connection;
     // Librería de MySQL
     public String driver = "com.mysql.cj.jdbc.Driver";//oracle.jdbc.driver.OracleDriver
@@ -83,4 +87,8 @@ public class Conexion{
         this.xstream = xstream;
     }*/    
 
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> main

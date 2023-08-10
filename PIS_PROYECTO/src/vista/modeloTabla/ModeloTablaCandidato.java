@@ -5,9 +5,18 @@
  */
 package vista.modeloTabla;
 
+<<<<<<< HEAD
 import controlador.ed.listas.ListaEnlazada;
 import javax.swing.table.AbstractTableModel;
 import modelo.Candidato;
+=======
+import controlador.DAO.DignidadDao;
+import controlador.DAO.PartidoPoliticoDao;
+import controlador.ed.listas.ListaEnlazada;
+import javax.swing.table.AbstractTableModel;
+import modelo.Candidato;
+import modelo.Dignidad;
+>>>>>>> main
 
 /**
  *
@@ -32,7 +41,11 @@ public class ModeloTablaCandidato extends AbstractTableModel{
 
     @Override
     public int getColumnCount() {
+<<<<<<< HEAD
         return 3;
+=======
+        return 4;
+>>>>>>> main
     }
 
     @Override
@@ -46,6 +59,11 @@ public class ModeloTablaCandidato extends AbstractTableModel{
             case 0: return(arg0+1);
             case 1: return c.getNombre_candidato();
             case 2: return c.getPreparacion_candidato();
+<<<<<<< HEAD
+=======
+            case 3: return new PartidoPoliticoDao().obtener(c.getId_partido_politico());
+            case 4: return new DignidadDao().obtener(c.getId_dignidad());
+>>>>>>> main
             default: return null;
         }
         
@@ -57,6 +75,11 @@ public class ModeloTablaCandidato extends AbstractTableModel{
             case 0: return "ID";
             case 1: return "Nombre Candidato";
             case 2: return "Preparacion Candidato";
+<<<<<<< HEAD
+=======
+            case 3: return "Partido Politico";
+            case 4: return "Dignidad";
+>>>>>>> main
             default: return null;
         }
     }

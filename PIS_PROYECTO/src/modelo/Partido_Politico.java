@@ -5,6 +5,10 @@
  */
 package modelo;
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> main
 /**
  *
  * @author cobos
@@ -53,4 +57,8 @@ public class Partido_Politico {
         return nombre_partido_politico;
     }
     
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> main

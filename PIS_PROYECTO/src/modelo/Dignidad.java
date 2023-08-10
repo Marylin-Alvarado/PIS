@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 package modelo;
 
 
@@ -7,6 +8,20 @@ public class Dignidad {
     private Integer id;
     private Integer nro_dignidad;
     private String categorias;
+=======
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
+package modelo;
+
+/**
+ *
+ * @author Gonzalez G
+ */
+public class Dignidad {
+
+>>>>>>> main
 
     public String getTipo() {
         return tipo;
@@ -16,6 +31,7 @@ public class Dignidad {
         this.tipo = tipo;
     }
 
+<<<<<<< HEAD
     public Integer getId() {
         return id;
     }
@@ -39,4 +55,6 @@ public class Dignidad {
     public void setNro_dignidad(Integer nro_dignidad) {
         this.nro_dignidad = nro_dignidad;
     }
+=======
+>>>>>>> main
 }

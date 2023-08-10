@@ -8,14 +8,24 @@ package controlador.DAO;
 import controlador.ed.listas.ListaEnlazada;
 import controlador.ed.listas.exception.ListaNullException;
 import controlador.ed.listas.exception.PosicionNoEncontradaException;
+<<<<<<< HEAD
+=======
+import java.io.IOException;
+import modelo.Candidato;
+>>>>>>> main
 import modelo.Candidato;
 
 /**
  *
  * @author cobos
  */
+<<<<<<< HEAD
 public class CandidatoDao extends AdaptadorDAO<Candidato> {
 
+=======
+public class CandidatoDao extends AdaptadorDAO<Candidato>{
+    
+>>>>>>> main
     private Candidato datos;
 
     public CandidatoDao() {
@@ -33,6 +43,7 @@ public class CandidatoDao extends AdaptadorDAO<Candidato> {
         this.datos = datos;
     }
 
+<<<<<<< HEAD
     public Integer guardar() throws Exception {
         return this.guardar(datos);
     }
@@ -74,6 +85,23 @@ public class CandidatoDao extends AdaptadorDAO<Candidato> {
     }
 
     /**
+=======
+   public Integer guardar() throws Exception {
+        return this.guardar(datos);   
+    }
+
+    public boolean modificar() throws Exception {
+         this.modificar(datos);
+         return true;
+    }
+    
+    public boolean eliminar() throws Exception{
+        this.eliminar(datos);
+         return true;
+    }
+      
+      /**
+>>>>>>> main
      *
      * @param lista
      * @param tipoOrden
@@ -129,18 +157,30 @@ public class CandidatoDao extends AdaptadorDAO<Candidato> {
                 for (int j = bajo; j < alto; j++) {
                     // Comprueba el tipo de ordenamiento y realiza el intercambio si es necesario
                     if (tipoOrden == 0) {
+<<<<<<< HEAD
                         if (arreglo[j].getId_partido_politico() < pivote.getId_partido_politico()) {
+=======
+                        if (arreglo[j].getId_partido_politico()< pivote.getId_partido_politico()) {
+>>>>>>> main
                             i++;
                             intercambio(arreglo, i, j);
                         }
                     } else {
+<<<<<<< HEAD
                         if (arreglo[j].getId_partido_politico() > pivote.getId_partido_politico()) {
+=======
+                        if (arreglo[j].getId_partido_politico()> pivote.getId_partido_politico()) {
+>>>>>>> main
                             i++;
                             intercambio(arreglo, i, j);
                         }
                     }
                 }
+<<<<<<< HEAD
 
+=======
+                
+>>>>>>> main
         }
         // Intercambia el pivote con el elemento en la posición i + 1
         intercambio(arreglo, i + 1, alto);
@@ -160,7 +200,11 @@ public class CandidatoDao extends AdaptadorDAO<Candidato> {
         arreglo[i] = arreglo[j];
         arreglo[j] = temp;
     }
+<<<<<<< HEAD
 
+=======
+    
+>>>>>>> main
     public Candidato buscarPorNombre(String dato) throws ListaNullException, PosicionNoEncontradaException {
         Candidato resultado = null;
         ListaEnlazada<Candidato> lista = listar();
@@ -173,8 +217,13 @@ public class CandidatoDao extends AdaptadorDAO<Candidato> {
         }
         return resultado;
     }
+<<<<<<< HEAD
 
     public ListaEnlazada<Candidato> ordenarNombre(ListaEnlazada<Candidato> lista, Integer tipo) {
+=======
+     
+     public ListaEnlazada<Candidato> ordenarNombre(ListaEnlazada<Candidato> lista, Integer tipo) {
+>>>>>>> main
         try {
             Candidato[] matriz = lista.toArray();
             for (int i = 1; i < lista.size(); i++) {
