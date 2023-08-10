@@ -9,19 +9,7 @@ package modelo;
  * @author Gonzalez G
  */
 public class Dignidad {
-   private Integer id;
-    private String tipo ;
-    
-    private Integer nro_cupo;
-    private String categoria ;
 
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
 
     public String getTipo() {
         return tipo;
@@ -31,25 +19,4 @@ public class Dignidad {
         this.tipo = tipo;
     }
 
-    public Integer getNro_cupo() {
-        return nro_cupo;
-    }
-
-    public void setNro_cupo(Integer nro_cupo) {
-        this.nro_cupo = nro_cupo;
-    }
-
-    public String getCategoria() {
-        return categoria;
-    }
-
-    public void setCategoria(String categoria) {
-        this.categoria = categoria;
-    }
-    
-
-   
-
-   
-  
 }
