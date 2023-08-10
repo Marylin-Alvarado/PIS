@@ -7,7 +7,7 @@ package modelo;
 
 import java.util.Date;
 import modelo.enums.Generos;
-import modelo.enums.TipoIdentificacion;
+
 
 /**
  *
