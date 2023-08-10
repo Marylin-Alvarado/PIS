@@ -34,13 +34,13 @@ public class CandidatoDao extends AdaptadorDAO<Candidato>{
         this.datos = datos;
     }
 
-    public void guardar() throws IOException {
-        datos.setId(generateID());
+    public void guardar() throws IOException, Exception {
+        datos.setId_candidato(generateID());
         this.guardar(datos);
     }
 
-    public void modificar(Integer pos) throws ListaNullException, PosicionNoEncontradaException, IOException {
-        this.modificar(datos, pos);
+    public void modificar(Integer pos) throws ListaNullException, PosicionNoEncontradaException, IOException, Exception {
+        this.modificar(datos);
     }
 
     private Integer generateID() {

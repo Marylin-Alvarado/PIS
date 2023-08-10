@@ -27,34 +27,77 @@ import java.util.Map;
  * @author cobos
  */
 public class AdaptadorDAO<T> implements InterfazDAO<T> {
-
-    private Conexion conexion;
+    /**
+     * Obejto Conexion
+     */
+    private ConexionB conexion;
+    /**
+     * Class del modelo a usar
+     */
     private Class clazz;
+<<<<<<< HEAD
 
+=======
+    
+    /**
+     * Constructor de la clase
+     * @param clazz El objeto de la clase del modelo Ejemplo: Persona.class
+     */
+>>>>>>> fd33ec33b29cc81818ccab2f478f796de9e9761b
     public AdaptadorDAO(Class clazz) {
-        this.conexion = new Conexion();
+        this.conexion = new ConexionB();
         this.clazz = clazz;
+<<<<<<< HEAD
 
+=======
+>>>>>>> fd33ec33b29cc81818ccab2f478f796de9e9761b
     }
-
+    /**
+     * Metodo que permite guardar
+     * @param obj El objeto del modelo lleno
+     * @return La llave primaria generada por el motor de base de datos (se sugiere construir la tabla de base de datos con la generacion de id auto incementable) 
+     * @throws Exception Cuando no se puede guardar en la base de datos
+     */
     @Override
     public Integer guardar(T obj) throws Exception {
+<<<<<<< HEAD
         String query = queryInsert(obj);
         Integer idGenerado = -1;
         PreparedStatement statement
                 = conexion.getConnection().prepareStatement(query,Statement.RETURN_GENERATED_KEYS);
+=======
+        //INSERT INTO <TABLA> (..) value (...)
+        String query = queryInsert(obj);
+        Integer idGenerado = -1;
+        PreparedStatement statement
+                = conexion.getConnection().prepareStatement(query,
+                        Statement.RETURN_GENERATED_KEYS);
+>>>>>>> fd33ec33b29cc81818ccab2f478f796de9e9761b
         statement.executeUpdate();
         ResultSet generatedKeys = statement.getGeneratedKeys();
         if (generatedKeys.next()) {
             idGenerado = generatedKeys.getInt(1);
         }
+<<<<<<< HEAD
 
         conexion.getConnection().close();
         conexion.setConnection(null);
         return idGenerado;
     }
+=======
+>>>>>>> fd33ec33b29cc81818ccab2f478f796de9e9761b
 
+        conexion.getConnection().close();
+        conexion.setConnection(null);
+        return idGenerado;
+    }
+    /**
+     * Metodo que permite modificar un registro en la base de datos, para modificar se debe primero consultar el Objeto haciendo uso del metodo Obtener
+     * @param obj El objeto del modelo a modificar
+     * @throws Exception Alguna Excepcion si no modifica
+     */
     @Override
+<<<<<<< HEAD
 <<<<<<< HEAD
     public void modificar(T obj, Integer pos) throws ListaNullException, PosicionNoEncontradaException, IOException {
         ListaEnlazada<T> lista = listar();
@@ -63,17 +106,26 @@ public class AdaptadorDAO<T> implements InterfazDAO<T> {
         conexion.getXstream().alias(lista.getClass().getName(), ListaEnlazada.class);
         conexion.getXstream().toXML(lista, new FileWriter(url));
 =======
+=======
+>>>>>>> fd33ec33b29cc81818ccab2f478f796de9e9761b
     public void modificar(T obj) throws Exception {
         String query = queryUpdate(obj);
         Statement st = conexion.getConnection().createStatement();
         st.executeUpdate(query);
         conexion.getConnection().close();
         conexion.setConnection(null);
+<<<<<<< HEAD
 >>>>>>> Wilson-Gonzales
+=======
+>>>>>>> fd33ec33b29cc81818ccab2f478f796de9e9761b
     }
-
+    /**
+     * Metodo que permite sacar los datos de la base de datos
+     * @return Un Objeto de la ListaEnlazada con los datos llenos
+     */
     @Override
     public ListaEnlazada<T> listar() {
+
         ListaEnlazada<T> lista = new ListaEnlazada<>();
         try {
             Statement stmt = conexion.getConnection().createStatement();
@@ -88,7 +140,11 @@ public class AdaptadorDAO<T> implements InterfazDAO<T> {
         }
         return lista;
     }
-
+    /**
+     * Permite obtener un objeto de la base de datos a travez del Id
+     * @param id El id a buscar en la base de datos
+     * @return El objeto buscado, es null si no esxiste el objeto
+     */
     @Override
     public T obtener(Integer id) {
         T data = null;
@@ -104,6 +160,11 @@ public class AdaptadorDAO<T> implements InterfazDAO<T> {
         return data;
     }
 
+<<<<<<< HEAD
+=======
+    //--------------ESTO ES DEL CRUD NO MODIFICAR AL MENOS QUE LO AMERITE------
+    
+>>>>>>> fd33ec33b29cc81818ccab2f478f796de9e9761b
     private T llenarObjeto(ResultSet rs) {
         T data = null;
         try {
@@ -183,7 +244,11 @@ public class AdaptadorDAO<T> implements InterfazDAO<T> {
                 if (aux != null) {
                     mapa.put(atributo.toLowerCase(), aux);
                 }
+<<<<<<< HEAD
 
+=======
+               
+>>>>>>> fd33ec33b29cc81818ccab2f478f796de9e9761b
             }
         } catch (Exception e) {
             System.out.println("No se pudo tener dato");
@@ -215,7 +280,10 @@ public class AdaptadorDAO<T> implements InterfazDAO<T> {
         }
         query = query.substring(0, query.length() - 2);
         query += ")";
+<<<<<<< HEAD
         System.out.println(query);
+=======
+>>>>>>> fd33ec33b29cc81818ccab2f478f796de9e9761b
         return query;
     }
 
