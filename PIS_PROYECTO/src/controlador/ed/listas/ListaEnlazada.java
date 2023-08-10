@@ -10,7 +10,7 @@ import controlador.ed.listas.exception.PosicionNoEncontradaException;
 
 /**
  *
- * @author Marylin
+ * @author alyce
  */
 
 public class ListaEnlazada<E> {
