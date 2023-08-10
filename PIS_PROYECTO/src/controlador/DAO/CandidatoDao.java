@@ -43,6 +43,11 @@ public class CandidatoDao extends AdaptadorDAO<Candidato>{
          this.modificar(datos);
          return true;
     }
+    
+    public boolean eliminar() throws Exception{
+        this.eliminar(datos);
+         return true;
+    }
       
       /**
      *

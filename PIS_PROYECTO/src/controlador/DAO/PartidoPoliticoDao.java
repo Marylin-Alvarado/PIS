@@ -43,6 +43,11 @@ public class PartidoPoliticoDao extends AdaptadorDAO<Partido_Politico> {
          return true;
     }
 
+    public boolean eliminar() throws Exception{
+        this.eliminar(datos);
+        return true;
+    }
+    
     public Partido_Politico buscarPorNombre(String dato) throws ListaNullException, PosicionNoEncontradaException {
         Partido_Politico resultado = null;
         ListaEnlazada<Partido_Politico> lista = listar();
