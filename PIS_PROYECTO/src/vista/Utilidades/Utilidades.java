@@ -11,23 +11,20 @@ import controlador.ed.listas.ListaEnlazada;
 import controlador.ed.listas.exception.ListaNullException;
 import controlador.ed.listas.exception.PosicionNoEncontradaException;
 import javax.swing.JComboBox;
-import modelo.Dignidad;
-import modelo.Partido_Politico;
-
 
 /**
  *
  * @author Marylin
  */
 public class Utilidades {
-  
-    public static void cargarPartido(JComboBox cbx , PartidoPoliticoDao pd) throws ListaNullException, PosicionNoEncontradaException{
+
         cbx.removeAllItems();
         ListaEnlazada<Partido_Politico> lista = pd.ordenarNombre(pd.listar(), 0);
         for (int i = 0; i < lista.size(); i++) {
             cbx.addItem(lista.obtener(i).getNombre_partido_politico());
         }
     }
+
     
     public static void cargarDignidad(JComboBox cbx , DignidadDao dd) throws ListaNullException, PosicionNoEncontradaException{
         cbx.removeAllItems();
@@ -36,4 +33,24 @@ public class Utilidades {
             cbx.addItem(lista.obtener(i).getTipo());
         }
     }
+
+    }
+     
+     public static TipoVoto getComboTipoVoto(JComboBox cbx) {
+        return  (TipoVoto) cbx.getSelectedItem();
+    }
+     
+
+     
+    public Date generarFechaActual(){
+     Date fechaHoraActual = new Date();
+        System.out.println(fechaHoraActual);
+     return fechaHoraActual ;  
+    }
+    
+    public static String cambiarFechaActualString(Date date){
+        SimpleDateFormat formatoFecha = new SimpleDateFormat("yyyy-MM-dd");
+     return formatoFecha.format(date); 
+    }
+    
 }

@@ -30,7 +30,6 @@ public class AdaptadorDAO<T> implements InterfazDAO<T> {
      * Class del modelo a usar
      */
     private Class clazz;
-
     /**
      * Constructor de la clase
      *
@@ -52,17 +51,12 @@ public class AdaptadorDAO<T> implements InterfazDAO<T> {
      */
     @Override
     public Integer guardar(T obj) throws Exception {
-        //INSERT INTO <TABLA> (..) value (...)
-        String query = queryInsert(obj);
-        Integer idGenerado = -1;
-        PreparedStatement statement
-                = conexion.getConnection().prepareStatement(query,
-                        Statement.RETURN_GENERATED_KEYS);
         statement.executeUpdate();
         ResultSet generatedKeys = statement.getGeneratedKeys();
         if (generatedKeys.next()) {
             idGenerado = generatedKeys.getInt(1);
         }
+
 
         conexion.getConnection().close();
         conexion.setConnection(null);
@@ -78,6 +72,7 @@ public class AdaptadorDAO<T> implements InterfazDAO<T> {
      * @throws Exception Alguna Excepcion si no modifica
      */
     @Override
+
     public void modificar(T obj) throws Exception {
         String query = queryUpdate(obj);
         Statement st = conexion.getConnection().createStatement();
@@ -141,7 +136,6 @@ public class AdaptadorDAO<T> implements InterfazDAO<T> {
         return data;
     }
 
-    //--------------ESTO ES DEL CRUD NO MODIFICAR AL MENOS QUE LO AMERITE------
     private T llenarObjeto(ResultSet rs) {
         T data = null;
         try {
@@ -221,7 +215,6 @@ public class AdaptadorDAO<T> implements InterfazDAO<T> {
                 if (aux != null) {
                     mapa.put(atributo.toLowerCase(), aux);
                 }
-
             }
         } catch (Exception e) {
             System.out.println("No se pudo tener dato");

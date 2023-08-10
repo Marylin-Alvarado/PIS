@@ -14,9 +14,14 @@ import java.io.IOException;
  *
  * @author cobos
  */
+<<<<<<< HEAD
+public interface InterfazDAO <T>{
+     /* Metodo que permite realizar el guardaddo
+=======
 public interface InterfazDAO<T> {
     /**
      * Metodo que permite realizar el guardaddo
+>>>>>>> fd33ec33b29cc81818ccab2f478f796de9e9761b
      * @param obj Objeto del modelo
      * @return El id generado producto del guardado
      */
