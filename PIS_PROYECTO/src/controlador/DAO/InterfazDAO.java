@@ -6,12 +6,15 @@
 package controlador.DAO;
 
 import controlador.ed.listas.ListaEnlazada;
+import controlador.ed.listas.exception.ListaNullException;
+import controlador.ed.listas.exception.PosicionNoEncontradaException;
+import java.io.IOException;
 
 /**
  *
  * @author cobos
  */
-public interface InterfazDAO<T> {
+public interface InterfazDAO <T>{
     /**
      * Metodo que permite realizar el guardaddo
      * @param obj Objeto del modelo
@@ -29,4 +32,5 @@ public interface InterfazDAO<T> {
      */
     public ListaEnlazada<T> listar();
     public T obtener(Integer id);
+      
 }

@@ -340,10 +340,10 @@ public class FrmDignidad extends javax.swing.JDialog {
                 String categoria = cbxCategoria.getSelectedItem().toString();
 
                 for (int i = 0; i < aux; i++) {
-                    dd.getDignidad().setTipo(cbxTipo.getSelectedItem().toString());
-                    dd.getDignidad().setCategoria(cbxCategoria.getSelectedItem().toString());
-                    dd.getDignidad().setNro_cupo(20);
-                    System.out.println(dd.getDignidad().getNro_cupo());
+                    dd.getDatos().setTipo(cbxTipo.getSelectedItem().toString());
+                    dd.getDatos().setCategoria(cbxCategoria.getSelectedItem().toString());
+                    dd.getDatos().setNro_cupo(20);
+                    System.out.println(dd.getDatos().getNro_cupo());
 
                     if (dd.contadorCategoria(categoria) <= 20) { // 20 es valor quemado pero en realidad va aqui la lista de los partidos existentes
                         asignarCategoria();
@@ -394,7 +394,7 @@ public class FrmDignidad extends javax.swing.JDialog {
      * Este metodo me permite limpiar todos los datos
      */
     private void limpiar() {
-        this.dd.setDignidad(null);
+        this.dd.setDatos(null);
         txtxNroCupos.setText("");
 
         fila = -1;

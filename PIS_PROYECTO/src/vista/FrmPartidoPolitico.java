@@ -5,20 +5,12 @@
  */
 package vista;
 
-<<<<<<< HEAD
-import controlador.DAO.CandidatoDao;
-import controlador.DAO.PartidoPoliticoDao;
-import java.io.IOException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-=======
 import controlador.DAO.PartidoPoliticoDao;
 import java.awt.Image;
 import java.awt.Toolkit;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
->>>>>>> main
 import javax.swing.JOptionPane;
 import vista.modeloTabla.ModeloTablaPartidoPolitico;
 
@@ -27,33 +19,23 @@ import vista.modeloTabla.ModeloTablaPartidoPolitico;
  * @author cobos
  */
 public class FrmPartidoPolitico extends javax.swing.JDialog {
-<<<<<<< HEAD
 
     private PartidoPoliticoDao partido = new PartidoPoliticoDao();
-=======
-private PartidoPoliticoDao partido = new PartidoPoliticoDao();
->>>>>>> main
     private ModeloTablaPartidoPolitico modelo = new ModeloTablaPartidoPolitico();
     private Integer fila = -1;
 
     /**
-<<<<<<< HEAD
      * Creates new form FrmPartidoPolitico
-=======
-     * Creates new form FrmPartidoPoliticoPartidoPolitico
->>>>>>> main
      */
     public FrmPartidoPolitico(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
         cargarTabla();
-<<<<<<< HEAD
-=======
         setResizable(false);
         setLocationRelativeTo(this);
-        SetImageLabel(jLabel4, "C:\\Users\\cobos\\Documents\\NetBeansProjects\\PIS\\PIS_PROYECTO\\src\\imagenes\\imagen-removebg-preview(12).png");
-        SetImageLabel(jLabel5, "C:\\Users\\cobos\\Documents\\NetBeansProjects\\PIS\\PIS_PROYECTO\\src\\imagenes\\imagen-removebg-preview(13).png");
-        SetImageLabel(jLabel6, "C:\\Users\\cobos\\Documents\\NetBeansProjects\\PIS\\PIS_PROYECTO\\src\\imagenes\\imagen-removebg-preview(14).png");
+        SetImageLabel(jLabel4, "C:\\Users\\Edison\\Downloads\\PIS-Danny-Cobos\\PIS-Danny-Cobos\\PIS_PROYECTO\\src\\imagenes\\imagen-removebg-preview(12).png");
+        SetImageLabel(jLabel5, "C:\\Users\\Edison\\Downloads\\PIS-Danny-Cobos\\PIS-Danny-Cobos\\PIS_PROYECTO\\src\\imagenes\\imagen-removebg-preview(13).png");
+        SetImageLabel(jLabel6, "C:\\Users\\Edison\\Downloads\\PIS-Danny-Cobos\\PIS-Danny-Cobos\\PIS_PROYECTO\\src\\imagenes\\imagen-removebg-preview(14).png");
     }
     
 
@@ -64,7 +46,6 @@ private PartidoPoliticoDao partido = new PartidoPoliticoDao();
         Icon icon = new ImageIcon(image.getImage().getScaledInstance(labelName.getWidth(), labelName.getHeight(), Image.SCALE_DEFAULT));
         labelName.setIcon(icon);
         this.repaint();
->>>>>>> main
     }
 
     private void cargarTabla() {
@@ -76,10 +57,7 @@ private PartidoPoliticoDao partido = new PartidoPoliticoDao();
     private void limpiar() {
         txtNombrePartido.setText("");
         txtNumeroCandidatos.setText("");
-<<<<<<< HEAD
-=======
         txtEslogan.setText("");
->>>>>>> main
         cargarTabla();
         partido.setDatos(null);
         fila = -1;
@@ -91,12 +69,6 @@ private PartidoPoliticoDao partido = new PartidoPoliticoDao();
             if (txtNombrePartido.getText().isEmpty() || txtNumeroCandidatos.getText().isEmpty()) {
                 JOptionPane.showMessageDialog(null, "Porfavor llene todos los campos", "Error", JOptionPane.ERROR_MESSAGE);
             } else {
-<<<<<<< HEAD
-                partido.getDatos().setNombre_partido(txtNombrePartido.getText());
-                partido.getDatos().setNumero_candidatos(Integer.parseInt(txtNumeroCandidatos.getText()));
-                partido.guardar();
-                limpiar();
-=======
                 partido.getDatos().setNombre_partido_politico(txtNombrePartido.getText());
                 partido.getDatos().setNumero_candidatos(Integer.parseInt(txtNumeroCandidatos.getText()));
                 partido.getDatos().setEslogan_partido(txtEslogan.getText());
@@ -107,31 +79,11 @@ private PartidoPoliticoDao partido = new PartidoPoliticoDao();
                     partido.guardar();
                     limpiar();
                 }
->>>>>>> main
                 JOptionPane.showMessageDialog(null, "Datos Guardados Correctamente", "Infomacion", JOptionPane.INFORMATION_MESSAGE);
             }
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e.getMessage(), "Infomacion", JOptionPane.INFORMATION_MESSAGE);
-<<<<<<< HEAD
-        }
-    }
-
-    private void registrarCandidato() {
-        fila = tblTabla.getSelectedRow();
-        if (fila >= 0) {
-            try {
-                partido.setDatos(modelo.getDatos().obtener(fila));
-                new FrmCandidato(null, true, partido).setVisible(true);
-                partido.modificar(fila);
-                limpiar();
-            } catch (Exception e) {
-
-            }
-        } else {
-            JOptionPane.showMessageDialog(null, "Ingrese un nombre a la sucursal", "Error", JOptionPane.ERROR_MESSAGE);
-=======
              
->>>>>>> main
         }
     }
 
@@ -144,20 +96,12 @@ private PartidoPoliticoDao partido = new PartidoPoliticoDao();
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-<<<<<<< HEAD
-=======
         jPanel3 = new javax.swing.JPanel();
->>>>>>> main
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         txtNombrePartido = new javax.swing.JTextField();
         txtNumeroCandidatos = new javax.swing.JTextField();
-<<<<<<< HEAD
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-=======
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
@@ -166,28 +110,14 @@ private PartidoPoliticoDao partido = new PartidoPoliticoDao();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
->>>>>>> main
         jPanel2 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblTabla = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setBackground(new java.awt.Color(252, 251, 227));
+        setEnabled(false);
 
-<<<<<<< HEAD
-        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Registro Partido Politico", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION));
-
-        jLabel1.setText("Nombre Partido");
-
-        jLabel2.setText("Numero de candidatos");
-
-        jButton1.setText("Registrar Candidato en partido");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
-
-=======
         jPanel3.setBackground(new java.awt.Color(252, 251, 227));
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
@@ -213,7 +143,6 @@ private PartidoPoliticoDao partido = new PartidoPoliticoDao();
 
         jButton2.setBackground(new java.awt.Color(187, 134, 252));
         jButton2.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
->>>>>>> main
         jButton2.setText("Registrar Partido Politico");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -221,9 +150,6 @@ private PartidoPoliticoDao partido = new PartidoPoliticoDao();
             }
         });
 
-<<<<<<< HEAD
-        jButton3.setText("Editar Informacion");
-=======
         jButton3.setBackground(new java.awt.Color(187, 134, 252));
         jButton3.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jButton3.setText("Editar Informacion");
@@ -239,7 +165,6 @@ private PartidoPoliticoDao partido = new PartidoPoliticoDao();
         txtEslogan.setColumns(20);
         txtEslogan.setRows(5);
         jScrollPane2.setViewportView(txtEslogan);
->>>>>>> main
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -249,21 +174,6 @@ private PartidoPoliticoDao partido = new PartidoPoliticoDao();
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-<<<<<<< HEAD
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 107, Short.MAX_VALUE))
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(txtNombrePartido)
-                            .addComponent(txtNumeroCandidatos, javax.swing.GroupLayout.DEFAULT_SIZE, 144, Short.MAX_VALUE))
-                        .addGap(77, 77, 77)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                    .addComponent(jButton1))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-=======
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -279,7 +189,7 @@ private PartidoPoliticoDao partido = new PartidoPoliticoDao();
                         .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 43, Short.MAX_VALUE)))
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(txtNumeroCandidatos, javax.swing.GroupLayout.PREFERRED_SIZE, 203, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtNombrePartido, javax.swing.GroupLayout.PREFERRED_SIZE, 203, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -289,39 +199,21 @@ private PartidoPoliticoDao partido = new PartidoPoliticoDao();
                     .addComponent(jButton2, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jButton3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
->>>>>>> main
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-<<<<<<< HEAD
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(txtNombrePartido, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton2))
-=======
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jLabel1)
                         .addComponent(txtNombrePartido, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, 23, Short.MAX_VALUE))
->>>>>>> main
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(txtNumeroCandidatos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-<<<<<<< HEAD
-                    .addComponent(jButton3))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 19, Short.MAX_VALUE)
-                .addComponent(jButton1)
-                .addContainerGap())
-        );
-
-        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Informacion Partido Politico", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION));
-
-=======
-                    .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, 24, Short.MAX_VALUE)
+                    .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jButton2))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -338,7 +230,6 @@ private PartidoPoliticoDao partido = new PartidoPoliticoDao();
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Informacion Partido Politico", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 12))); // NOI18N
 
         tblTabla.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
->>>>>>> main
         tblTabla.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
@@ -358,21 +249,13 @@ private PartidoPoliticoDao partido = new PartidoPoliticoDao();
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-<<<<<<< HEAD
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 528, Short.MAX_VALUE)
-=======
                 .addComponent(jScrollPane1)
->>>>>>> main
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-<<<<<<< HEAD
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-=======
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 188, Short.MAX_VALUE)
                 .addContainerGap())
         );
@@ -396,43 +279,27 @@ private PartidoPoliticoDao partido = new PartidoPoliticoDao();
                 .addGap(18, 18, 18)
                 .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
->>>>>>> main
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-<<<<<<< HEAD
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap())
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-=======
             .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
->>>>>>> main
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-<<<<<<< HEAD
-=======
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+        guardar();
+    }//GEN-LAST:event_jButton2ActionPerformed
+
     private void txtNombrePartidoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNombrePartidoKeyTyped
         // TODO add your handling code here:
         if (txtNombrePartido.getText().length() >= 45) {
@@ -465,18 +332,6 @@ private PartidoPoliticoDao partido = new PartidoPoliticoDao();
         }
     }//GEN-LAST:event_txtNumeroCandidatosKeyTyped
 
->>>>>>> main
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
-        guardar();
-    }//GEN-LAST:event_jButton2ActionPerformed
-
-<<<<<<< HEAD
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-        registrarCandidato();
-    }//GEN-LAST:event_jButton1ActionPerformed
-=======
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
         fila = tblTabla.getSelectedRow();
@@ -493,7 +348,6 @@ private PartidoPoliticoDao partido = new PartidoPoliticoDao();
             JOptionPane.showMessageDialog(null, "Escoja un registro de la tabla", "Error", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_jButton3ActionPerformed
->>>>>>> main
 
     /**
      * @param args the command line arguments
@@ -538,20 +392,10 @@ private PartidoPoliticoDao partido = new PartidoPoliticoDao();
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-<<<<<<< HEAD
-    private javax.swing.JButton jButton1;
-=======
->>>>>>> main
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-<<<<<<< HEAD
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable tblTabla;
-=======
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -563,7 +407,6 @@ private PartidoPoliticoDao partido = new PartidoPoliticoDao();
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable tblTabla;
     private javax.swing.JTextArea txtEslogan;
->>>>>>> main
     private javax.swing.JTextField txtNombrePartido;
     private javax.swing.JTextField txtNumeroCandidatos;
     // End of variables declaration//GEN-END:variables

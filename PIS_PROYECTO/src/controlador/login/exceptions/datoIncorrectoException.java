@@ -9,13 +9,13 @@ package controlador.login.exceptions;
  *
  * @author Edison
  */
-public class DatoIncorrectoException extends Exception{
+public class datoIncorrectoException extends Exception{
 
-    public DatoIncorrectoException(String msg) {
+    public datoIncorrectoException(String msg) {
         super(msg);
     }
     
-    public DatoIncorrectoException(Integer limite) {
+    public datoIncorrectoException(Integer limite) {
         super("Datos incorrectos \n"
                 + "Número de intentos disponibles: " + limite);
     }

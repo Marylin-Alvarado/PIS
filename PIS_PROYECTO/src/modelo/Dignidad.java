@@ -1,60 +1,54 @@
-<<<<<<< HEAD
+
 package modelo;
 
 
-public class Dignidad {
-
-    private String tipo;
-    private Integer id;
-    private Integer nro_dignidad;
-    private String categorias;
-=======
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package modelo;
 
-/**
- *
- * @author Gonzalez G
- */
-public class Dignidad {
 
->>>>>>> main
+    /**
+     *
+     * @author Gonzalez G
+     */
+    public class Dignidad {
 
-    public String getTipo() {
-        return tipo;
+        private Integer id;
+        private String tipo;
+
+        private Integer nro_cupo;
+        private String categoria;
+
+        public Integer getId() {
+            return id;
+        }
+
+        public void setId(Integer id) {
+            this.id = id;
+        }
+
+        public String getTipo() {
+            return tipo;
+        }
+
+        public void setTipo(String tipo) {
+            this.tipo = tipo;
+        }
+
+        public Integer getNro_cupo() {
+            return nro_cupo;
+        }
+
+        public void setNro_cupo(Integer nro_cupo) {
+            this.nro_cupo = nro_cupo;
+        }
+
+        public String getCategoria() {
+            return categoria;
+        }
+
+        public void setCategoria(String categoria) {
+            this.categoria = categoria;
+        }
     }
-
-    public void setTipo(String tipo) {
-        this.tipo = tipo;
-    }
-
-<<<<<<< HEAD
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public String getCategorias() {
-        return categorias;
-    }
-
-    public void setCategorias(String categorias) {
-        this.categorias = categorias;
-    }
-
-    public Integer getNro_dignidad() {
-        return nro_dignidad;
-    }
-
-    public void setNro_dignidad(Integer nro_dignidad) {
-        this.nro_dignidad = nro_dignidad;
-    }
-=======
->>>>>>> main
-}
