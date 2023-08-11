@@ -9,13 +9,13 @@ package controlador.login.exceptions;
  *
  * @author Edison
  */
-public class IntentoExcedidoException extends Exception{
+public class intentoExcedidoException extends Exception{
 
-    public IntentoExcedidoException(String msg) {
+    public intentoExcedidoException(String msg) {
         super(msg);
     }
     
-    public IntentoExcedidoException() {
+    public intentoExcedidoException() {
         super("El intento de ingresar se ha excedido");
     }
 }

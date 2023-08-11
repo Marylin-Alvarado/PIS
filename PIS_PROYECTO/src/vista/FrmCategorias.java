@@ -24,7 +24,7 @@ public class FrmCategorias extends javax.swing.JDialog {
         Dignidad[] degnidades = dao.listar().toArray();
         
         for(modelo.Dignidad d : degnidades){
-            agregar(d.getCategorias());
+            agregar(d.getCategoria());
         }
         
     }
@@ -54,7 +54,7 @@ public class FrmCategorias extends javax.swing.JDialog {
         
         for(Candidato c : candidatos){
             try {
-                if(categoria.equalsIgnoreCase(dao.buscarPorId(c.getId_dignidad()).getCategorias())){
+                if(categoria.equalsIgnoreCase(dao.buscarPorId(c.getId_dignidad()).getCategoria())){
                     resultado.insertar(c);
                 }
             } catch (Exception ex) {

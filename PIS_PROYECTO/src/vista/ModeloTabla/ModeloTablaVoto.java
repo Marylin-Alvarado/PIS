@@ -14,6 +14,7 @@ import vista.Utilidades.Utilidades;
  * @author Gonzalez G
  */
 public class ModeloTablaVoto  extends AbstractTableModel {
+   
     private ListaEnlazada<Voto> lista = new ListaEnlazada<>();
 
     public ListaEnlazada<Voto> getLista() {
