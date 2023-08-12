@@ -142,6 +142,7 @@ public class FrmResultado extends javax.swing.JDialog {
         jLabel8 = new javax.swing.JLabel();
         cbxCandidato = new javax.swing.JComboBox<>();
         jButton1 = new javax.swing.JButton();
+        jButton3 = new javax.swing.JButton();
         PanelGrafica = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -203,6 +204,13 @@ public class FrmResultado extends javax.swing.JDialog {
             }
         });
 
+        jButton3.setText("Volver");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -219,7 +227,8 @@ public class FrmResultado extends javax.swing.JDialog {
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addGap(89, 89, 89)
+                                .addComponent(jButton3)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(jButton2)
                                 .addGap(59, 59, 59)
                                 .addComponent(jLabel4)
@@ -262,7 +271,7 @@ public class FrmResultado extends javax.swing.JDialog {
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(jLabel1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 11, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel2)))
@@ -272,7 +281,8 @@ public class FrmResultado extends javax.swing.JDialog {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton2)
                     .addComponent(jLabel4)
-                    .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton3))
                 .addGap(29, 29, 29))
         );
 
@@ -361,6 +371,7 @@ public class FrmResultado extends javax.swing.JDialog {
         PanelGrafica.removeAll();
         PanelGrafica.add(lineChartPanel, BorderLayout.CENTER);
         PanelGrafica.validate();
+
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void cbxDignidadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxDignidadActionPerformed
@@ -371,6 +382,12 @@ public class FrmResultado extends javax.swing.JDialog {
         // TODO add your handling code here:
         guardar();
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        // TODO add your handling code here:
+        dispose();
+        new FrmPrincipalAdm(null, true).setVisible(true);
+    }//GEN-LAST:event_jButton3ActionPerformed
 
     private void guardar() {
         try {
@@ -391,7 +408,6 @@ public class FrmResultado extends javax.swing.JDialog {
 
         } catch (Exception e) {
         }
-        
 
     }
 
@@ -444,6 +460,7 @@ public class FrmResultado extends javax.swing.JDialog {
     private javax.swing.JComboBox<String> cbxPartido;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel4;
