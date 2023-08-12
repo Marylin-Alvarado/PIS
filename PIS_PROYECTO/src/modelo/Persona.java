@@ -7,6 +7,7 @@ package modelo;
 
 import java.util.Date;
 import modelo.enums.Generos;
+import modelo.enums.Rol;
 import modelo.enums.TipoIdentificacion;
 
 /**
@@ -19,13 +20,10 @@ public class Persona {
     private String nombres_completos;
     private Integer identificacion;
     private String codigoDac;
-
-    private String direccion;
-    private String telefono;
     private String ciudad;
     private Date fechaNacimiento;
     private Generos genero;
-
+    private Rol rol;
     private String correo;
 
     public Persona() {
@@ -66,21 +64,15 @@ public class Persona {
         this.codigoDac = codigoDac;
     }
 
-    public String getDireccion() {
-        return direccion;
+    public Rol getRol() {
+        return rol;
     }
 
-    public void setDireccion(String direccion) {
-        this.direccion = direccion;
+    public void setRol(Rol rol) {
+        this.rol = rol;
     }
-
-    public String getTelefono() {
-        return telefono;
-    }
-
-    public void setTelefono(String telefono) {
-        this.telefono = telefono;
-    }
+    
+    
 
     public String getCiudad() {
         return ciudad;
