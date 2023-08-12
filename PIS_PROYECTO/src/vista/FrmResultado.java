@@ -5,6 +5,7 @@
  */
 package vista;
 
+import static com.sun.corba.se.impl.util.Utility.printStackTrace;
 import controlador.DAO.CandidatoDao;
 import controlador.DAO.DignidadDao;
 import controlador.DAO.PartidoPoliticoDao;
@@ -380,11 +381,10 @@ public class FrmResultado extends javax.swing.JDialog {
             if (dd.getResultados().getId() != null) {
 
                 dd.modificar();
-                cargarTabla();
 
             } else {
                 dd.guardar();
-                
+                cargarTabla();
 
             }
             JOptionPane.showMessageDialog(null, "Datos Guardados Correctamente", "Infomacion", JOptionPane.INFORMATION_MESSAGE);
@@ -392,6 +392,7 @@ public class FrmResultado extends javax.swing.JDialog {
         } catch (Exception e) {
         }
         
+
     }
 
     /**
