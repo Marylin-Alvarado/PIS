@@ -7,6 +7,7 @@
 package vista.Utilidades;
 
 
+import controlador.DAO.CandidatoDao;
 import controlador.DAO.DignidadDao;
 import controlador.DAO.PartidoPoliticoDao;
 import controlador.ed.listas.ListaEnlazada;
@@ -60,6 +61,14 @@ public class Utilidades {
         ListaEnlazada<Partido_Politico> lista = pd.ordenarNombre(pd.listar(), 0);
         for (int i = 0; i < lista.size(); i++) {
             cbx.addItem(lista.obtener(i).getNombre_partido_politico());
+        }
+    }
+    
+    public static void cargarCandidato(JComboBox cbx , CandidatoDao pd) throws ListaNullException, PosicionNoEncontradaException{
+        cbx.removeAllItems();
+        ListaEnlazada<Candidato> lista = pd.ordenarNombre(pd.listar(), 0);
+        for (int i = 0; i < lista.size(); i++) {
+            cbx.addItem(lista.obtener(i).getNombre_candidato());
         }
     }
     
