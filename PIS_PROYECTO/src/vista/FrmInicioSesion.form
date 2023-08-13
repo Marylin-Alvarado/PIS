@@ -215,6 +215,9 @@
                   <Font name="Sylfaen" size="12" style="0"/>
                 </Property>
               </Properties>
+              <Events>
+                <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtUsuarioKeyTyped"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JPasswordField" name="txtContrasenia">
               <Properties>
@@ -222,6 +225,9 @@
                   <Font name="Sylfaen" size="12" style="0"/>
                 </Property>
               </Properties>
+              <Events>
+                <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtContraseniaKeyTyped"/>
+              </Events>
             </Component>
           </SubComponents>
         </Container>

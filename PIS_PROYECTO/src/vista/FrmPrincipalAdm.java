@@ -25,10 +25,11 @@ public class FrmPrincipalAdm extends javax.swing.JDialog {
         super(parent, modal);
         this.setContentPane(fondo);
         initComponents();
+        this.setLocationRelativeTo(this);
     }
 
-    public FrmPrincipalAdm() {
-    }
+//    public FrmPrincipalAdm() {
+//    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -51,8 +52,8 @@ public class FrmPrincipalAdm extends javax.swing.JDialog {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jButton1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/userpassword_deusuari_787.png"))); // NOI18N
-        jButton1.setText("Login");
+        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/49576_new_add_plus_user_icon(1).png"))); // NOI18N
+        jButton1.setText("Registro");
         jButton1.setFocusable(false);
         jButton1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jButton1.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
@@ -189,7 +190,7 @@ public class FrmPrincipalAdm extends javax.swing.JDialog {
 
     private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
         // TODO add your handling code here:
-        FrmInicioSesion ini =  new FrmInicioSesion(null,true);
+        FrmCuenta ini =  new FrmCuenta(null,true);
         ini.setVisible(true);
     }//GEN-LAST:event_jButton1MouseClicked
 

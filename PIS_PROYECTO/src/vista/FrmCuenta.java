@@ -5,7 +5,6 @@
  */
 package vista;
 
-
 import controlador.DAO.PersonaDAO;
 import java.awt.Image;
 import java.awt.Toolkit;
@@ -32,7 +31,6 @@ import vista.modeloTabla.ModeloTablaRegistrados;
  */
 public class FrmCuenta extends javax.swing.JDialog {
 
-    
     private PersonaDAO pc = new PersonaDAO();
     private ModeloTablaRegistrados mdr = new ModeloTablaRegistrados();
 
@@ -47,10 +45,10 @@ public class FrmCuenta extends javax.swing.JDialog {
         cargarRol(cbxRol);
         SetImageLabel(jblIconCrear, "C:\\Users\\Edison\\Desktop\\PIS-main\\PIS\\PIS_PROYECTO\\src\\imagenes\\imagen-removebg-preview(1).png");
         SetImageLabel(lblNombreTitulo, "C:\\Users\\Edison\\Desktop\\PIS-main\\PIS\\PIS_PROYECTO\\src\\imagenes\\imagen-removebg-preview(8).png");
-       
 
     }
-    public FrmCuenta(java.awt.Frame parent, boolean modal,PersonaDAO pd) {
+
+    public FrmCuenta(java.awt.Frame parent, boolean modal, PersonaDAO pd) {
         super(parent, modal);
         initComponents();
         this.pc = pd;
@@ -59,7 +57,7 @@ public class FrmCuenta extends javax.swing.JDialog {
         cargarRol(cbxRol);
         SetImageLabel(jblIconCrear, "C:\\Users\\Edison\\Downloads\\imagen-removebg-preview(1).png");
         SetImageLabel(lblNombreTitulo, "C:\\Users\\Edison\\Downloads\\imagen-removebg-preview(8).png");
-       
+
     }
 
     private void SetImageLabel(JLabel labelName, String root) {
@@ -72,7 +70,7 @@ public class FrmCuenta extends javax.swing.JDialog {
     private void guardarPersona() {
         try {
             if (!txtNombreApellidos.getText().isEmpty() || !txtCorreoElec.getText().isEmpty()
-                    || !txtNumCedula.getText().isEmpty() || !txtCodigoDac.getText().isEmpty()||!txtCiudad.getText().isEmpty()) {
+                    || !txtNumCedula.getText().isEmpty() || !txtCodigoDac.getText().isEmpty() || !txtCiudad.getText().isEmpty()) {
                 this.pc.getPersona().setNombres_completos(txtNombreApellidos.getText());
                 this.pc.getPersona().setIdentificacion(Integer.parseInt(txtNumCedula.getText()));
                 this.pc.getPersona().setCodigoDac(txtCodigoDac.getText());//
@@ -80,7 +78,7 @@ public class FrmCuenta extends javax.swing.JDialog {
                 this.pc.getPersona().setGenero((Generos) cbxGenero.getSelectedItem());
                 this.pc.getPersona().setCorreo(txtCorreoElec.getText());
                 this.pc.getPersona().setCiudad(txtCiudad.getText());
-                this.pc.getPersona().setRol((Rol)cbxRol.getSelectedItem());
+                this.pc.getPersona().setRol((Rol) cbxRol.getSelectedItem());
                 this.pc.guardar();
                 validarEdad();
                 limpiar();
@@ -95,18 +93,16 @@ public class FrmCuenta extends javax.swing.JDialog {
         }
 
     }
-    
-    
 
     private void limpiar() {
-       // this.cd.setCuenta(null);
+        // this.cd.setCuenta(null);
         txtNombreApellidos.setText("");
         txtCorreoElec.setText("");
         txtCodigoDac.setText("");
         txtNumCedula.setText("");
         dteFechaNacimiento.setDate(null);
         txtCiudad.setText("");
-        
+
     }
 
     public static void cargarGenero(JComboBox cbx) {
@@ -116,7 +112,7 @@ public class FrmCuenta extends javax.swing.JDialog {
         }
 
     }
-    
+
     public static void cargarRol(JComboBox cbx) {
         cbx.removeAllItems();
         for (Rol rol : Rol.values()) {
@@ -149,9 +145,6 @@ public class FrmCuenta extends javax.swing.JDialog {
         long anios = diferencia / (1000L * 60 * 60 * 24 * 365);
         return (int) anios;
     }
-    
-    
-    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -298,6 +291,11 @@ public class FrmCuenta extends javax.swing.JDialog {
         jLabel7.setText("Ciudad: ");
 
         txtCiudad.setFont(new java.awt.Font("Sylfaen", 0, 12)); // NOI18N
+        txtCiudad.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtCiudadKeyTyped(evt);
+            }
+        });
 
         jLabel8.setFont(new java.awt.Font("Sylfaen", 0, 12)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(143, 142, 142));
@@ -466,7 +464,8 @@ public class FrmCuenta extends javax.swing.JDialog {
 
     private void btnRegistrosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrosActionPerformed
         // TODO add your handling code here:
-
+        FrmRegistro reg = new FrmRegistro(null, true);
+        reg.setVisible(true);
     }//GEN-LAST:event_btnRegistrosActionPerformed
 
     private void txtNombreApellidosKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNombreApellidosKeyTyped
@@ -478,11 +477,13 @@ public class FrmCuenta extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(this, "No puede ingresar más caracteres", "Error", JOptionPane.ERROR_MESSAGE);
         }
 
-        //        if ((c < 'a'  c > 'z') && (c < 'A'  c > 'Z')) {
-        //            evt.consume();
-        //            Toolkit.getDefaultToolkit().beep();
-        //            JOptionPane.showMessageDialog(this, "No puede ingresar numeros", "Error", JOptionPane.ERROR_MESSAGE);
-        //        }
+        if (Character.isDigit(c)) {
+            evt.consume(); // Ignorar la entrada del número
+            JOptionPane.showMessageDialog(txtNombreApellidos, "No se permiten números", "Error", JOptionPane.ERROR_MESSAGE);
+            
+        }
+
+
     }//GEN-LAST:event_txtNombreApellidosKeyTyped
 
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
@@ -492,10 +493,26 @@ public class FrmCuenta extends javax.swing.JDialog {
 
     private void btnRegistrosKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_btnRegistrosKeyReleased
         // TODO add your handling code here:
-        
-            new FrmRegistro(null, true, this.pc).setVisible(true);
-        
+
+        new FrmRegistro(null, true, this.pc).setVisible(true);
+
     }//GEN-LAST:event_btnRegistrosKeyReleased
+
+    private void txtCiudadKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCiudadKeyTyped
+        // TODO add your handling code here:
+        char c = evt.getKeyChar();
+        if (txtCiudad.getText().length() >= 20) {
+            evt.consume();
+            Toolkit.getDefaultToolkit().beep();
+            JOptionPane.showMessageDialog(this, "No puede ingresar más caracteres", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+
+        if (Character.isDigit(c)) {
+            evt.consume(); // Ignorar la entrada del número
+            JOptionPane.showMessageDialog(txtCiudad, "No se permiten números", "Error", JOptionPane.ERROR_MESSAGE);
+            
+        }
+    }//GEN-LAST:event_txtCiudadKeyTyped
 
     /**
      * @param args the command line arguments

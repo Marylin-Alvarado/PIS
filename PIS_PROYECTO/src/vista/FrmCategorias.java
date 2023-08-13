@@ -17,6 +17,7 @@ public class FrmCategorias extends javax.swing.JDialog {
     public FrmCategorias(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        this.setLocationRelativeTo(this);
         cargarComponentes();
     }
     

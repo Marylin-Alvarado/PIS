@@ -46,7 +46,8 @@ public class FrmCandidato extends javax.swing.JDialog {
         cargarComboPartido();
         cargarComboDignidad();
         setResizable(false);
-        setLocationRelativeTo(this);
+        this.setLocationRelativeTo(this);
+        
         SetImageLabel(jLabel5,"C:\\Users\\Edison\\Downloads\\PIS-Danny-Cobos\\PIS-Danny-Cobos\\PIS_PROYECTO\\src\\imagenes\\imagen-removebg-preview(15).png");
         SetImageLabel(jLabel6,"C:\\Users\\Edison\\Downloads\\PIS-Danny-Cobos\\PIS-Danny-Cobos\\PIS_PROYECTO\\src\\imagenes\\imagen-removebg-preview(16).png");
         SetImageLabel(jLabel7, "C:\\Users\\Edison\\Downloads\\PIS-Danny-Cobos\\PIS-Danny-Cobos\\PIS_PROYECTO\\src\\imagenes\\imagen-removebg-preview(12).png");

@@ -5,7 +5,6 @@
  */
 package vista;
 
-
 import controlador.DAO.PersonaDAO;
 import controlador.ed.listas.ListaEnlazada;
 import java.awt.Image;
@@ -48,36 +47,47 @@ public class FrmInicioSesion extends javax.swing.JDialog {
         SetImageLabel(jLabel2, "C:\\Users\\Edison\\Desktop\\PIS-main\\PIS\\PIS_PROYECTO\\src\\imagenes\\imagen-removebg-preview(11).png");
     }
 
+    // Esta función toma un JLabel y una ruta de archivo de imagen como parámetros
+    // y establece la imagen en el JLabel, escalándola al tamaño del JLabel.
     private void SetImageLabel(JLabel labelName, String root) {
-        ImageIcon image = new ImageIcon(root);
+        ImageIcon image = new ImageIcon(root); // Crea un ImageIcon a partir de la ruta de la imagen
         Icon icon = new ImageIcon(image.getImage().getScaledInstance(labelName.getWidth(), labelName.getHeight(), Image.SCALE_DEFAULT));
-        labelName.setIcon(icon);
-        this.repaint();
+        // Escala la imagen al tamaño del JLabel
+        labelName.setIcon(icon); // Establece el icono en el JLabel
+        this.repaint(); // Vuelve a pintar el componente para mostrar la imagen
+    }
+    
+    private void limpiar(){
+        txtUsuario.setText("");
+        txtContrasenia.setText("");
     }
 
+// Esta función se encarga de autenticar a un usuario.
     private void autentificar() {
-        //System.out.println(cd.buscarNombreCliente(resulta));
         try {
+            // Intenta autenticar al usuario utilizando el método inicioSesion de pd (asumo que pd es algún tipo de manejador de personas)
             pd.setPersona(pd.inicioSesion(txtUsuario.getText(), Integer.parseInt(txtContrasenia.getText())));
-            
-            
+
+            // Si se encontraron los nombres completos del usuario (es decir, si se autenticó con éxito)
             if (pd.getPersona().getNombres_completos() != null) {
-                System.out.println("-------------------------------");
-                //System.out.println(cd.buscarNombreCliente(resultado.toString()));
-                JOptionPane.showMessageDialog(this, "Se inicio sesion", "INFORMACION", JOptionPane.INFORMATION_MESSAGE);
+                JOptionPane.showMessageDialog(this, "Se inició sesión", "INFORMACIÓN", JOptionPane.INFORMATION_MESSAGE);
+
+                // Verifica el rol del usuario autenticado
                 if (pd.getPersona().getRol() == Rol.ADMIN) {
-                    JOptionPane.showMessageDialog(this, "BIENVENIDO ADMINISTRADOR", "INFORMACION", JOptionPane.INFORMATION_MESSAGE);
-                     new FrmPrincipalAdm(null, true).setVisible(true);
+                    JOptionPane.showMessageDialog(this, "BIENVENIDO ADMINISTRADOR", "INFORMACIÓN", JOptionPane.INFORMATION_MESSAGE);
+                    // Abre una nueva ventana FrmPrincipalAdm para el administrador
+                    new FrmPrincipalAdm(null, true).setVisible(true);
                 } else {
-                     new FrmPapeletas(null,true, this.md).setVisible(true);
+                    // Abre una nueva ventana FrmPapeletas para otros usuarios
+                    new FrmPapeletas(null, true, this.md).setVisible(true);
                 }
+                limpiar();
             } else {
                 JOptionPane.showMessageDialog(this, "Usuario o contraseña incorrecta", "ERROR", JOptionPane.ERROR_MESSAGE);
             }
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
-
     }
 
     /**
@@ -145,8 +155,18 @@ public class FrmInicioSesion extends javax.swing.JDialog {
         jLabel4.setText("Contraseña");
 
         txtUsuario.setFont(new java.awt.Font("Sylfaen", 0, 12)); // NOI18N
+        txtUsuario.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtUsuarioKeyTyped(evt);
+            }
+        });
 
         txtContrasenia.setFont(new java.awt.Font("Sylfaen", 0, 12)); // NOI18N
+        txtContrasenia.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtContraseniaKeyTyped(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -232,6 +252,39 @@ public class FrmInicioSesion extends javax.swing.JDialog {
     private void btnIniciarSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIniciarSesionActionPerformed
         autentificar();
     }//GEN-LAST:event_btnIniciarSesionActionPerformed
+
+    private void txtUsuarioKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtUsuarioKeyTyped
+        // TODO add your handling code here:
+        char c = evt.getKeyChar();
+        if (txtUsuario.getText().length() >= 50) {
+            evt.consume();
+            Toolkit.getDefaultToolkit().beep();
+            JOptionPane.showMessageDialog(this, "No puede ingresar más caracteres", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+
+        if (Character.isDigit(c)) {
+            evt.consume(); // Ignorar la entrada del número
+            JOptionPane.showMessageDialog(txtUsuario, "No se permiten números", "Error", JOptionPane.ERROR_MESSAGE);
+            
+        }
+        
+    }//GEN-LAST:event_txtUsuarioKeyTyped
+
+    private void txtContraseniaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtContraseniaKeyTyped
+        // TODO add your handling code here:
+        if (txtContrasenia.getText().length() >= 10) {
+            evt.consume();
+            Toolkit.getDefaultToolkit().beep();
+            JOptionPane.showMessageDialog(this, "No puede ingresar más numeros", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+
+        char c = evt.getKeyChar();
+        if (Character.isLetter(c)) {
+            evt.consume();
+            Toolkit.getDefaultToolkit().beep();
+            JOptionPane.showMessageDialog(this, "No puede ingresar letras", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_txtContraseniaKeyTyped
 
     /**
      * @param args the command line arguments
