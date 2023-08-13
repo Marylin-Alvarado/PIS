@@ -106,4 +106,14 @@ public class Persona {
         this.correo = correo;
     }
 
+    @Override
+    public String toString() {
+        return  nombres_completos +" "+ identificacion ;
+    }
+    
+    
+
+    
+    
+
 }

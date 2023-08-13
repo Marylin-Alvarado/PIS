@@ -40,7 +40,7 @@ public class PersonaDAO extends AdaptadorDAO<Persona> {
         return this.guardar(persona);   
     }
 
-    public boolean modificar() throws Exception {
+    public boolean modificar(Integer pos) throws Exception {
          this.modificar(persona);
          return true;
     }
@@ -120,6 +120,7 @@ public class PersonaDAO extends AdaptadorDAO<Persona> {
         Persona c = null;
         ListaEnlazada<Persona> lista = listar();
         for(int i = 0; i < lista.size();i++) {
+            System.out.println(lista.obtener(i));
             Persona aux = lista.obtener(i);
             if(user.equals(aux.getNombres_completos())) {
                 c = aux;
@@ -129,10 +130,23 @@ public class PersonaDAO extends AdaptadorDAO<Persona> {
         return c;
     }
     
-    public Persona inicioSesion(String user, String clave) throws Exception {
+    public Persona inicioSesion(String user, Integer clave) throws Exception {
         Persona c = buscarUsaurio(user);
         if(c != null) {
-            System.out.println(c+"  "+c.getIdentificacion()+ " "+clave);
+            System.out.println(c+"  "+c.getIdentificacion());
+            //System.out.println("Llego aqui");
+            if(!c.getIdentificacion().equals(clave)) {
+                c = null;
+            }
+        }
+        
+        return c;
+    }
+    public Persona inicioSesionAdmin(String user, Integer clave) throws Exception {
+        Persona c = buscarUsaurio(user);
+        if(c != null) {
+            System.out.println(c+"  "+c.getIdentificacion());
+            //System.out.println("Llego aqui");
             if(!c.getIdentificacion().equals(clave)) {
                 c = null;
             }

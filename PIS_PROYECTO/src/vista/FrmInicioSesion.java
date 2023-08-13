@@ -19,6 +19,8 @@ import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import modelo.Candidato;
+import modelo.enums.Rol;
 
 import vista.modeloTabla.ModeloTablaRegistrados;
 
@@ -31,6 +33,7 @@ public class FrmInicioSesion extends javax.swing.JDialog {
     //private CuentaDAO cd = new CuentaDAO();
     private PersonaDAO pd = new PersonaDAO();
     private ModeloTablaRegistrados modelo = new ModeloTablaRegistrados();
+    private ListaEnlazada<Candidato> md = new ListaEnlazada<>();
 
     // private Cuenta cuenta;
     /**
@@ -55,12 +58,19 @@ public class FrmInicioSesion extends javax.swing.JDialog {
     private void autentificar() {
         //System.out.println(cd.buscarNombreCliente(resulta));
         try {
-            pd.setPersona(pd.inicioSesion(txtUsuario.getText(), new String(txtContrasenia.getPassword())));
+            pd.setPersona(pd.inicioSesion(txtUsuario.getText(), Integer.parseInt(txtContrasenia.getText())));
+            
             
             if (pd.getPersona().getNombres_completos() != null) {
                 System.out.println("-------------------------------");
                 //System.out.println(cd.buscarNombreCliente(resultado.toString()));
                 JOptionPane.showMessageDialog(this, "Se inicio sesion", "INFORMACION", JOptionPane.INFORMATION_MESSAGE);
+                if (pd.getPersona().getRol() == Rol.ADMIN) {
+                    JOptionPane.showMessageDialog(this, "BIENVENIDO ADMINISTRADOR", "INFORMACION", JOptionPane.INFORMATION_MESSAGE);
+                     new FrmPrincipalAdm(null, true).setVisible(true);
+                } else {
+                     new FrmPapeletas(null,true, this.md).setVisible(true);
+                }
             } else {
                 JOptionPane.showMessageDialog(this, "Usuario o contraseña incorrecta", "ERROR", JOptionPane.ERROR_MESSAGE);
             }
@@ -90,7 +100,6 @@ public class FrmInicioSesion extends javax.swing.JDialog {
         jLabel4 = new javax.swing.JLabel();
         txtUsuario = new javax.swing.JTextField();
         txtContrasenia = new javax.swing.JPasswordField();
-        btnRegistrarse = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -139,15 +148,6 @@ public class FrmInicioSesion extends javax.swing.JDialog {
 
         txtContrasenia.setFont(new java.awt.Font("Sylfaen", 0, 12)); // NOI18N
 
-        btnRegistrarse.setBackground(new java.awt.Color(187, 134, 252));
-        btnRegistrarse.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        btnRegistrarse.setText("Recuperar Contraseña");
-        btnRegistrarse.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnRegistrarseActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -173,10 +173,7 @@ public class FrmInicioSesion extends javax.swing.JDialog {
                             .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 305, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                                 .addComponent(btnIniciarSesion, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(92, 92, 92))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                .addComponent(btnRegistrarse)
-                                .addGap(75, 75, 75))))))
+                                .addGap(92, 92, 92))))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -196,9 +193,7 @@ public class FrmInicioSesion extends javax.swing.JDialog {
                 .addComponent(txtContrasenia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btnIniciarSesion)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnRegistrarse, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addGap(43, 43, 43))
         );
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -237,11 +232,6 @@ public class FrmInicioSesion extends javax.swing.JDialog {
     private void btnIniciarSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIniciarSesionActionPerformed
         autentificar();
     }//GEN-LAST:event_btnIniciarSesionActionPerformed
-
-    private void btnRegistrarseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarseActionPerformed
-        // TODO add your handling code here:
-        new FrmCuenta(null, true, this.pd).setVisible(true);
-    }//GEN-LAST:event_btnRegistrarseActionPerformed
 
     /**
      * @param args the command line arguments
@@ -287,7 +277,6 @@ public class FrmInicioSesion extends javax.swing.JDialog {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnIniciarSesion;
-    private javax.swing.JButton btnRegistrarse;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
