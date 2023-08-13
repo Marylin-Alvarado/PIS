@@ -24,6 +24,7 @@ public class FrmCertificados extends javax.swing.JDialog {
 
     FondoPanel fondo = new FondoPanel();
     
+    
 
     /**
      * Creates new form FrmCertificados
