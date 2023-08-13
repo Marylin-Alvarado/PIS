@@ -21,7 +21,7 @@ import modelo.Dignidad;
 import modelo.PartidoPolitico;
 import modelo.Partido_Politico;
 import modelo.Persona;
-import modelo.TipoVoto;
+import modelo.enums.TipoVoto;
 import modelo.enums.Generos;
 import modelo.enums.TipoIdentificacion;
 
