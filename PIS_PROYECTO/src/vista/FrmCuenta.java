@@ -67,50 +67,51 @@ public class FrmCuenta extends javax.swing.JDialog {
         this.repaint();
     }
 
+    // Este método guarda la información de una persona en el sistema.
     private void guardarPersona() {
         try {
             if (!txtNombreApellidos.getText().isEmpty() || !txtCorreoElec.getText().isEmpty()
                     || !txtNumCedula.getText().isEmpty() || !txtCodigoDac.getText().isEmpty() || !txtCiudad.getText().isEmpty()) {
+                // Asigna los valores de los campos de texto y otros componentes a la persona en el objeto pc
                 this.pc.getPersona().setNombres_completos(txtNombreApellidos.getText());
                 this.pc.getPersona().setIdentificacion(Integer.parseInt(txtNumCedula.getText()));
-                this.pc.getPersona().setCodigoDac(txtCodigoDac.getText());//
+                this.pc.getPersona().setCodigoDac(txtCodigoDac.getText());
                 this.pc.getPersona().setFechaNacimiento(dteFechaNacimiento.getDate());
                 this.pc.getPersona().setGenero((Generos) cbxGenero.getSelectedItem());
                 this.pc.getPersona().setCorreo(txtCorreoElec.getText());
                 this.pc.getPersona().setCiudad(txtCiudad.getText());
                 this.pc.getPersona().setRol((Rol) cbxRol.getSelectedItem());
-                this.pc.guardar();
-                validarEdad();
-                limpiar();
 
+                // Llama al método guardar() en el objeto pc para guardar la persona
+                this.pc.guardar();
+
+                validarEdad(); // Realiza alguna validación adicional de edad
+                limpiar(); // Limpia los campos de entrada
                 JOptionPane.showMessageDialog(null, "Se ha guardado ", "INFORMACION", JOptionPane.INFORMATION_MESSAGE);
             } else {
                 JOptionPane.showMessageDialog(null, "Llene todos los campos", "Error", JOptionPane.ERROR_MESSAGE);
             }
-
         } catch (Exception e) {
             System.out.println(e);
         }
-
     }
 
+    // Este método limpia los campos de entrada.
     private void limpiar() {
-        // this.cd.setCuenta(null);
         txtNombreApellidos.setText("");
         txtCorreoElec.setText("");
         txtCodigoDac.setText("");
         txtNumCedula.setText("");
         dteFechaNacimiento.setDate(null);
         txtCiudad.setText("");
-
     }
 
+    // Estos métodos estáticos cargan los elementos de un enum en un JComboBox.
     public static void cargarGenero(JComboBox cbx) {
         cbx.removeAllItems();
         for (Generos genero : Generos.values()) {
             cbx.addItem(genero);
         }
-
     }
 
     public static void cargarRol(JComboBox cbx) {
@@ -118,13 +119,13 @@ public class FrmCuenta extends javax.swing.JDialog {
         for (Rol rol : Rol.values()) {
             cbx.addItem(rol);
         }
-
     }
 
+    // Este método valida si una persona es mayor de 16 años basado en su fecha de nacimiento.
     private void validarEdad() {
         try {
-            Date fechaNacimiento = dteFechaNacimiento.getDate();
-            boolean esMayorDeEdad = esMayorDeEdad(fechaNacimiento);
+            Date fechaNacimiento = dteFechaNacimiento.getDate(); // Obtiene la fecha de nacimiento de la interfaz
+            boolean esMayorDeEdad = esMayorDeEdad(fechaNacimiento); // Verifica si es mayor de 16 años
 
             if (esMayorDeEdad) {
                 JOptionPane.showMessageDialog(this, "¡Es mayor de 16 años!", "Resultado", JOptionPane.INFORMATION_MESSAGE);
@@ -134,16 +135,18 @@ public class FrmCuenta extends javax.swing.JDialog {
         }
     }
 
+  // Este método verifica si una persona es mayor de 16 años comparando su fecha de nacimiento con la fecha actual.
     private boolean esMayorDeEdad(Date fechaNacimiento) {
-        Date fechaActual = new Date();
-        int edad = calcularEdad(fechaNacimiento, fechaActual);
-        return edad >= 16;
+        Date fechaActual = new Date(); // Obtiene la fecha actual
+        int edad = calcularEdad(fechaNacimiento, fechaActual); // Calcula la edad
+        return edad >= 16; // Devuelve true si la edad es mayor o igual a 16
     }
 
+   // Este método calcula la diferencia en años entre dos fechas.
     private int calcularEdad(Date fechaNacimiento, Date fechaActual) {
-        long diferencia = fechaActual.getTime() - fechaNacimiento.getTime();
-        long anios = diferencia / (1000L * 60 * 60 * 24 * 365);
-        return (int) anios;
+        long diferencia = fechaActual.getTime() - fechaNacimiento.getTime(); // Calcula la diferencia en milisegundos
+        long anios = diferencia / (1000L * 60 * 60 * 24 * 365); // Convierte la diferencia a años
+        return (int) anios; // Devuelve la edad en años (truncada)
     }
 
     /**
@@ -480,7 +483,7 @@ public class FrmCuenta extends javax.swing.JDialog {
         if (Character.isDigit(c)) {
             evt.consume(); // Ignorar la entrada del número
             JOptionPane.showMessageDialog(txtNombreApellidos, "No se permiten números", "Error", JOptionPane.ERROR_MESSAGE);
-            
+
         }
 
 
@@ -510,7 +513,7 @@ public class FrmCuenta extends javax.swing.JDialog {
         if (Character.isDigit(c)) {
             evt.consume(); // Ignorar la entrada del número
             JOptionPane.showMessageDialog(txtCiudad, "No se permiten números", "Error", JOptionPane.ERROR_MESSAGE);
-            
+
         }
     }//GEN-LAST:event_txtCiudadKeyTyped
 
