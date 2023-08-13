@@ -36,10 +36,15 @@ public class FrmVoto extends javax.swing.JDialog {
       cargaCombo();
     }
  /**
- *
- * @author cargarImagenes
- */ 
-    
+ * Este método se encarga de cargar imágenes en etiquetas del formulario.
+ * Realiza las siguientes acciones:
+ * 
+ * - Establece la ubicación relativa del formulario utilizando 'this.setLocationRelativeTo(this)'.
+ * - Asigna imágenes a las etiquetas utilizando el método 'SetImageLabel()' con las rutas de archivo correspondientes.
+ * 
+ * Las imágenes se cargan en las etiquetas 'jblvoto1', 'jblestado', 'jblubicacion' y 'jblVoto',
+ * brindando una representación visual para las diferentes partes del formulario.
+ */
     public void cargarImagenes(){
      this.setLocationRelativeTo(this);
         SetImageLabel(jblvoto1, "C:\\Users\\Gonzalez G\\OneDrive\\Desktop\\PROYECTO DE VOTACION\\PIS\\PIS_PROYECTO\\src\\imagenes\\voto.png");
@@ -49,10 +54,18 @@ public class FrmVoto extends javax.swing.JDialog {
     
     }
 /**
- *
- * @author SetImageLabel
- * convierte la jlb en una imagen o icono
- */ 
+ * Este método se encarga de establecer una imagen en una etiqueta específica del formulario.
+ * Realiza las siguientes acciones:
+ * 
+ * - Crea un objeto ImageIcon utilizando la ruta de archivo proporcionada.
+ * - Escala la imagen para que se ajuste al tamaño de la etiqueta utilizando 'getScaledInstance()'.
+ * - Crea un Icon utilizando la imagen escalada.
+ * - Establece el icono en la etiqueta especificada utilizando 'labelName.setIcon()'.
+ * - Repinta el formulario para actualizar la representación visual.
+ * 
+ * @param labelName La etiqueta donde se establecerá la imagen.
+ * @param root La ruta de archivo de la imagen a cargar.
+ */
        private void SetImageLabel(JLabel labelName, String root) {
         ImageIcon image = new ImageIcon(root);
         Icon icon = new ImageIcon(image.getImage().getScaledInstance(labelName.getWidth(), labelName.getHeight(), Image.SCALE_DEFAULT));
@@ -74,8 +87,6 @@ public class FrmVoto extends javax.swing.JDialog {
         cbxEstado = new javax.swing.JComboBox<>();
         cbxTipo = new javax.swing.JComboBox<>();
         jPanel2 = new javax.swing.JPanel();
-        jButton1 = new javax.swing.JButton();
-        btnSeleccionar = new javax.swing.JButton();
         jblVoto = new javax.swing.JLabel();
         jblestado = new javax.swing.JLabel();
         jblvoto1 = new javax.swing.JLabel();
@@ -94,47 +105,19 @@ public class FrmVoto extends javax.swing.JDialog {
 
         cbxEstado.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "TRUE", "FALSE" }));
 
-        jButton1.setText("REGISTRAR");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
-
-        btnSeleccionar.setText("SELECCIONAR");
-        btnSeleccionar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnSeleccionarActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jButton1)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnSeleccionar))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(55, 55, 55)
-                        .addComponent(jblVoto, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(55, 55, 55)
+                .addComponent(jblVoto, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(55, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(35, 35, 35)
-                        .addComponent(jButton1))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(btnSeleccionar)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(64, 64, 64)
                 .addComponent(jblVoto, javax.swing.GroupLayout.DEFAULT_SIZE, 121, Short.MAX_VALUE)
                 .addContainerGap())
         );
@@ -229,32 +212,19 @@ public class FrmVoto extends javax.swing.JDialog {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-guardar();        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
 /**
-     * Este metodo me perimite selecionar en la tabla el valor a modificar ya sea tanto el 
-     * Lugar como el tipo etc
-     */
-    private void btnSeleccionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSeleccionarActionPerformed
-      fila = tblTabla.getSelectedRow();
-        if (fila >= 0) {
-            try {
-                Integer id = modelo.getLista().obtener(fila).getId();
-                vd.setVoto(vd.obtener(id));
-                
-                cbxTipo.setSelectedItem(vd.getVoto().getTipoVoto());
-                cbxEstado.setSelectedItem(vd.getVoto().getEstado());
-            } catch (Exception e) {
-                System.out.println(e);
-            }
-        } else {
-            JOptionPane.showMessageDialog(null, "Escoja un registro de la tabla", "Error", JOptionPane.ERROR_MESSAGE);}
-    }//GEN-LAST:event_btnSeleccionarActionPerformed
-/**
-     * Este metodo me perimite cargar la tabla con los datos ya registrados
-     */
+ * Este método se encarga de cargar los datos de los votos en una tabla en el formulario.
+ * Realiza las siguientes acciones:
+ * 
+ * - Obtiene una lista de votos utilizando el método 'listar()' del objeto 'vd'.
+ * - Establece la lista de votos en el modelo de la tabla utilizando 'modelo.setLista()'.
+ * - Asigna el modelo de la tabla a la tabla 'tblTabla' utilizando 'tblTabla.setModel()'.
+ * - Actualiza la interfaz de usuario de la tabla utilizando 'tblTabla.updateUI()'.
+ * 
+ * Este método actualiza la tabla con los datos más recientes de los votos, lo que permite
+ * que el usuario vea y manipule la información actualizada.
+ */
+    
     private void cargarTabla() {
         modelo.setLista(vd.listar());
         tblTabla.setModel(modelo);
@@ -266,9 +236,24 @@ guardar();        // TODO add your handling code here:
     Utilidades.cargarComboTipoVoto(cbxTipo);
     }
 /**
-     * Este metodo me perimite guardar los datos del voto tanto
-     * como el tipo ,asi como el lugar y el estado del voto
-     */
+ * Este método se encarga de guardar la información de un voto en el sistema.
+ * Verifica que se hayan ingresado los campos necesarios y realiza las operaciones
+ * correspondientes para almacenar el voto en la base de datos.
+ * 
+ * Luego, establece el tipo de voto, el estado y la fecha de emisión del voto en
+ * función de las selecciones del usuario y la fecha actual.
+ * 
+ * Si el ID del voto no es nulo, indica que se está modificando un voto existente.
+ * En ese caso, llama al método 'modificar()' del objeto 'vd' con la fila especificada
+ * y luego limpia los campos de entrada utilizando el método 'limpiar()'.
+ * 
+ * Si el ID del voto es nulo, indica que se está creando un nuevo voto.
+ * Llama al método 'guardar()' del objeto 'vd' para guardar el nuevo voto en la base
+ * de datos y luego limpia los campos de entrada utilizando el método 'limpiar()'.
+ * 
+ * Finalmente, muestra un mensaje indicando que se ha guardado la información de forma
+ * exitosa, o muestra un mensaje de error si ocurre una excepción durante el proceso.
+ */
      private void guardar() {
          
          if ( cbxTipo.getSelectedItem().toString().isEmpty()) {
@@ -297,8 +282,17 @@ guardar();        // TODO add your handling code here:
          
     }
 /**
-     * Este metodo me permite limpiar los datos
-     */
+ * Este método se encarga de restablecer el formulario a su estado original después de
+ * que se haya guardado un voto o se haya cancelado una operación. Realiza las siguientes
+ * acciones:
+ * 
+ * - Establece el objeto de voto en 'null' en el objeto 'vd'.
+ * - Reinicia el valor de la variable 'fila' a -1, indicando que no se ha seleccionado ninguna fila.
+ * - Llama al método 'cargarTabla()' para volver a cargar los datos en la tabla del formulario.
+ * 
+ * Este método es útil para limpiar los campos y preparar el formulario para un nuevo voto
+ * o para realizar otra operación.
+ */
        private void limpiar() {
         this.vd.setVoto(null);
         fila = -1;
@@ -351,10 +345,8 @@ guardar();        // TODO add your handling code here:
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnSeleccionar;
     private javax.swing.JComboBox<String> cbxEstado;
     private javax.swing.JComboBox<String> cbxTipo;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel5;
