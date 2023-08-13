@@ -5,11 +5,13 @@
  */
 package vista;
 
-import static com.sun.corba.se.impl.util.Utility.printStackTrace;
+//import static com.sun.corba.se.impl.util.Utility.printStackTrace;
 import controlador.DAO.CandidatoDao;
 import controlador.DAO.DignidadDao;
+import controlador.DAO.PapeletaDao;
 import controlador.DAO.PartidoPoliticoDao;
 import controlador.DAO.ResultadoDao;
+import controlador.DAO.VotoDao;
 import controlador.ed.listas.ListaEnlazada;
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -18,6 +20,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
 import modelo.Resultados;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
@@ -51,6 +54,7 @@ public class FrmResultado extends javax.swing.JDialog {
     private CandidatoDao cd = new CandidatoDao();
     private PartidoPoliticoDao partido = new PartidoPoliticoDao();
     private DignidadDao dignidad = new DignidadDao();
+    private VotoDao voto = new VotoDao();
 
 //    JFreeChart grafico;
 //    DefaultCategoryDataset datos = new DefaultCategoryDataset();
@@ -317,7 +321,7 @@ public class FrmResultado extends javax.swing.JDialog {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(PanelGrafica, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(38, Short.MAX_VALUE))
+                .addContainerGap(159, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -379,8 +383,13 @@ public class FrmResultado extends javax.swing.JDialog {
     }//GEN-LAST:event_cbxDignidadActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
+//        String candidatoSeleccionado = cbxCandidato.getSelectedItem().toString();
+//        tblTabla.addRow(new Object[]{candidatoSeleccionado});
+
+//        String candidatoSeleccionado = cbxCandidato.getSelectedItem().toString();
+//        tblTabla.add(fila);
         guardar();
+
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
@@ -389,25 +398,55 @@ public class FrmResultado extends javax.swing.JDialog {
         new FrmPrincipalAdm(null, true).setVisible(true);
     }//GEN-LAST:event_jButton3ActionPerformed
 
-    private void guardar() {
-        try {
-
-            dd.getResultados().setId_candidato(partido.buscarPorNombre(cbxCandidato.getSelectedItem().toString()).getId());
-//                        .getDatos().setId_partido_politico(partido.buscarPorNombre(cbxPartido.getSelectedItem().toString()).getId());
-//                candidato.getDatos().setId_dignidad(dignidad.categoriaDignidad(cbxDignidad.getSelectedItem().toString()).getId());
-            if (dd.getResultados().getId() != null) {
-
-                dd.modificar();
-
-            } else {
-                dd.guardar();
-                cargarTabla();
-
-            }
-            JOptionPane.showMessageDialog(null, "Datos Guardados Correctamente", "Infomacion", JOptionPane.INFORMATION_MESSAGE);
-
-        } catch (Exception e) {
+    private double calcularPorcentaje(int voto, int totalVotos) {
+        if (totalVotos == 0) {
+            return 0.0; // Evita la división por cero
         }
+
+        double porcentaje = (double) voto / totalVotos * 100;
+        return porcentaje;
+    }
+
+    private void guardar() {
+//        try {
+//
+//            dd.getResultados().setId_candidato(partido.buscarPorNombre(cbxCandidato.getSelectedItem().toString()).getId());
+////                        .getDatos().setId_partido_politico(partido.buscarPorNombre(cbxPartido.getSelectedItem().toString()).getId());
+////                candidato.getDatos().setId_dignidad(dignidad.categoriaDignidad(cbxDignidad.getSelectedItem().toString()).getId());
+//            if (dd.getResultados().getId() != null) {
+//
+//                dd.modificar();
+//
+//            } else {
+//                dd.guardar();
+//                cargarTabla();
+//
+//            }
+//            JOptionPane.showMessageDialog(null, "Datos Guardados Correctamente", "Infomacion", JOptionPane.INFORMATION_MESSAGE);
+//
+//        } catch (Exception e) {
+//        }
+//        if (jTextField2.getText().trim().isEmpty() ||jTextField2.getText().trim().isEmpty()){
+////                txtVoto.getSelectedItem().toString().isEmpty()) {
+//            JOptionPane.showMessageDialog(null, "Ingrese todo los campos", "Error", JOptionPane.ERROR_MESSAGE);
+//        } else {
+//            try {
+//          
+////                String aux = String.valueOf(jTextField2.getText());
+////                Integer au = Integer.valueOf(txtVoto.getText());
+//                String aux = cbxCandidato.getSelectedItem().toString();
+//                Integer au = Integer.valueOf(jComboBox1.getSelectedItem().toString());
+//
+//                for (int i = 0; i < au; i++) {
+//                    cd.getDatos().setNombre_candidato(cbxCandidato.getSelectedItem().toString());
+//      
+//
+//                }
+//            } catch (Exception e) {
+//                JOptionPane.showMessageDialog(null, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+//            }
+//        }
+       
 
     }
 
@@ -474,4 +513,5 @@ public class FrmResultado extends javax.swing.JDialog {
     private javax.swing.JTable tblTabla;
     private javax.swing.JLabel txtNombre;
     // End of variables declaration//GEN-END:variables
+
 }

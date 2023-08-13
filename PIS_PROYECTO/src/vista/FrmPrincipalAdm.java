@@ -40,8 +40,6 @@ public class FrmPrincipalAdm extends javax.swing.JDialog {
     private void initComponents() {
 
         Escritorio = new FondoPanel();
-        jDesktopPane1 = new javax.swing.JDesktopPane();
-        jToolBar1 = new javax.swing.JToolBar();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
@@ -52,8 +50,8 @@ public class FrmPrincipalAdm extends javax.swing.JDialog {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-        jToolBar1.setRollover(true);
-
+        jButton1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/userpassword_deusuari_787.png"))); // NOI18N
         jButton1.setText("Login");
         jButton1.setFocusable(false);
         jButton1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -63,8 +61,14 @@ public class FrmPrincipalAdm extends javax.swing.JDialog {
                 jButton1MouseClicked(evt);
             }
         });
-        jToolBar1.add(jButton1);
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
+        jButton2.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/groups_people_people_1715.png"))); // NOI18N
         jButton2.setText("PartidoPolitico");
         jButton2.setFocusable(false);
         jButton2.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -74,8 +78,9 @@ public class FrmPrincipalAdm extends javax.swing.JDialog {
                 jButton2MouseClicked(evt);
             }
         });
-        jToolBar1.add(jButton2);
 
+        jButton3.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/customer_person_people_man_you_1625.png"))); // NOI18N
         jButton3.setText("Dignidad");
         jButton3.setFocusable(false);
         jButton3.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -85,8 +90,9 @@ public class FrmPrincipalAdm extends javax.swing.JDialog {
                 jButton3MouseClicked(evt);
             }
         });
-        jToolBar1.add(jButton3);
 
+        jButton4.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/bootloader_users_person_people_6080.png"))); // NOI18N
         jButton4.setText("Candidato");
         jButton4.setFocusable(false);
         jButton4.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -96,8 +102,9 @@ public class FrmPrincipalAdm extends javax.swing.JDialog {
                 jButton4MouseClicked(evt);
             }
         });
-        jToolBar1.add(jButton4);
 
+        jButton5.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jButton5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/Statistics_27003.png"))); // NOI18N
         jButton5.setText("Resultado");
         jButton5.setFocusable(false);
         jButton5.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -107,38 +114,35 @@ public class FrmPrincipalAdm extends javax.swing.JDialog {
                 jButton5MouseClicked(evt);
             }
         });
-        jToolBar1.add(jButton5);
-
-        jDesktopPane1.setLayer(jToolBar1, javax.swing.JLayeredPane.DEFAULT_LAYER);
-
-        javax.swing.GroupLayout jDesktopPane1Layout = new javax.swing.GroupLayout(jDesktopPane1);
-        jDesktopPane1.setLayout(jDesktopPane1Layout);
-        jDesktopPane1Layout.setHorizontalGroup(
-            jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jDesktopPane1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jToolBar1, javax.swing.GroupLayout.DEFAULT_SIZE, 1052, Short.MAX_VALUE)
-                .addContainerGap())
-        );
-        jDesktopPane1Layout.setVerticalGroup(
-            jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jDesktopPane1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jToolBar1, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
-        );
 
         javax.swing.GroupLayout EscritorioLayout = new javax.swing.GroupLayout(Escritorio);
         Escritorio.setLayout(EscritorioLayout);
         EscritorioLayout.setHorizontalGroup(
             EscritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jDesktopPane1)
+            .addGroup(EscritorioLayout.createSequentialGroup()
+                .addGap(394, 394, 394)
+                .addGroup(EscritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 241, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 241, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 241, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 241, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 241, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(441, Short.MAX_VALUE))
         );
         EscritorioLayout.setVerticalGroup(
             EscritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(EscritorioLayout.createSequentialGroup()
-                .addComponent(jDesktopPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 619, Short.MAX_VALUE))
+                .addGap(41, 41, 41)
+                .addComponent(jButton1)
+                .addGap(47, 47, 47)
+                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(51, 51, 51)
+                .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(55, 55, 55)
+                .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 67, Short.MAX_VALUE)
+                .addComponent(jButton5)
+                .addGap(48, 48, 48))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -188,6 +192,10 @@ public class FrmPrincipalAdm extends javax.swing.JDialog {
         FrmInicioSesion ini =  new FrmInicioSesion(null,true);
         ini.setVisible(true);
     }//GEN-LAST:event_jButton1MouseClicked
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -239,10 +247,8 @@ public class FrmPrincipalAdm extends javax.swing.JDialog {
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
-    private javax.swing.JDesktopPane jDesktopPane1;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTabbedPane jTabbedPane2;
-    private javax.swing.JToolBar jToolBar1;
     // End of variables declaration//GEN-END:variables
 
     class FondoPanel extends JPanel {
@@ -251,7 +257,7 @@ public class FrmPrincipalAdm extends javax.swing.JDialog {
 
         public void paint(Graphics g) {
 
-            imagen = new ImageIcon(getClass().getResource("/imagenes/robot.jpg")).getImage();
+            imagen = new ImageIcon(getClass().getResource("/imagenes/fondoPrincipal.jpg")).getImage();
 
             g.drawImage(imagen, 0, 0, getWidth(), getHeight(), this);
 

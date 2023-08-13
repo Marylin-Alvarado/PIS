@@ -131,6 +131,26 @@ public class FrmDatosVotante extends javax.swing.JDialog {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
 
+//        int filaSeleccionada = tblRegistro.getSelectedRow();
+//        if (filaSeleccionada != -1) {
+//            String nombre = tblRegistro.getValueAt(filaSeleccionada, 1).toString(); // Columna 1 es el nombre
+//            String identificacion = tblRegistro.getValueAt(filaSeleccionada, 2).toString(); // Columna 2 es la identificación
+//
+//            FrmCertificados.txtNombre.setText(nombre);
+//            FrmCertificados.txtIdentificacion.setText(identificacion); // Accede al JLabel en FrmCertificado y establece la identificación
+//
+//            FrmCertificados.setVisible(true); // Muestra la vista FrmCertificado
+//        }
+        int filaSeleccionada = tblRegistro.getSelectedRow();
+        if (filaSeleccionada != -1) {
+            String nombre = tblRegistro.getValueAt(filaSeleccionada, 1).toString(); // Columna 1 es el nombre
+            int identificacion = Integer.parseInt(tblRegistro.getValueAt(filaSeleccionada, 2).toString()); // Columna 2 es la identificación
+
+//            FrmCertificados.txtNombre.setText(nombre); // Accede al JTextField en FrmCertificados y establece el nombre
+//            FrmCertificados.txtIdentificacion.setValue(identificacion); // Accede al JFormattedTextField en FrmCertificados y establece la identificación
+//
+//            FrmCertificados.setVisible(true); // Muestra la vista FrmCertificados
+        }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
