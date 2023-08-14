@@ -110,18 +110,16 @@ public class FrmResultado extends javax.swing.JDialog {
     }
 
     //Metodo para graficar con la libreria JFreeChart con barra 
-    public void Barras() {
-        int presidente = 0, vicepresidente = 0, asambleistas = 0, alcalde = 0, viceAlcalde = 0, concejal = 0; //Contadores
+   public void Barras() {
+        int presidente = 0, vicepresidente = 0, asambleistas = 0, alcalde = 0, viceAlcalde = 0, concejal = 0;
 
         try {
             DefaultCategoryDataset data = new DefaultCategoryDataset();
-            //Hacemos un recorrido por la tabla
 
             for (int i = 0; i < tblTabla.getRowCount(); i++) {
                 String cargo = tblTabla.getValueAt(i, 2).toString();
 
                 if (cargo.equals("Presidente")) {
-                    // la variable comienza en 0 mientras encuentra presidente va ser 1 y si hay mas se iran sumando
                     presidente++;
                 } else if (cargo.equals("Vicepresidente")) {
                     vicepresidente++;
@@ -136,6 +134,8 @@ public class FrmResultado extends javax.swing.JDialog {
                 }
             }
 
+            int totalVotos = presidente + vicepresidente + asambleistas + alcalde + viceAlcalde + concejal;
+
             data.addValue(presidente, "Presidente", "");
             data.addValue(vicepresidente, "Vicepresidente", "");
             data.addValue(asambleistas, "Asambleistas", "");
@@ -145,13 +145,16 @@ public class FrmResultado extends javax.swing.JDialog {
 
             JFreeChart fc = ChartFactory.createBarChart3D("Resultados de Eleccion", "voto", "candidato", data, PlotOrientation.VERTICAL, true, true, true);
             ChartFrame cf = new ChartFrame("Cantidad de voto", fc);
-            cf.setSize(500, 500);
+            cf.setSize(600, 600);
             cf.setLocationRelativeTo(null);
             cf.setVisible(true);
+            // Mostrar el total de votos en el JLabel lblTotalVotos
+            txtResultado.setText("Total de votos: " + totalVotos);
+
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "" + e);
-        }
-    }
+        }
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
