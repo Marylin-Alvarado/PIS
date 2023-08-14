@@ -111,10 +111,10 @@ public class FrmResultado extends javax.swing.JDialog {
 
     //Metodo para graficar con la libreria JFreeChart con barra 
    public void Barras() {
-        int presidente = 0, vicepresidente = 0, asambleistas = 0, alcalde = 0, viceAlcalde = 0, concejal = 0;
+       int presidente = 0, vicepresidente = 0, asambleistas = 0, alcalde = 0, viceAlcalde = 0, concejal = 0;
 
-        try {
-            DefaultCategoryDataset data = new DefaultCategoryDataset();
+       try {
+           DefaultCategoryDataset data = new DefaultCategoryDataset();
 
             for (int i = 0; i < tblTabla.getRowCount(); i++) {
                 String cargo = tblTabla.getValueAt(i, 2).toString();
@@ -150,12 +150,9 @@ public class FrmResultado extends javax.swing.JDialog {
             cf.setVisible(true);
             // Mostrar el total de votos en el JLabel lblTotalVotos
             txtResultado.setText("Total de votos: " + totalVotos);
-
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "" + e);
-        }
-    }
-
+       } catch (Exception e) {
+       }
+   }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
