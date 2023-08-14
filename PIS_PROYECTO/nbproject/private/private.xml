@@ -3,18 +3,15 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/Edison/Desktop/PIS-main/PIS/PIS_PROYECTO/src/modelo/Eleccion.java</file>
-            <file>file:/C:/Users/Edison/Desktop/PIS-main/PIS/PIS_PROYECTO/src/modelo/Voto.java</file>
-            <file>file:/C:/Users/Edison/Desktop/PIS-main/PIS/PIS_PROYECTO/src/controlador/DAO/PapeletaDao.java</file>
-            <file>file:/C:/Users/Edison/Desktop/PIS-main/PIS/PIS_PROYECTO/src/modelo/Resultados.java</file>
-            <file>file:/C:/Users/Edison/Desktop/PIS-main/PIS/PIS_PROYECTO/src/modelo/Papeleta.java</file>
-            <file>file:/C:/Users/Edison/Desktop/PIS-main/PIS/PIS_PROYECTO/src/vista/FrmInicioSesion.java</file>
+            <file>file:/C:/Users/Edison/Desktop/PIS-main/PIS/PIS_PROYECTO/src/controlador/DAO/DignidadDao.java</file>
             <file>file:/C:/Users/Edison/Desktop/PIS-main/PIS/PIS_PROYECTO/src/vista/FrmPapeletas.java</file>
-            <file>file:/C:/Users/Edison/Desktop/PIS-main/PIS/PIS_PROYECTO/src/vista/FrmCuenta.java</file>
-            <file>file:/C:/Users/Edison/Desktop/PIS-main/PIS/PIS_PROYECTO/src/modelo/Partido_Politico.java</file>
-            <file>file:/C:/Users/Edison/Desktop/PIS-main/PIS/PIS_PROYECTO/src/modelo/PartidoPolitico.java</file>
-            <file>file:/C:/Users/Edison/Desktop/PIS-main/PIS/PIS_PROYECTO/src/controlador/DAO/PersonaDAO.java</file>
-            <file>file:/C:/Users/Edison/Desktop/PIS-main/PIS/PIS_PROYECTO/src/controlador/DAO/Conexion.java</file>
+            <file>file:/C:/Users/Edison/Desktop/PIS-main/PIS/PIS_PROYECTO/src/vista/FrmDignidad.java</file>
+            <file>file:/C:/Users/Edison/Desktop/PIS-main/PIS/PIS_PROYECTO/src/modelo/Dignidad.java</file>
+            <file>file:/C:/Users/Edison/Desktop/PIS-main/PIS/PIS_PROYECTO/src/vista/FrmResultado.java</file>
+            <file>file:/C:/Users/Edison/Desktop/PIS-main/PIS/PIS_PROYECTO/src/vista/FrmPrincipalAdm.java</file>
+            <file>file:/C:/Users/Edison/Desktop/PIS-main/PIS/PIS_PROYECTO/src/vista/FrmCandidato.java</file>
+            <file>file:/C:/Users/Edison/Desktop/PIS-main/PIS/PIS_PROYECTO/src/vista/FrmPartido_Politico.java</file>
+            <file>file:/C:/Users/Edison/Desktop/PIS-main/PIS/PIS_PROYECTO/src/vista/Utilidades/Utilidades.java</file>
         </group>
     </open-files>
 </project-private>
