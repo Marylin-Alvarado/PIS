@@ -33,8 +33,9 @@ public class Utilidades {
 
     /**
      * Metodo de cargar el combo de tipo de voto
+     *
      * @param cbx
-     * @return 
+     * @return
      */
     public static JComboBox cargarComboTipoVoto(JComboBox cbx) {
         cbx.removeAllItems();
@@ -46,8 +47,9 @@ public class Utilidades {
 
     /**
      * Metodo de get de combo de tipo de voto
+     *
      * @param cbx
-     * @return 
+     * @return
      */
     public static TipoVoto getComboTipoVoto(JComboBox cbx) {
         return (TipoVoto) cbx.getSelectedItem();
@@ -55,7 +57,8 @@ public class Utilidades {
 
     /**
      * Metodo de generar fecha actual
-     * @return 
+     *
+     * @return
      */
     public Date generarFechaActual() {
         Date fechaHoraActual = new Date();
@@ -65,8 +68,9 @@ public class Utilidades {
 
     /**
      * Metodo de cambiar fecha actual
+     *
      * @param date
-     * @return 
+     * @return
      */
     public static String cambiarFechaActualString(Date date) {
         SimpleDateFormat formatoFecha = new SimpleDateFormat("yyyy-MM-dd");
@@ -75,10 +79,11 @@ public class Utilidades {
 
     /**
      * Metodo de cargar el partido
+     *
      * @param cbx
      * @param pd
      * @throws ListaNullException
-     * @throws PosicionNoEncontradaException 
+     * @throws PosicionNoEncontradaException
      */
     public static void cargarPartido(JComboBox cbx, PartidoPoliticoDao pd) throws ListaNullException, PosicionNoEncontradaException {
         cbx.removeAllItems();
@@ -89,11 +94,11 @@ public class Utilidades {
     }
 
     /**
-     * 
+     *
      * @param cbx
      * @param pd
      * @throws ListaNullException
-     * @throws PosicionNoEncontradaException 
+     * @throws PosicionNoEncontradaException
      */
     //Metodo para cargar el combo para candidato por nombre     
     public static void cargarCandidato(JComboBox cbx, CandidatoDao pd) throws ListaNullException, PosicionNoEncontradaException {
@@ -106,6 +111,7 @@ public class Utilidades {
 
     /**
      * Metodo de cargar la dignidad
+     *
      * @param cbx
      * @param dd
      * @throws ListaNullException
@@ -116,7 +122,7 @@ public class Utilidades {
      * @throws PosicionNoEncontradaException
      * @throws PosicionNoEncontradaException
      * @throws PosicionNoEncontradaException
-     * @throws PosicionNoEncontradaException 
+     * @throws PosicionNoEncontradaException
      */
     public static void cargarDignidad(JComboBox cbx, DignidadDao dd) throws ListaNullException, PosicionNoEncontradaException, PosicionNoEncontradaException, PosicionNoEncontradaException, PosicionNoEncontradaException, PosicionNoEncontradaException, PosicionNoEncontradaException, PosicionNoEncontradaException, PosicionNoEncontradaException {
         cbx.removeAllItems();
@@ -128,8 +134,9 @@ public class Utilidades {
 
     /**
      * Metodo de cargar el combo de genero en un comboBox
+     *
      * @param cbx
-     * @return 
+     * @return
      */
     public static JComboBox cargarComboGenero(JComboBox cbx) {
         cbx.removeAllItems();
@@ -141,17 +148,18 @@ public class Utilidades {
 
     /**
      * metodo de get del combo genero
+     *
      * @param cbx
-     * @return 
+     * @return
      */
     public static Generos getComboGenero(JComboBox cbx) {
         return (Generos) cbx.getSelectedItem();
     }
 
     /**
-     * 
+     *
      * @param cbx
-     * @return 
+     * @return
      */
     //Metodo para cargar el tipo de identificacion de persona
     public static JComboBox cargarTipoIdentificacion(JComboBox cbx) {
@@ -164,11 +172,13 @@ public class Utilidades {
 
     /**
      * Metodo de generar el numero aleatorio
+     *
      * @param min
      * @param max
-     * @return 
+     * @return
      */
     public static int generarNumeroAleatorio(int min, int max) {
+
         Random random = new Random();
         return random.nextInt(max - min + 1) + min;
     }

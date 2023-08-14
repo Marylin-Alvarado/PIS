@@ -245,6 +245,9 @@ public class PersonaDAO extends AdaptadorDAO<Persona> {
         return ubicacion;
     }
 
+    
+
+// Este método implementa el algoritmo de ordenamiento rápido ascendente.
     /**
      *
      * @param user

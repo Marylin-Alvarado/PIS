@@ -25,6 +25,7 @@ public class FrmCertificados extends javax.swing.JDialog {
     FondoPanel fondo = new FondoPanel();
     Integer id_persona = 0;
 
+
     /**
      * Creates new form FrmCertificados
      */
@@ -35,13 +36,16 @@ public class FrmCertificados extends javax.swing.JDialog {
         this.setLocationRelativeTo(this);
     }
 
-    public FrmCertificados(java.awt.Frame parent, boolean modal, Integer id) {
-        super(parent, modal);
-        this.setContentPane(fondo);
-        initComponents();
-        this.setLocationRelativeTo(this);
-        id_persona = id;
+    public FrmCertificados() {
     }
+
+    FrmCertificados(Object object, boolean b, Integer id_persona) {
+    
+    }
+
+    
+
+
 
 //    public void cargarDatos() throws ListaVaciaException, PosicionNoEncontradaException, ListaNullException {
 //////        txtNombre.setText(persona.buscarNombre(persona.getPersona().getNombres_completos()));
@@ -81,6 +85,9 @@ public class FrmCertificados extends javax.swing.JDialog {
 //        }
 //
 //    }
+
+
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
