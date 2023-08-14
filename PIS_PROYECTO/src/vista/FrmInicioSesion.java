@@ -5,6 +5,7 @@
  */
 package vista;
 
+import controlador.DAO.CandidatoDao;
 import controlador.DAO.PersonaDAO;
 import controlador.ed.listas.ListaEnlazada;
 import java.awt.Image;
@@ -31,6 +32,7 @@ public class FrmInicioSesion extends javax.swing.JDialog {
 
     //private CuentaDAO cd = new CuentaDAO();
     private PersonaDAO pd = new PersonaDAO();
+    private CandidatoDao cd = new CandidatoDao();
     private ModeloTablaRegistrados modelo = new ModeloTablaRegistrados();
     private ListaEnlazada<Candidato> md = new ListaEnlazada<>();
     private int intentosRestantes = 2;
@@ -85,8 +87,8 @@ public class FrmInicioSesion extends javax.swing.JDialog {
                     // Abre una nueva ventana FrmPrincipalAdm para el administrador
                     new FrmPrincipalAdm(null, true).setVisible(true);
                 } else {
-                    // Abre una nueva ventana FrmPapeletas para otros usuarios
-                    new FrmPapeletas(null, true, this.md).setVisible(true);
+                    // Abre una nueva ventana FrmPapeletas para otros usuarios Y envia el id de la persona
+                    new FrmPapeletas(null, true, cd.listar(),pd.buscarinicioSesion(txtUsuario.getText(),Integer.valueOf(txtContrasenia.getText()))).setVisible(true);
                 }
                 limpiar();
             } else {

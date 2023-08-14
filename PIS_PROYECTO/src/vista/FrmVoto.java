@@ -254,7 +254,7 @@ public class FrmVoto extends javax.swing.JDialog {
  * Finalmente, muestra un mensaje indicando que se ha guardado la información de forma
  * exitosa, o muestra un mensaje de error si ocurre una excepción durante el proceso.
  */
-     private void guardar() {
+     public void guardar() {
          
          if ( cbxTipo.getSelectedItem().toString().isEmpty()) {
             JOptionPane.showMessageDialog(null, "Ingrese todo los campos", "Error", JOptionPane.ERROR_MESSAGE);

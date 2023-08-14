@@ -4,6 +4,8 @@ import controlador.DAO.CandidatoDao;
 import controlador.DAO.DignidadDao;
 import controlador.DAO.PapeletaDao;
 import controlador.DAO.PartidoPoliticoDao;
+import controlador.DAO.PersonaDAO;
+import controlador.DAO.VotoDao;
 import controlador.ed.listas.ListaEnlazada;
 import controlador.ed.listas.exception.ListaNullException;
 import controlador.ed.listas.exception.PosicionNoEncontradaException;
@@ -24,10 +26,13 @@ import javax.swing.JPanel;
 import javax.swing.border.TitledBorder;
 import modelo.Candidato;
 import modelo.Partido_Politico;
+import vista.Utilidades.Utilidades;
 
 public class FrmPapeletas extends javax.swing.JDialog {
 
+    
     private CandidatoDao daoCandidato = new CandidatoDao();
+    private VotoDao vd = new VotoDao();
     private PartidoPoliticoDao dao = new PartidoPoliticoDao();
     private DignidadDao daoDignidad = new DignidadDao();
     private ListaEnlazada<pnCandidatos> paneles = new ListaEnlazada<>();
@@ -36,6 +41,8 @@ public class FrmPapeletas extends javax.swing.JDialog {
     private int id_candidato=0;
     private int id_partido=0;
     private String nombre="";
+    private Integer id_persona=0;
+    private PersonaDAO pd = new PersonaDAO();
    
     public FrmPapeletas(java.awt.Frame parent, boolean modal) throws Exception {
         super(parent, modal);
@@ -43,10 +50,12 @@ public class FrmPapeletas extends javax.swing.JDialog {
         agregarCandidatos();
     }
 
-    public FrmPapeletas(java.awt.Frame parent, boolean modal, ListaEnlazada<Candidato> candidatos) throws Exception {
+    public FrmPapeletas(java.awt.Frame parent, boolean modal, ListaEnlazada<Candidato> candidatos,Integer id) throws Exception {
         super(parent, modal);
         initComponents();
-        
+         agregarCandidatos();
+        id_persona = id;
+       
     }
 
     private void agregarCandidatos() throws Exception {
@@ -62,51 +71,7 @@ public class FrmPapeletas extends javax.swing.JDialog {
         }
 
         jComboPartido.setModel(comboBoxModel);
-    
-//        Candidato[] aux = daoCandidato.listar().toArray();
-//        
-//       System.out.print("Array: ");
-//        for (int i = 0; i < aux.length; i++) {
-//            System.out.print(aux[i].getNombre_candidato());
-//
-//            // Agregar una coma y espacio después de cada elemento, excepto el último
-//            if (i < aux.length - 1) {
-//                System.out.print(", ");
-//            }
-//        }
-        
-//        String dignidad = "";
-//        
-//        if (tipo.equalsIgnoreCase("ejecutiva")) {
-//            dignidad = "Presidente";
-//        }
-//        if (tipo.equalsIgnoreCase("legislativa")) {
-//            dignidad = "Diputado";
-//        }
-//        if (tipo.equalsIgnoreCase("local")) {
-//            dignidad = "Alcalde";
-//        }
-       
-//        for (Partido_Politico partido : partidos) {
-//            Candidato primer = null;
-//            Candidato segundo = null;
-//            for (Candidato c : aux) {
-//                if (Objects.equals(c.getId_partido_politico(), partido.getId())) {
-//                    if (daoDignidad.buscarPorId(c.getId_dignidad()).equals(dignidad)) {
-//                        primer = c;
-//                    } else {
-//                        segundo = c;
-//                    }
-//                }
-//            }
-//            pnCandidatos c = new pnCandidatos();
-//            c.setInfo(primer, segundo);
-//            paneles.insertar(c);
-//
-//            pnPapeletas.add(c);
-//            pnPapeletas.repaint();
-//            pnPapeletas.revalidate();
-//        }
+
     }
     
     private void mostrarInfo(){
@@ -153,7 +118,7 @@ public class FrmPapeletas extends javax.swing.JDialog {
             }
         });
 
-        panelPrincipal.setLayout(new java.awt.GridLayout());
+        panelPrincipal.setLayout(new java.awt.GridLayout(1, 0));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -162,24 +127,26 @@ public class FrmPapeletas extends javax.swing.JDialog {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lbTitulo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 614, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(148, 148, 148)
+                                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addComponent(panelPrincipal, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGap(284, 284, 284)
                                 .addComponent(btnVotar))
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(195, 195, 195)
-                                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lbTitulo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                .addGap(0, 15, Short.MAX_VALUE)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jComboPartido, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 614, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addComponent(panelPrincipal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                                .addGap(19, 19, 19)
+                                .addComponent(jComboPartido, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -187,13 +154,13 @@ public class FrmPapeletas extends javax.swing.JDialog {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(20, 20, 20)
                 .addComponent(lbTitulo)
-                .addGap(18, 18, 18)
+                .addGap(27, 27, 27)
                 .addComponent(jComboPartido, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(44, 44, 44)
                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(10, 10, 10)
-                .addComponent(panelPrincipal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(panelPrincipal, javax.swing.GroupLayout.PREFERRED_SIZE, 0, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(61, 61, 61)
                 .addComponent(btnVotar)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 233, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -225,11 +192,12 @@ public class FrmPapeletas extends javax.swing.JDialog {
           
             try {
                
-                daopapeleta.guardarPapeleta(id_candidato,1,1);
+                daopapeleta.guardarPapeleta(id_candidato,Utilidades.generarNumeroAleatorio(1,pd.listar().size() ),id_persona);
             } catch (Exception ex) {
                 Logger.getLogger(FrmPapeletas.class.getName()).log(Level.SEVERE, null, ex);
             }
-          
+          dispose();
+           new FrmCertificados(null, true,id_persona).setVisible(true);
       }
       
                
@@ -346,7 +314,6 @@ private String buscarNombrePartidoPorId(Integer idPartido, Partido_Politico[] pa
     }
     return "Partido no encontrado";
 }
-
 
 
 

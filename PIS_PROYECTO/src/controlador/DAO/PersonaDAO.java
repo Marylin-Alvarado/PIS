@@ -147,6 +147,31 @@ public class PersonaDAO extends AdaptadorDAO<Persona> {
         return c; // Devuelve la persona si la identificación coincide, de lo contrario, devuelve null
     }
 
+        public int buscarUsuarioid(String user) throws Exception {
+    int ubicacion = -1;  // Valor por defecto en caso de no encontrar al usuario
+    ListaEnlazada<Persona> lista = listar();
+    for (int i = 0; i < lista.size(); i++) {
+        Persona aux = lista.obtener(i);
+        if (user.equals(aux.getNombres_completos())) {
+            ubicacion = i+1;  // Actualizar la ubicación si se encuentra al usuario
+            break;
+        }
+    }
+    return ubicacion;
+}
+
+public int buscarinicioSesion(String user, Integer clave) throws Exception {
+    int ubicacion = buscarUsuarioid(user);
+     ListaEnlazada<Persona> lista = listar();
+    if (ubicacion != -1) {
+        Persona c = lista.obtener(ubicacion-1);
+        if (!c.getIdentificacion().equals(clave)) {
+            ubicacion = -1;  // Si la clave no coincide, resetear la ubicación
+        }
+    }
+    return ubicacion;
+}
+    
 // Este método implementa el algoritmo de ordenamiento rápido ascendente.
 
     public ListaEnlazada<Persona> quicksortAs(ListaEnlazada<Persona> lista) {

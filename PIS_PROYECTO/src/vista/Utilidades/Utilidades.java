@@ -15,6 +15,7 @@ import controlador.ed.listas.exception.ListaNullException;
 import controlador.ed.listas.exception.PosicionNoEncontradaException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Random;
 import javax.swing.JComboBox;
 import modelo.Candidato;
 import modelo.Dignidad;
@@ -76,7 +77,7 @@ public class Utilidades {
         cbx.removeAllItems();
         ListaEnlazada<Dignidad> lista = dd.ordenarCategoria(dd.listar());
         for (int i = 0; i < lista.size(); i++) {
-            cbx.addItem(lista.obtener(i).getTipo());
+            cbx.addItem(lista.obtener(i).getCategoria());
         }
     }
 
@@ -101,13 +102,10 @@ public class Utilidades {
         }
         return cbx;
     }
-    /**
-     * Retorn el Partido Politico al cual pertenece el Candidato
-     * @param candidato
-     * @return PartidoPolitico
-     * @throws PosicionNoEncontradaException
-     * @throws ListaNullException 
-     */
-   
+    
+   public static int generarNumeroAleatorio(int min, int max) {
+        Random random = new Random();
+        return random.nextInt(max - min + 1) + min;
+    }
 
 }

@@ -23,7 +23,7 @@ import javax.swing.JPanel;
 public class FrmCertificados extends javax.swing.JDialog {
 
     FondoPanel fondo = new FondoPanel();
-    
+    Integer id_persona = 0;
     
 
     /**
@@ -35,10 +35,14 @@ public class FrmCertificados extends javax.swing.JDialog {
         initComponents();
         this.setLocationRelativeTo(this);
     }
-
-    public FrmCertificados() {
+public FrmCertificados(java.awt.Frame parent, boolean modal,Integer id) {
+        super(parent, modal);
+        this.setContentPane(fondo);
+        initComponents();
+        this.setLocationRelativeTo(this);
+        id_persona = id ;
     }
-
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always

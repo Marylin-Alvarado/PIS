@@ -103,7 +103,7 @@ public class FrmCandidato extends javax.swing.JDialog {
                 candidato.getDatos().setNombre_candidato(txtNombre.getText());
                 candidato.getDatos().setPreparacion_candidato(txtPreparacion.getText());
                 candidato.getDatos().setId_partido_politico(partido.buscarPorNombre(cbxPartido.getSelectedItem().toString()).getId());
-//                candidato.getDatos().setId_dignidad(dignidad.categoriaDignidad(cbxDignidad.getSelectedItem().toString()).getId());
+                candidato.getDatos().setId_dignidad(dignidad.categoriaDignidad(cbxDignidad.getSelectedItem().toString()).getId());
                 if (candidato.getDatos().getId() != null) {
                     candidato.modificar();
                     limpiar();
