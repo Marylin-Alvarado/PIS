@@ -21,8 +21,10 @@ public class PapeletaDao extends AdaptadorDAO<Papeleta>{
         this.papeleta = papeleta;
     }
     
-    public void guardarPapeleta(Integer voto) throws Exception{
-        getPapeleta().setId_candidato(voto);
+    public void guardarPapeleta(Integer candidato,Integer voto,Integer persona) throws Exception{
+        getPapeleta().setId_candidato(candidato);
+        getPapeleta().setId_persona(persona);
+        getPapeleta().setId_voto(voto);
         guardar(papeleta);
     }
     
