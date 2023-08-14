@@ -18,7 +18,7 @@ import java.util.Random;
 import javax.swing.JComboBox;
 import modelo.Candidato;
 import modelo.Dignidad;
-import modelo.PartidoPolitico;
+import modelo.Partido_Politico;
 import modelo.Partido_Politico;
 import modelo.Persona;
 import modelo.enums.TipoVoto;

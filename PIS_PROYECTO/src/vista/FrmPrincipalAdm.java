@@ -169,7 +169,7 @@ public class FrmPrincipalAdm extends javax.swing.JDialog {
         /**
          * Metodo que llama a la vista del partido politico
          */
-        FrmPartidoPolitico part = new FrmPartidoPolitico(null, true);
+        FrmPartido_Politico part = new FrmPartido_Politico(null, true);
         part.setVisible(true);
     }//GEN-LAST:event_jButton2MouseClicked
 

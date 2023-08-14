@@ -355,7 +355,7 @@ public class FrmDignidad extends javax.swing.JDialog {
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         // TODO add your handling code here:
         this.dispose();
-        new FrmPartidoPolitico(null, true).setVisible(true);
+        new FrmPartido_Politico(null, true).setVisible(true);
     }//GEN-LAST:event_jButton4ActionPerformed
     /**
      * Este metodo me perimite guardar los datos del de la dignidad como los

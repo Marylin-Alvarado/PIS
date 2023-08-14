@@ -132,6 +132,20 @@ public class DignidadDao extends AdaptadorDAO<Dignidad> {
         }
         return resultado;
     }
+    
+    public Dignidad buscarPorCategoria(String dato) throws ListaNullException, PosicionNoEncontradaException {
+        Dignidad resultado = null;
+        ListaEnlazada<Dignidad> lista = listar();
+        for (int i = 0; i < lista.size(); i++) {
+            Dignidad aux = lista.obtener(i);
+            if (aux.getCategoria().toLowerCase().equals(dato.toLowerCase())) {
+                resultado = aux;
+                break;
+            }
+        }
+        return resultado;
+    }
+
 
     /**
      * Ordena una lista de dignidades según su categoría en orden alfabético
