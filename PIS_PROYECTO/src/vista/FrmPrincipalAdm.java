@@ -166,30 +166,45 @@ public class FrmPrincipalAdm extends javax.swing.JDialog {
 
     private void jButton2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton2MouseClicked
         // TODO add your handling code here:
+        /**
+         * Metodo que llama a la vista del partido politico
+         */
         FrmPartidoPolitico part = new FrmPartidoPolitico(null, true);
         part.setVisible(true);
     }//GEN-LAST:event_jButton2MouseClicked
 
     private void jButton3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton3MouseClicked
         // TODO add your handling code here:
+        /**
+         * Metodo que llama a la dignidad
+         */
         FrmDignidad dig = new FrmDignidad(null, true);
         dig.setVisible(true);
     }//GEN-LAST:event_jButton3MouseClicked
 
     private void jButton4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton4MouseClicked
         // TODO add your handling code here:
+        /**
+         * Metodo que llama a la vista de candidato
+         */
         FrmCandidato cand = new FrmCandidato(null, true);
         cand.setVisible(true);
     }//GEN-LAST:event_jButton4MouseClicked
 
     private void jButton5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton5MouseClicked
         // TODO add your handling code here:
+        /**
+         * Metodo que llama a la vista resultado
+         */
         FrmResultado resl = new FrmResultado(null, true);
         resl.setVisible(true);
     }//GEN-LAST:event_jButton5MouseClicked
 
     private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
         // TODO add your handling code here:
+        /**
+         * Metodo que llama ala vista de la cuenta
+         */
         FrmCuenta ini =  new FrmCuenta(null,true);
         ini.setVisible(true);
     }//GEN-LAST:event_jButton1MouseClicked

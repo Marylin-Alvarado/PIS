@@ -22,11 +22,21 @@ public class WrapLayout extends FlowLayout {
         super(align, hgap, vgap);
     }
 
+    /**
+     *
+     * @param target
+     * @return
+     */
     @Override
     public Dimension preferredLayoutSize(Container target) {
         return layoutSize(target, true);
     }
 
+    /**
+     *
+     * @param target
+     * @return
+     */
     @Override
     public Dimension minimumLayoutSize(Container target) {
         Dimension minimum = layoutSize(target, false);
@@ -34,6 +44,12 @@ public class WrapLayout extends FlowLayout {
         return minimum;
     }
 
+    /**
+     * 
+     * @param target
+     * @param preferred
+     * @return 
+     */
     private Dimension layoutSize(Container target, boolean preferred) {
         synchronized (target.getTreeLock()) {
             int targetWidth = target.getSize().width;
@@ -89,6 +105,12 @@ public class WrapLayout extends FlowLayout {
         }
     }
 
+    /**
+     * 
+     * @param dim
+     * @param rowWidth
+     * @param rowHeight 
+     */
     private void addRow(Dimension dim, int rowWidth, int rowHeight) {
         dim.width = Math.max(dim.width, rowWidth);
 

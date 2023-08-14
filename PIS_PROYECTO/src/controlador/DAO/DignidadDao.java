@@ -16,12 +16,22 @@ import modelo.Dignidad;
  */
 public class DignidadDao extends AdaptadorDAO<Dignidad> {
 
+    /**
+     * Atributo de tipo Dignidad de datos
+     */
     private Dignidad datos;
 
+    /**
+     * Controlador de dignidad Dao
+     */
     public DignidadDao() {
         super(Dignidad.class);
     }
 
+    /**
+     * Metodo de get de datos
+     * @return 
+     */
     public Dignidad getDatos() {
         if (this.datos == null) {
             this.datos = new Dignidad();
@@ -29,14 +39,28 @@ public class DignidadDao extends AdaptadorDAO<Dignidad> {
         return datos;
     }
 
+    /**
+     * Metodo de set de datos
+     * @param datos 
+     */
     public void setDatos(Dignidad datos) {
         this.datos = datos;
     }
 
+    /**
+     * Metodo de guardar
+     * @return
+     * @throws Exception 
+     */
     public Integer guardar() throws Exception {
         return this.guardar(datos);
     }
 
+    /**
+     * Metodo de modificar
+     * @return
+     * @throws Exception 
+     */
     public boolean modificar() throws Exception {
         this.modificar(datos);
         return true;

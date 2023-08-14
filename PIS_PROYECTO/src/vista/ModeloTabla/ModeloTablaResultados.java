@@ -52,7 +52,7 @@ public class ModeloTablaResultados extends AbstractTableModel {
 
     @Override
     public int getColumnCount() {
-        return 4;
+        return 3;
     }
 
     @Override
@@ -64,8 +64,7 @@ public class ModeloTablaResultados extends AbstractTableModel {
                 return "Nombre Candidato";
             case 2:
                 return "Voto";
-            case 3:
-                return "Porcentaje";
+            
             default:
                 return null;
         }
@@ -85,8 +84,7 @@ public class ModeloTablaResultados extends AbstractTableModel {
                 return r.getId_candidato();
             case 2:
                 return r.getId_voto();
-            case 3:
-                return r.getPorciento();
+            
             default:
                 return null;
         }

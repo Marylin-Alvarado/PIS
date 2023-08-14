@@ -45,6 +45,10 @@ public class FrmDignidad extends javax.swing.JDialog {
         controlJtextfieldS(txtxNroCupos);
     }
 
+    /**
+     * Metodo de control en un txtField
+     * @param dato 
+     */
     private void controlJtextfield(JTextField dato) {
         dato.addKeyListener(new KeyListener() {
             @Override
@@ -68,6 +72,10 @@ public class FrmDignidad extends javax.swing.JDialog {
 
     }
 
+    /**
+     * Metodo de control en un txtField
+     * @param dato 
+     */
     private void controlJtextfieldS(JTextField dato) {
         dato.addKeyListener(new KeyListener() {
             @Override

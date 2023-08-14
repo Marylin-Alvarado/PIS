@@ -11,10 +11,18 @@ package controlador.login.exceptions;
  */
 public class datoIncorrectoException extends Exception{
 
+    /**
+     * 
+     * @param msg 
+     */
     public datoIncorrectoException(String msg) {
         super(msg);
     }
     
+    /**
+     * 
+     * @param limite 
+     */
     public datoIncorrectoException(Integer limite) {
         super("Datos incorrectos \n"
                 + "Número de intentos disponibles: " + limite);

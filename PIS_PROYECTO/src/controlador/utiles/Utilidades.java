@@ -33,34 +33,75 @@ import modelo.Persona;
  */
 public class Utilidades {
     
+    /**
+     * 
+     * @param clase
+     * @return 
+     */
     public static Boolean isNumber(Class clase) {
         return clase.getSuperclass().getSimpleName().equalsIgnoreCase("Number");
     }
 
+    /**
+     * 
+     * @param clase
+     * @return 
+     */
     public static Boolean isString(Class clase) {
         return clase.getSimpleName().equalsIgnoreCase("String");
     }
 
+    /**
+     * 
+     * @param clase
+     * @return 
+     */
     public static Boolean isCharacter(Class clase) {
         return clase.getSimpleName().equalsIgnoreCase("Character");
     }
 
+    /**
+     * 
+     * @param clase
+     * @return 
+     */
     public static Boolean isBoolean(Class clase) {
         return clase.getSimpleName().equalsIgnoreCase("Boolean");
     }
 
+    /**
+     * 
+     * @param clase
+     * @return 
+     */
     public static Boolean isDate(Class clase) {
         return clase.getSimpleName().equalsIgnoreCase("Date");
     }
 
+    /**
+     * 
+     * @param clase
+     * @return 
+     */
     public static Boolean isPrimitive(Class clase) {
         return clase.isPrimitive();
     }
 
+    /**
+     * 
+     * @param clase
+     * @return 
+     */
     public static Boolean isObject(Class clase) {
         return (!isPrimitive(clase) && !isBoolean(clase) && !isCharacter(clase) && !isNumber(clase) && !isString(clase) && !isDate(clase));
     }
 
+    /**
+     * Metodo de obtener atributo
+     * @param clase
+     * @param nombre
+     * @return 
+     */
     public static Field obtenerAtributo(Class clase, String nombre) { //Devuelve que tipo de dato es el atributo enviado
         Field atributo = null;
         for (Field aux : clase.getDeclaredFields()) {
@@ -72,12 +113,23 @@ public class Utilidades {
         return atributo;
     }
 
+    /**
+     * Metodo de capitalizar
+     * @param nombre
+     * @return 
+     */
     public static String capitalizar(String nombre) {
         char[] aux = nombre.toCharArray();
         aux[0] = Character.toUpperCase(aux[0]);
         return new String(aux);
     }
 
+    /**
+     * Metodo de transformarDato
+     * @param atributo
+     * @param dato
+     * @return 
+     */
     public static Object transformarDato(Field atributo, String dato) {
         Object transformar = null;
         if (atributo.getType().getSuperclass().getSimpleName().equalsIgnoreCase("Number")) {
@@ -97,15 +149,32 @@ public class Utilidades {
 
     }
 
+    /**
+     * Metodo de enceiptar
+     * @param dato
+     * @return 
+     */
     //***************************************************************************************************\\
     public static String encriptar(String dato) {
         return Base64.getEncoder().encodeToString(dato.getBytes());
     }
 
+    /**
+     * Metodo de desencriptar
+     * @param dato
+     * @return 
+     */
     public static String desencriptar(String dato) {
         return new String(Base64.getDecoder().decode(dato));
     }
 
+    /**
+     * metodo de crear clave 
+     * @param clave
+     * @return
+     * @throws UnsupportedEncodingException
+     * @throws NoSuchAlgorithmException 
+     */
     //*********************************************************************\\
     public static SecretKeySpec crearClave(String clave) throws UnsupportedEncodingException, NoSuchAlgorithmException {
         byte[] claveEncription = clave.getBytes("UTF-8");
@@ -115,6 +184,18 @@ public class Utilidades {
         return keySpec;
     }
 
+    /**
+     * Metodo de encriptar clave
+     * @param datos
+     * @param claveSecreta
+     * @return
+     * @throws InvalidKeyException
+     * @throws NoSuchPaddingException
+     * @throws UnsupportedEncodingException
+     * @throws NoSuchAlgorithmException
+     * @throws IllegalBlockSizeException
+     * @throws BadPaddingException 
+     */
     public static String encriptarClave(final String datos, final String claveSecreta) throws InvalidKeyException, NoSuchPaddingException, UnsupportedEncodingException, NoSuchAlgorithmException, IllegalBlockSizeException, BadPaddingException {
         byte[] decodeKey = Base64.getDecoder().decode(claveSecreta);
         SecretKey secretKeySpec = crearClave(new String(decodeKey));
@@ -125,6 +206,18 @@ public class Utilidades {
         return Base64.getEncoder().encodeToString(bytesEncriptados);
     }
 
+    /**
+     * Metodo de desencriptar clave
+     * @param datos
+     * @param claveSecreta
+     * @return
+     * @throws InvalidKeyException
+     * @throws NoSuchAlgorithmException
+     * @throws NoSuchPaddingException
+     * @throws UnsupportedEncodingException
+     * @throws IllegalBlockSizeException
+     * @throws BadPaddingException 
+     */
     public static String desencriptarClave(final String datos, final String claveSecreta) throws InvalidKeyException, NoSuchAlgorithmException, NoSuchPaddingException, UnsupportedEncodingException, IllegalBlockSizeException, BadPaddingException {
         byte[] decodeKey = Base64.getDecoder().decode(claveSecreta);
         SecretKey secretKeySpec = crearClave(new String(decodeKey));
@@ -137,6 +230,11 @@ public class Utilidades {
 
     }
 
+    /**
+     * Metodo de validar la cedula
+     * @param cedula
+     * @return 
+     */
     public static boolean validadorDeCedula(String cedula) {
         boolean cedulaCorrecta = false;
         cedula = (cedula.length() == 13) ? cedula.substring(0, 10) : cedula;
@@ -185,6 +283,10 @@ public class Utilidades {
     }
     
     
+    /**
+     * main
+     * @param args 
+     */
 
     public static void main(String[] args) {
 

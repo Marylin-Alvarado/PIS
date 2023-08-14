@@ -30,7 +30,7 @@ import vista.modeloTabla.ModeloTablaRegistrados;
  * @author Edison
  */
 public class FrmCuenta extends javax.swing.JDialog {
-
+    FrmVoto frmvoto ;
     private PersonaDAO pc = new PersonaDAO();
     private ModeloTablaRegistrados mdr = new ModeloTablaRegistrados();
 
@@ -60,6 +60,11 @@ public class FrmCuenta extends javax.swing.JDialog {
 
     }
 
+    /**
+     * Metodo de set image en label
+     * @param labelName
+     * @param root 
+     */
     private void SetImageLabel(JLabel labelName, String root) {
         ImageIcon image = new ImageIcon(root);
         Icon icon = new ImageIcon(image.getImage().getScaledInstance(labelName.getWidth(), labelName.getHeight(), Image.SCALE_DEFAULT));
@@ -490,7 +495,14 @@ public class FrmCuenta extends javax.swing.JDialog {
     }//GEN-LAST:event_txtNombreApellidosKeyTyped
 
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
-        // TODO add your handling code here:
+  if (frmvoto == null) {
+            frmvoto = new FrmVoto(null,true);
+            frmvoto.setVisible(true);
+        }
+        if (!txtNombreApellidos.getText().trim().isEmpty()||!txtCorreoElec.getText().trim().isEmpty()|| txtCodigoDac.getText().trim().isEmpty()|| txtNumCedula.getText().trim().isEmpty() ) {
+frmvoto.guardar();
+    
+        }              
         guardarPersona();
     }//GEN-LAST:event_btnGuardarActionPerformed
 

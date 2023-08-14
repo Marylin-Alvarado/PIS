@@ -47,14 +47,20 @@ public class FrmCandidato extends javax.swing.JDialog {
         cargarComboDignidad();
         setResizable(false);
         this.setLocationRelativeTo(this);
-        
-        SetImageLabel(jLabel5,"C:\\Users\\Edison\\Downloads\\PIS-Danny-Cobos\\PIS-Danny-Cobos\\PIS_PROYECTO\\src\\imagenes\\imagen-removebg-preview(15).png");
-        SetImageLabel(jLabel6,"C:\\Users\\Edison\\Downloads\\PIS-Danny-Cobos\\PIS-Danny-Cobos\\PIS_PROYECTO\\src\\imagenes\\imagen-removebg-preview(16).png");
+
+        SetImageLabel(jLabel5, "C:\\Users\\Edison\\Downloads\\PIS-Danny-Cobos\\PIS-Danny-Cobos\\PIS_PROYECTO\\src\\imagenes\\imagen-removebg-preview(15).png");
+        SetImageLabel(jLabel6, "C:\\Users\\Edison\\Downloads\\PIS-Danny-Cobos\\PIS-Danny-Cobos\\PIS_PROYECTO\\src\\imagenes\\imagen-removebg-preview(16).png");
         SetImageLabel(jLabel7, "C:\\Users\\Edison\\Downloads\\PIS-Danny-Cobos\\PIS-Danny-Cobos\\PIS_PROYECTO\\src\\imagenes\\imagen-removebg-preview(12).png");
         SetImageLabel(jLabel8, "C:\\Users\\Edison\\Downloads\\PIS-Danny-Cobos\\PIS-Danny-Cobos\\PIS_PROYECTO\\src\\imagenes\\imagen-removebg-preview(17).png");
 
     }
 
+    /**
+     * Metodo de set imagen en label
+     *
+     * @param labelName
+     * @param root
+     */
     private void SetImageLabel(JLabel labelName, String root) {
         ImageIcon image = new ImageIcon(root);
         Icon icon = new ImageIcon(image.getImage().getScaledInstance(labelName.getWidth(), labelName.getHeight(), Image.SCALE_DEFAULT));
@@ -62,6 +68,9 @@ public class FrmCandidato extends javax.swing.JDialog {
         this.repaint();
     }
 
+    /**
+     * Metodo de cargar la tabla
+     */
     private void cargarTabla() {
         try {
             modelo.setDatos(candidato.listar());
@@ -71,6 +80,9 @@ public class FrmCandidato extends javax.swing.JDialog {
         }
     }
 
+    /**
+     * Metodo de limpiar
+     */
     private void limpiar() {
         txtNombre.setText("");
         txtPreparacion.setText("");
@@ -79,6 +91,9 @@ public class FrmCandidato extends javax.swing.JDialog {
         cargarComboDignidad();
     }
 
+    /**
+     * Metodo de cargar el combo de partido
+     */
     private void cargarComboPartido() {
         try {
             Utilidades.cargarPartido(cbxPartido, partido);
@@ -86,8 +101,11 @@ public class FrmCandidato extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(null, e.getMessage() + " Error", "Error", JOptionPane.ERROR_MESSAGE);
         }
     }
-    
-     private void cargarComboDignidad() {
+
+    /**
+     * Metodo de cargar combo de dignidad
+     */
+    private void cargarComboDignidad() {
         try {
             Utilidades.cargarDignidad(cbxDignidad, dignidad);
         } catch (Exception e) {
@@ -95,6 +113,9 @@ public class FrmCandidato extends javax.swing.JDialog {
         }
     }
 
+    /**
+     * Metodo de guardar el candidato
+     */
     private void guardar() {
         try {
             if (txtNombre.getText().isEmpty() || txtPreparacion.getText().isEmpty()) {
@@ -103,7 +124,7 @@ public class FrmCandidato extends javax.swing.JDialog {
                 candidato.getDatos().setNombre_candidato(txtNombre.getText());
                 candidato.getDatos().setPreparacion_candidato(txtPreparacion.getText());
                 candidato.getDatos().setId_partido_politico(partido.buscarPorNombre(cbxPartido.getSelectedItem().toString()).getId());
-//                candidato.getDatos().setId_dignidad(dignidad.categoriaDignidad(cbxDignidad.getSelectedItem().toString()).getId());
+                candidato.getDatos().setId_dignidad(dignidad.categoriaDignidad(cbxDignidad.getSelectedItem().toString()).getId());
                 if (candidato.getDatos().getId() != null) {
                     candidato.modificar();
                     limpiar();
@@ -370,7 +391,7 @@ public class FrmCandidato extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
-
+//Metodo para editar en la tabla
         fila = tblTabla.getSelectedRow();
         if (fila >= 0) {
             try {
@@ -452,30 +473,20 @@ public class FrmCandidato extends javax.swing.JDialog {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
 
-}
+                }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(FrmCandidato.class  
-
-.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-
-catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(FrmCandidato.class  
-
-.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-
-catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(FrmCandidato.class  
-
-.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-
-catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(FrmCandidato.class  
-
-.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FrmCandidato.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            java.util.logging.Logger.getLogger(FrmCandidato.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            java.util.logging.Logger.getLogger(FrmCandidato.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+            java.util.logging.Logger.getLogger(FrmCandidato.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
@@ -485,7 +496,7 @@ catch (javax.swing.UnsupportedLookAndFeelException ex) {
                 FrmCandidato dialog = new FrmCandidato(new javax.swing.JFrame(), true);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
-public void windowClosing(java.awt.event.WindowEvent e) {
+                    public void windowClosing(java.awt.event.WindowEvent e) {
                         System.exit(0);
                     }
                 });

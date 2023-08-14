@@ -11,10 +11,17 @@ package controlador.ed.listas.exception;
  */
 public class PosicionNoEncontradaException extends Exception {
 
+    /**
+     * 
+     * @param msg 
+     */
     public PosicionNoEncontradaException(String msg) {
         super(msg);
     }
 
+    /**
+     * 
+     */
     public PosicionNoEncontradaException() {
         super("La posicion esta fuera de los limites");
     }

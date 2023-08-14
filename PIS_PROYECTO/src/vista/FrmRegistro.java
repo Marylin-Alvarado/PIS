@@ -37,12 +37,18 @@ public class FrmRegistro extends javax.swing.JDialog {
         
     }
     
+    /**
+     * Metodo de cargar la tabla
+     */
     private void cargarTabla(){
         md.setLista(pd.listar());
         tblRegistro.setModel(md);
         tblRegistro.updateUI();
     }
     
+    /**
+     * Metodo de guardar la persona
+     */
     private void guardarPersona() {
         try {
             if (txtNombre.getText().isEmpty() || !txtCorreoEl.getText().isEmpty()

@@ -11,10 +11,17 @@ package controlador.login.exceptions;
  */
 public class intentoExcedidoException extends Exception{
 
+    /**
+     * 
+     * @param msg 
+     */
     public intentoExcedidoException(String msg) {
         super(msg);
     }
     
+    /**
+     * 
+     */
     public intentoExcedidoException() {
         super("El intento de ingresar se ha excedido");
     }

@@ -16,8 +16,17 @@ import java.lang.reflect.Array;
  */
 public class ListaEnlazada<E> {
 
+    /**
+     * Atributo de nodo lista
+     */
     private NodoLista<E> cabecera;
+    /**
+     * Atributo tipo integer de size
+     */
     private Integer size;
+    /**
+     * Atributo de tipo integer ascendente y descendente
+     */
     private final Integer ascendente = 1;
     private final Integer descendente = 2;
 
@@ -228,18 +237,34 @@ public class ListaEnlazada<E> {
         this.size = 0;
     }
 
+    /**
+     * Metodo de get del nodo lista
+     * @return 
+     */
     public NodoLista<E> getCabecera() {
         return cabecera;
     }
 
+    /**
+     * Metodo de set de nodo lista
+     * @param cabecera 
+     */
     public void setCabecera(NodoLista<E> cabecera) {
         this.cabecera = cabecera;
     }
+    /**
+     * Metodo de get de size
+     * @return 
+     */
 
     public Integer getSize() {
         return size;
     }
 
+    /**
+     * Metodo de set de size
+     * @param size 
+     */
     public void setSize(Integer size) {
         this.size = size;
     }

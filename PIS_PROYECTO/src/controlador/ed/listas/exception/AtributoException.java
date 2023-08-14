@@ -11,10 +11,17 @@ package controlador.ed.listas.exception;
  */
 public class AtributoException extends Exception {
 
+    /**
+     * Metodo de atributo exception
+     * @param msg 
+     */
     public AtributoException(String msg) {
         super(msg);
     }
 
+    /**
+     * Metodo de  mensaje 
+     */
     public AtributoException() {
         super("No se puede encontrar el atributo dado");
     }

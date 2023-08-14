@@ -11,10 +11,17 @@ package controlador.ed.listas.exception;
  */
 public class ListaNullException extends Exception {
 
+    /**
+     * 
+     * @param msg 
+     */
     public ListaNullException(String msg) {
         super(msg);
     }
 
+    /**
+     * 
+     */
     public ListaNullException() {
         super("La lista esta vacia");
     }

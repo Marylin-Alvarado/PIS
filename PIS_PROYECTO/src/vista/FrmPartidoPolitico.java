@@ -45,11 +45,18 @@ public class FrmPartidoPolitico extends javax.swing.JDialog {
         this.repaint();
     }
 
+    /**
+     * Metodo de cargarTabla
+     */
     private void cargarTabla() {
         modelo.setDatos(partido.listar());
         tblTabla.setModel(modelo);
         tblTabla.updateUI();
     }
+    
+    /**
+     * Metodo de limpiar
+     */
 
     private void limpiar() {
         txtNombrePartido.setText("");
@@ -61,6 +68,9 @@ public class FrmPartidoPolitico extends javax.swing.JDialog {
         tblTabla.clearSelection();
     }
 
+    /**
+     * Metodo de guardar el partido y candidato
+     */
     private void guardar() {
         try {
             if (txtNombrePartido.getText().isEmpty() || txtNumeroCandidatos.getText().isEmpty()) {

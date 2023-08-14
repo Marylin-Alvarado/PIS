@@ -41,6 +41,10 @@ public class Conexion {
     // Clave de usuario
     public String password = "Dannu0986";
 
+    /**
+     * Metodo para conectar ala base
+     * @return 
+     */
     private Connection conectar() {
         Connection conn = null;
 
@@ -55,16 +59,28 @@ public class Conexion {
         return conn;
     }
 
+    /**
+     * Metodo de get de connection 
+     * @return 
+     */
     public Connection getConnection() {
         if(connection == null)
             connection = conectar();
         return connection;
     }
 
+    /**
+     * Metodo de set connection 
+     * @param connection 
+     */
     public void setConnection(Connection connection) {
         this.connection = connection;
     }
 
+    /**
+     * 
+     * @param args 
+     */
     public static void main(String[] args) {
         new Conexion().conectar();
     }

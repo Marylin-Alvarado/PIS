@@ -23,6 +23,7 @@ import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import modelo.Resultados;
 import org.jfree.chart.ChartFactory;
+import org.jfree.chart.ChartFrame;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
 import org.jfree.chart.plot.CategoryPlot;
@@ -66,8 +67,6 @@ public class FrmResultado extends javax.swing.JDialog {
         initComponents();
 
         cargarTabla();
-        cargarComboPartido();
-        cargarComboDignidad();
         cargarComboCandidato();
         this.setTitle("Resultados");
 //        dd.RellenaTabla("Candidaro", tblTabla);
@@ -88,6 +87,9 @@ public class FrmResultado extends javax.swing.JDialog {
     public FrmResultado() {
     }
 
+    /**
+     * Metodo de cargar el combo de candidato
+     */
     private void cargarComboCandidato() {
         try {
             Utilidades.cargarCandidato(cbxCandidato, cd);
@@ -96,28 +98,59 @@ public class FrmResultado extends javax.swing.JDialog {
         }
     }
 
-    private void cargarComboPartido() {
-        try {
-            Utilidades.cargarPartido(cbxPartido, partido);
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, e.getMessage() + " Error", "Error", JOptionPane.ERROR_MESSAGE);
-        }
-    }
-
-    private void cargarComboDignidad() {
-        try {
-            Utilidades.cargarDignidad(cbxDignidad, dignidad);
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, e.getMessage() + " Error", "Error", JOptionPane.ERROR_MESSAGE);
-        }
-    }
-
+    /**
+     * Metodo de cargar la tabla
+     */
     private void cargarTabla() {
 
         rsl.setResultado(dd.listar());
         tblTabla.setModel(rsl);
         tblTabla.updateUI();
 
+    }
+
+    //Metodo para graficar con la libreria JFreeChart con barra 
+    public void Barras() {
+        int presidente = 0, vicepresidente = 0, asambleistas = 0, alcalde = 0, viceAlcalde = 0, concejal = 0; //Contadores
+
+        try {
+            DefaultCategoryDataset data = new DefaultCategoryDataset();
+            //Hacemos un recorrido por la tabla
+
+            for (int i = 0; i < tblTabla.getRowCount(); i++) {
+                String cargo = tblTabla.getValueAt(i, 2).toString();
+
+                if (cargo.equals("Presidente")) {
+                    // la variable comienza en 0 mientras encuentra presidente va ser 1 y si hay mas se iran sumando
+                    presidente++;
+                } else if (cargo.equals("Vicepresidente")) {
+                    vicepresidente++;
+                } else if (cargo.equals("Asambleistas")) {
+                    asambleistas++;
+                } else if (cargo.equals("Alcalde")) {
+                    alcalde++;
+                } else if (cargo.equals("Vicealcalde")) {
+                    viceAlcalde++;
+                } else if (cargo.equals("Concejal")) {
+                    concejal++;
+                }
+            }
+
+            data.addValue(presidente, "Presidente", "");
+            data.addValue(vicepresidente, "Vicepresidente", "");
+            data.addValue(asambleistas, "Asambleistas", "");
+            data.addValue(alcalde, "Alcalde", "");
+            data.addValue(viceAlcalde, "Vicealcalde", "");
+            data.addValue(concejal, "Concejal", "");
+
+            JFreeChart fc = ChartFactory.createBarChart3D("Resultados de Eleccion", "voto", "candidato", data, PlotOrientation.VERTICAL, true, true, true);
+            ChartFrame cf = new ChartFrame("Cantidad de voto", fc);
+            cf.setSize(500, 500);
+            cf.setLocationRelativeTo(null);
+            cf.setVisible(true);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "" + e);
+        }
     }
 
     /**
@@ -138,16 +171,11 @@ public class FrmResultado extends javax.swing.JDialog {
         txtNombre = new javax.swing.JLabel();
         jButton2 = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
-        cbxPartido = new javax.swing.JComboBox<>();
-        jLabel7 = new javax.swing.JLabel();
-        cbxDignidad = new javax.swing.JComboBox<>();
+        txtResultado = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         cbxCandidato = new javax.swing.JComboBox<>();
         jButton1 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
-        PanelGrafica = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -179,22 +207,7 @@ public class FrmResultado extends javax.swing.JDialog {
 
         jLabel4.setText("Total de Votos:");
 
-        jLabel5.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-
-        jLabel6.setFont(new java.awt.Font("Sylfaen", 0, 13)); // NOI18N
-        jLabel6.setText("Partido");
-
-        cbxPartido.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
-        jLabel7.setFont(new java.awt.Font("Sylfaen", 0, 13)); // NOI18N
-        jLabel7.setText("Dignidad");
-
-        cbxDignidad.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        cbxDignidad.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cbxDignidadActionPerformed(evt);
-            }
-        });
+        txtResultado.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
         jLabel8.setFont(new java.awt.Font("Sylfaen", 0, 13)); // NOI18N
         jLabel8.setText("Nombre Candidato");
@@ -237,19 +250,13 @@ public class FrmResultado extends javax.swing.JDialog {
                                 .addGap(59, 59, 59)
                                 .addComponent(jLabel4)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(txtResultado, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(57, 57, 57)
-                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jLabel8)
-                                    .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel7, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(jLabel8)
                                 .addGap(38, 38, 38)
-                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(cbxPartido, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(cbxDignidad, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(cbxCandidato, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addComponent(cbxCandidato, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(0, 24, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -262,15 +269,7 @@ public class FrmResultado extends javax.swing.JDialog {
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel8)
                             .addComponent(cbxCandidato, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel6)
-                            .addComponent(cbxPartido, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel7)
-                            .addComponent(cbxDignidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGap(82, 82, 82)
                         .addComponent(jButton1))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addContainerGap()
@@ -285,22 +284,9 @@ public class FrmResultado extends javax.swing.JDialog {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton2)
                     .addComponent(jLabel4)
-                    .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtResultado, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton3))
                 .addGap(29, 29, 29))
-        );
-
-        PanelGrafica.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-
-        javax.swing.GroupLayout PanelGraficaLayout = new javax.swing.GroupLayout(PanelGrafica);
-        PanelGrafica.setLayout(PanelGraficaLayout);
-        PanelGraficaLayout.setHorizontalGroup(
-            PanelGraficaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 495, Short.MAX_VALUE)
-        );
-        PanelGraficaLayout.setVerticalGroup(
-            PanelGraficaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -310,29 +296,27 @@ public class FrmResultado extends javax.swing.JDialog {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(PanelGrafica, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(PanelGrafica, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(159, Short.MAX_VALUE))
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 1, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
@@ -340,54 +324,12 @@ public class FrmResultado extends javax.swing.JDialog {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
-//        try {
-//            for (int i = 0; i < tblTabla.getRowCount(); i++) {
-//                datos.addValue(Integer.parseInt(tblTabla.getValueAt(i, 0).toString()), tblTabla.getValueAt(i, 1).toString(), tblTabla.getValueAt(i, 2).toString());
-//                grafico = ChartFactory.createBarChart("Grafico de Resultados de Candidatos", "Candidatos", "Votos", datos, PlotOrientation.VERTICAL, true, true, false);
-//                ChartPanel panel = new ChartPanel(grafico);
-//                add(panel);
-//                panel.setBounds(5000, 40, 400, 250);
-//            }
-//        } catch (Exception e) {
-//            System.out.println(e);
-//        }
 
-//create datos
-        DefaultCategoryDataset dataset = new DefaultCategoryDataset();
-        dataset.setValue(200, "Total", "Nombre");
-        dataset.setValue(150, "Total", "Voto");
-
-        //create chart
-        JFreeChart linechart = ChartFactory.createLineChart("", "", "", dataset, PlotOrientation.VERTICAL, false, true, false);
-
-        //create plot object
-        CategoryPlot lineCategoryPlot = linechart.getCategoryPlot();
-        // lineCategoryPlot
-        lineCategoryPlot.setBackgroundPaint(Color.PINK);
-
-        //create render
-        LineAndShapeRenderer lineRenderer = (LineAndShapeRenderer) lineCategoryPlot.getRenderer();
-        Color lineChartColor = new Color(204, 0, 51);
-        lineRenderer.setSeriesPaint(0, lineChartColor);
-
-        //create chartPanel
-        ChartPanel lineChartPanel = new ChartPanel(linechart);
-        PanelGrafica.removeAll();
-        PanelGrafica.add(lineChartPanel, BorderLayout.CENTER);
-        PanelGrafica.validate();
-
+        Barras();
     }//GEN-LAST:event_jButton2ActionPerformed
 
-    private void cbxDignidadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxDignidadActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_cbxDignidadActionPerformed
-
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-//        String candidatoSeleccionado = cbxCandidato.getSelectedItem().toString();
-//        tblTabla.addRow(new Object[]{candidatoSeleccionado});
 
-//        String candidatoSeleccionado = cbxCandidato.getSelectedItem().toString();
-//        tblTabla.add(fila);
         guardar();
 
     }//GEN-LAST:event_jButton1ActionPerformed
@@ -398,55 +340,28 @@ public class FrmResultado extends javax.swing.JDialog {
         new FrmPrincipalAdm(null, true).setVisible(true);
     }//GEN-LAST:event_jButton3ActionPerformed
 
-    private double calcularPorcentaje(int voto, int totalVotos) {
-        if (totalVotos == 0) {
-            return 0.0; // Evita la división por cero
-        }
-
-        double porcentaje = (double) voto / totalVotos * 100;
-        return porcentaje;
-    }
-
+    //Metodo de guardar al candidato y el voto 
     private void guardar() {
-//        try {
-//
-//            dd.getResultados().setId_candidato(partido.buscarPorNombre(cbxCandidato.getSelectedItem().toString()).getId());
-////                        .getDatos().setId_partido_politico(partido.buscarPorNombre(cbxPartido.getSelectedItem().toString()).getId());
-////                candidato.getDatos().setId_dignidad(dignidad.categoriaDignidad(cbxDignidad.getSelectedItem().toString()).getId());
-//            if (dd.getResultados().getId() != null) {
-//
-//                dd.modificar();
-//
-//            } else {
-//                dd.guardar();
-//                cargarTabla();
-//
-//            }
-//            JOptionPane.showMessageDialog(null, "Datos Guardados Correctamente", "Infomacion", JOptionPane.INFORMATION_MESSAGE);
-//
-//        } catch (Exception e) {
-//        }
-//        if (jTextField2.getText().trim().isEmpty() ||jTextField2.getText().trim().isEmpty()){
-////                txtVoto.getSelectedItem().toString().isEmpty()) {
-//            JOptionPane.showMessageDialog(null, "Ingrese todo los campos", "Error", JOptionPane.ERROR_MESSAGE);
-//        } else {
-//            try {
-//          
-////                String aux = String.valueOf(jTextField2.getText());
-////                Integer au = Integer.valueOf(txtVoto.getText());
-//                String aux = cbxCandidato.getSelectedItem().toString();
-//                Integer au = Integer.valueOf(jComboBox1.getSelectedItem().toString());
-//
-//                for (int i = 0; i < au; i++) {
-//                    cd.getDatos().setNombre_candidato(cbxCandidato.getSelectedItem().toString());
-//      
-//
-//                }
-//            } catch (Exception e) {
-//                JOptionPane.showMessageDialog(null, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-//            }
-//        }
-       
+        try {
+
+            dd.getResultados().setId_candidato(cd.buscarPorNombre(cbxCandidato.getSelectedItem().toString()).getId());
+            dd.getResultados().setId_voto(1);
+
+//                        .getDatos().setId_partido_politico(partido.buscarPorNombre(cbxPartido.getSelectedItem().toString()).getId());
+//                candidato.getDatos().setId_dignidad(dignidad.categoriaDignidad(cbxDignidad.getSelectedItem().toString()).getId());
+            if (dd.getResultados().getId() != null) {
+
+                dd.modificar();
+
+            } else {
+                dd.guardar();
+                cargarTabla();
+
+            }
+            JOptionPane.showMessageDialog(null, "Datos Guardados Correctamente", "Infomacion", JOptionPane.INFORMATION_MESSAGE);
+
+        } catch (Exception e) {
+        }
 
     }
 
@@ -493,25 +408,20 @@ public class FrmResultado extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JPanel PanelGrafica;
     private javax.swing.JComboBox<String> cbxCandidato;
-    private javax.swing.JComboBox<String> cbxDignidad;
-    private javax.swing.JComboBox<String> cbxPartido;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tblTabla;
     private javax.swing.JLabel txtNombre;
+    private javax.swing.JLabel txtResultado;
     // End of variables declaration//GEN-END:variables
 
 }

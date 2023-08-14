@@ -11,10 +11,17 @@ package controlador.login.exceptions;
  */
 public class usuarioNoExisteException extends Exception{
 
+    /**
+     * 
+     * @param msg 
+     */
     public usuarioNoExisteException(String msg) {
         super(msg);
     }
     
+    /**
+     * 
+     */
     public usuarioNoExisteException() {
         super("No existe el usuario");
     }

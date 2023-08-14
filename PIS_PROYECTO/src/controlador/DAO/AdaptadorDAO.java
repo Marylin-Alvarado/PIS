@@ -21,16 +21,26 @@ import java.util.Map;
  * @author cobos
  */
 public class AdaptadorDAO<T> implements InterfazDAO<T> {
-
+    
+    //Atributo de tipo Conexion de conexion
     private Conexion conexion;
+    //Atributo de tipo Class de clazz
     private Class clazz;
 
+    //Constructor del adaptador Dao de los atributos 
     public AdaptadorDAO(Class clazz) {
         this.conexion = new Conexion();
         this.clazz = clazz;
 
     }
 
+    /**
+     * Metodo de guardar 
+     * @param obj
+     * @return
+     * @throws Exception 
+     */
+    
     @Override
     public Integer guardar(T obj) throws Exception {
         String query = queryInsert(obj);
@@ -48,6 +58,12 @@ public class AdaptadorDAO<T> implements InterfazDAO<T> {
         return idGenerado;
     }
 
+    /**
+     * Metodo de modificar
+     * @param obj
+     * @throws Exception 
+     */
+    
     @Override
     public void modificar(T obj) throws Exception {
         String query = queryUpdate(obj);
@@ -56,6 +72,12 @@ public class AdaptadorDAO<T> implements InterfazDAO<T> {
         conexion.getConnection().close();
         conexion.setConnection(null);
     }
+    
+    /**
+     * Metodo de listar
+     * @return 
+     */
+    
 
     @Override
     public ListaEnlazada<T> listar() {
@@ -74,6 +96,12 @@ public class AdaptadorDAO<T> implements InterfazDAO<T> {
         return lista;
     }
 
+    /**
+     * Metodo de obtener
+     * @param id
+     * @return 
+     */
+    
     @Override
     public T obtener(Integer id) {
         T data = null;
@@ -88,6 +116,12 @@ public class AdaptadorDAO<T> implements InterfazDAO<T> {
         }
         return data;
     }
+    
+    /**
+     * Metodo de llenar un objeto
+     * @param rs
+     * @return 
+     */    
 
     private T llenarObjeto(ResultSet rs) {
         T data = null;
@@ -108,6 +142,14 @@ public class AdaptadorDAO<T> implements InterfazDAO<T> {
         return data;
     }
 
+    /**
+     * Metodo para fijar los datos tipo string, integer, double y date
+     * @param f
+     * @param rs
+     * @param data
+     * @param atributo 
+     */
+    
     private void fijarDatos(Field f, ResultSet rs, T data, String atributo) {
         try {
             Method m = null;
@@ -147,6 +189,12 @@ public class AdaptadorDAO<T> implements InterfazDAO<T> {
         }
     }
 
+    /**
+     * Metodo de obtener el objeto
+     * @param obj
+     * @return 
+     */
+   
     private HashMap<String, Object> obtenerObjeto(T obj) {
         HashMap<String, Object> mapa = new HashMap<>();
         try {
@@ -176,6 +224,12 @@ public class AdaptadorDAO<T> implements InterfazDAO<T> {
         return mapa;
     }
 
+    /**
+     * Metodo de querryinsert de objeto de insert into
+     * @param obj
+     * @return 
+     */
+    
     private String queryInsert(T obj) {
         HashMap<String, Object> mapa = obtenerObjeto(obj);
         String query = "INSERT INTO " + clazz.getSimpleName().toLowerCase() + " (";
@@ -204,6 +258,12 @@ public class AdaptadorDAO<T> implements InterfazDAO<T> {
         return query;
     }
 
+    /**
+     * Metodo de queryUpdate de objeto de update
+     * @param obj
+     * @return 
+     */
+    
     private String queryUpdate(T obj) {
         HashMap<String, Object> mapa = obtenerObjeto(obj);
         String query = "UPDATE " + clazz.getSimpleName().toLowerCase() + " SET ";
