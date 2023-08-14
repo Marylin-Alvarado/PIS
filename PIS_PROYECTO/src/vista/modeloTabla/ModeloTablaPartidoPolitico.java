@@ -5,18 +5,17 @@
  */
 package vista.modeloTabla;
 
-import controlador.DAO.CandidatoDao;
 import controlador.ed.listas.ListaEnlazada;
 import javax.swing.table.AbstractTableModel;
-import modelo.Candidato;
 import modelo.Partido_Politico;
+
 
 /**
  *
  * @author cobos
  */
 public class ModeloTablaPartidoPolitico extends AbstractTableModel{
-    
+  
     private ListaEnlazada<Partido_Politico> datos = new ListaEnlazada<>();
 
     public ListaEnlazada<Partido_Politico> getDatos() {
@@ -64,7 +63,6 @@ public class ModeloTablaPartidoPolitico extends AbstractTableModel{
             default: return null;
         }
     }
-    
     
     
 }

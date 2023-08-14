@@ -54,4 +54,7 @@ public class Partido_Politico {
         return nombre_partido_politico;
     }
     
+
 }
+
+

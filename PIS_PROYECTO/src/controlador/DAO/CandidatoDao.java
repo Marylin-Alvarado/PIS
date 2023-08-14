@@ -8,17 +8,14 @@ package controlador.DAO;
 import controlador.ed.listas.ListaEnlazada;
 import controlador.ed.listas.exception.ListaNullException;
 import controlador.ed.listas.exception.PosicionNoEncontradaException;
-import java.io.IOException;
-import modelo.Candidato;
 import modelo.Candidato;
 
 /**
  *
  * @author cobos
  */
-public class CandidatoDao extends AdaptadorDAO<Candidato>{
-    
-    private Candidato datos;
+public class CandidatoDao extends AdaptadorDAO<Candidato> {
+ private Candidato datos;
 
     public CandidatoDao() {
         super(Candidato.class);
@@ -35,21 +32,52 @@ public class CandidatoDao extends AdaptadorDAO<Candidato>{
         this.datos = datos;
     }
 
-   public Integer guardar() throws Exception {
-        return this.guardar(datos);   
+    public Integer guardar() throws Exception {
+        return this.guardar(datos);
     }
 
     public boolean modificar() throws Exception {
-         this.modificar(datos);
-         return true;
+        this.modificar(datos);
+        return true;
     }
     
     public boolean eliminar() throws Exception{
         this.eliminar(datos);
-         return true;
+        return true;
     }
-      
-      /**
+
+    public ListaEnlazada<Candidato> buscarCandidatoPorPartidoPolitico(int id) {
+        ListaEnlazada<Candidato> cadidatos = listar();
+        ListaEnlazada<Candidato> resultado = new ListaEnlazada<>();
+
+        Candidato[] aux = cadidatos.toArray();
+
+        for (int i = 0; i < aux.length; i++) {
+
+            if (aux[i].getId_partido_politico() == i) {
+                resultado.insertar(aux[i]);
+            }
+        }
+
+        return resultado;
+    }
+
+    public Candidato buscarPorDignidad(int id, String dignidad) throws Exception {
+        ListaEnlazada<Candidato> aux = buscarCandidatoPorPartidoPolitico(id);
+        Candidato c = new Candidato();
+        
+        c.setNombre_candidato("");
+        
+        for (int i = 0; i < aux.size(); i++) {
+            if (new DignidadDao().buscarPorId(aux.obtener(i).getId_dignidad()).getTipo().equals(dignidad)){
+                c = aux.obtener(i);
+            }
+        }
+        
+        return c;
+    }
+
+    /**
      *
      * @param lista
      * @param tipoOrden
@@ -105,18 +133,18 @@ public class CandidatoDao extends AdaptadorDAO<Candidato>{
                 for (int j = bajo; j < alto; j++) {
                     // Comprueba el tipo de ordenamiento y realiza el intercambio si es necesario
                     if (tipoOrden == 0) {
-                        if (arreglo[j].getId_partido_politico()< pivote.getId_partido_politico()) {
+                        if (arreglo[j].getId_partido_politico() < pivote.getId_partido_politico()) {
                             i++;
                             intercambio(arreglo, i, j);
                         }
                     } else {
-                        if (arreglo[j].getId_partido_politico()> pivote.getId_partido_politico()) {
+                        if (arreglo[j].getId_partido_politico() > pivote.getId_partido_politico()) {
                             i++;
                             intercambio(arreglo, i, j);
                         }
                     }
                 }
-                
+
         }
         // Intercambia el pivote con el elemento en la posición i + 1
         intercambio(arreglo, i + 1, alto);
@@ -136,7 +164,7 @@ public class CandidatoDao extends AdaptadorDAO<Candidato>{
         arreglo[i] = arreglo[j];
         arreglo[j] = temp;
     }
-    
+
     public Candidato buscarPorNombre(String dato) throws ListaNullException, PosicionNoEncontradaException {
         Candidato resultado = null;
         ListaEnlazada<Candidato> lista = listar();
@@ -149,8 +177,8 @@ public class CandidatoDao extends AdaptadorDAO<Candidato>{
         }
         return resultado;
     }
-     
-     public ListaEnlazada<Candidato> ordenarNombre(ListaEnlazada<Candidato> lista, Integer tipo) {
+
+    public ListaEnlazada<Candidato> ordenarNombre(ListaEnlazada<Candidato> lista, Integer tipo) {
         try {
             Candidato[] matriz = lista.toArray();
             for (int i = 1; i < lista.size(); i++) {

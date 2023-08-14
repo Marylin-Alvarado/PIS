@@ -5,12 +5,18 @@
  */
 package vista.modeloTabla;
 
+
+import controlador.ed.listas.ListaEnlazada;
+import javax.swing.table.AbstractTableModel;
+import modelo.Candidato;
+
 import controlador.DAO.DignidadDao;
 import controlador.DAO.PartidoPoliticoDao;
 import controlador.ed.listas.ListaEnlazada;
 import javax.swing.table.AbstractTableModel;
 import modelo.Candidato;
 import modelo.Dignidad;
+
 
 /**
  *

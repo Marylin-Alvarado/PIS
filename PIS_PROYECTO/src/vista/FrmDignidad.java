@@ -8,7 +8,6 @@ import controlador.DAO.DignidadDao;
 import java.awt.Image;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-import static java.awt.image.ImageObserver.PROPERTIES;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -17,9 +16,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
-import javax.swing.event.DocumentEvent;
-import javax.swing.event.DocumentListener;
-import vista.ModeloTabla.ModeloTablaDignidad;
+import vista.modeloTabla.ModeloTablaDignidad;
 
 /**
  *
@@ -109,6 +106,7 @@ public class FrmDignidad extends javax.swing.JDialog {
         jScrollPane1 = new javax.swing.JScrollPane();
         tblTabla = new javax.swing.JTable();
         jButton2 = new javax.swing.JButton();
+        jButton4 = new javax.swing.JButton();
         jbllogo = new javax.swing.JLabel();
         txtCategoriabuscar = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
@@ -168,6 +166,13 @@ public class FrmDignidad extends javax.swing.JDialog {
 
         jButton2.setText("REGISTRAR CANDIDATOS");
 
+        jButton4.setText("Volver");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -177,7 +182,9 @@ public class FrmDignidad extends javax.swing.JDialog {
                 .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jButton4)
+                .addGap(18, 18, 18)
+                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(15, 15, 15))
         );
         jPanel2Layout.setVerticalGroup(
@@ -186,7 +193,9 @@ public class FrmDignidad extends javax.swing.JDialog {
                 .addGap(27, 27, 27)
                 .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 9, Short.MAX_VALUE)
-                .addComponent(jButton2))
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton2)
+                    .addComponent(jButton4)))
         );
 
         txtCategoriabuscar.addActionListener(new java.awt.event.ActionListener() {
@@ -325,6 +334,12 @@ public class FrmDignidad extends javax.swing.JDialog {
 
         // TODO add your handling code here:
     }//GEN-LAST:event_cbxTipoMouseClicked
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        // TODO add your handling code here:
+        this.dispose();
+        new FrmPartido_Politico(null, true).setVisible(true);
+    }//GEN-LAST:event_jButton4ActionPerformed
     /**
      * Este metodo me perimite guardar los datos del de la dignidad como los
      * numeros de cupos,como el tipo ,la categoria entre otros.
@@ -340,10 +355,10 @@ public class FrmDignidad extends javax.swing.JDialog {
                 String categoria = cbxCategoria.getSelectedItem().toString();
 
                 for (int i = 0; i < aux; i++) {
-                    dd.getDignidad().setTipo(cbxTipo.getSelectedItem().toString());
-                    dd.getDignidad().setCategoria(cbxCategoria.getSelectedItem().toString());
-                    dd.getDignidad().setNro_cupo(20);
-                    System.out.println(dd.getDignidad().getNro_cupo());
+                    dd.getDatos().setTipo(cbxTipo.getSelectedItem().toString());
+                    dd.getDatos().setCategoria(cbxCategoria.getSelectedItem().toString());
+                    dd.getDatos().setNro_cupo(20);
+                    System.out.println(dd.getDatos().getNro_cupo());
 
                     if (dd.contadorCategoria(categoria) <= 20) { // 20 es valor quemado pero en realidad va aqui la lista de los partidos existentes
                         asignarCategoria();
@@ -394,7 +409,7 @@ public class FrmDignidad extends javax.swing.JDialog {
      * Este metodo me permite limpiar todos los datos
      */
     private void limpiar() {
-        this.dd.setDignidad(null);
+        this.dd.setDatos(null);
         txtxNroCupos.setText("");
 
         fila = -1;
@@ -483,6 +498,7 @@ public class FrmDignidad extends javax.swing.JDialog {
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

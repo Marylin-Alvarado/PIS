@@ -1,10 +1,10 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
+/* To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
 package controlador.DAO;
 
+import java.io.IOException;
 import controlador.ed.listas.ListaEnlazada;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
@@ -22,57 +22,33 @@ import java.util.Map;
  */
 public class AdaptadorDAO<T> implements InterfazDAO<T> {
 
-    /**
-     * Obejto Conexion
-     */
     private Conexion conexion;
-    /**
-     * Class del modelo a usar
-     */
     private Class clazz;
-    /**
-     * Constructor de la clase
-     *
-     * @param clazz El objeto de la clase del modelo Ejemplo: Persona.class
-     */
+
     public AdaptadorDAO(Class clazz) {
         this.conexion = new Conexion();
         this.clazz = clazz;
+
     }
 
-    /**
-     * Metodo que permite guardar
-     *
-     * @param obj El objeto del modelo lleno
-     * @return La llave primaria generada por el motor de base de datos (se
-     * sugiere construir la tabla de base de datos con la generacion de id auto
-     * incementable)
-     * @throws Exception Cuando no se puede guardar en la base de datos
-     */
     @Override
     public Integer guardar(T obj) throws Exception {
+        String query = queryInsert(obj);
+        Integer idGenerado = -1;
+        PreparedStatement statement
+                = conexion.getConnection().prepareStatement(query,Statement.RETURN_GENERATED_KEYS);
         statement.executeUpdate();
         ResultSet generatedKeys = statement.getGeneratedKeys();
         if (generatedKeys.next()) {
             idGenerado = generatedKeys.getInt(1);
         }
 
-
         conexion.getConnection().close();
         conexion.setConnection(null);
         return idGenerado;
     }
 
-    /**
-     * Metodo que permite modificar un registro en la base de datos, para
-     * modificar se debe primero consultar el Objeto haciendo uso del metodo
-     * Obtener
-     *
-     * @param obj El objeto del modelo a modificar
-     * @throws Exception Alguna Excepcion si no modifica
-     */
     @Override
-
     public void modificar(T obj) throws Exception {
         String query = queryUpdate(obj);
         Statement st = conexion.getConnection().createStatement();
@@ -80,7 +56,7 @@ public class AdaptadorDAO<T> implements InterfazDAO<T> {
         conexion.getConnection().close();
         conexion.setConnection(null);
     }
-
+    
     public void eliminar(T obj) throws Exception {
         // DELETE FROM <TABLA> WHERE <CONDICION>
         String query = queryDelete(obj);
@@ -92,14 +68,8 @@ public class AdaptadorDAO<T> implements InterfazDAO<T> {
         conexion.setConnection(null);
     }
 
-    /**
-     * Metodo que permite sacar los datos de la base de datos
-     *
-     * @return Un Objeto de la ListaEnlazada con los datos llenos
-     */
     @Override
     public ListaEnlazada<T> listar() {
-
         ListaEnlazada<T> lista = new ListaEnlazada<>();
         try {
             Statement stmt = conexion.getConnection().createStatement();
@@ -115,12 +85,6 @@ public class AdaptadorDAO<T> implements InterfazDAO<T> {
         return lista;
     }
 
-    /**
-     * Permite obtener un objeto de la base de datos a travez del Id
-     *
-     * @param id El id a buscar en la base de datos
-     * @return El objeto buscado, es null si no esxiste el objeto
-     */
     @Override
     public T obtener(Integer id) {
         T data = null;
@@ -215,6 +179,7 @@ public class AdaptadorDAO<T> implements InterfazDAO<T> {
                 if (aux != null) {
                     mapa.put(atributo.toLowerCase(), aux);
                 }
+
             }
         } catch (Exception e) {
             System.out.println("No se pudo tener dato");
@@ -246,6 +211,7 @@ public class AdaptadorDAO<T> implements InterfazDAO<T> {
         }
         query = query.substring(0, query.length() - 2);
         query += ")";
+        System.out.println(query);
         return query;
     }
 
@@ -278,8 +244,8 @@ public class AdaptadorDAO<T> implements InterfazDAO<T> {
         query += " WHERE id = " + id;
         return query;
     }
-
-    private String queryDelete(T obj) {
+    
+    String queryDelete(T obj) {
         HashMap<String, Object> mapa = obtenerObjeto(obj);
         String query = "DELETE FROM " + clazz.getSimpleName().toLowerCase();
         Integer id = 0;

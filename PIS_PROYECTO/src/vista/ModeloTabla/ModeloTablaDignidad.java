@@ -2,13 +2,12 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package vista.ModeloTabla;
+package vista.modeloTabla;
 
 import controlador.ed.listas.ListaEnlazada;
 import javax.swing.table.AbstractTableModel;
 import modelo.Dignidad;
 
-import modelo.Voto;
 /**
  *
  * @author Gonzalez G

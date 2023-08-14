@@ -1,3 +1,4 @@
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -5,6 +6,11 @@
  */
 package controlador.utiles;
 
+
+import controlador.DAO.PapeletaDao;
+import controlador.ed.listas.ListaEnlazada;
+import controlador.ed.listas.exception.ListaNullException;
+import controlador.ed.listas.exception.PosicionNoEncontradaException;
 import java.io.UnsupportedEncodingException;
 import java.lang.reflect.Field;
 import java.security.InvalidKeyException;
@@ -17,6 +23,9 @@ import javax.crypto.IllegalBlockSizeException;
 import javax.crypto.NoSuchPaddingException;
 import javax.crypto.SecretKey;
 import javax.crypto.spec.SecretKeySpec;
+import modelo.Eleccion;
+import modelo.Papeleta;
+import modelo.Persona;
 
 /**
  *
@@ -174,6 +183,8 @@ public class Utilidades {
         }
         return cedulaCorrecta;
     }
+    
+    
 
     public static void main(String[] args) {
 
@@ -192,5 +203,22 @@ public class Utilidades {
         String baj = aux.substring(10, 13);
         System.out.println(ced + " " + baj);
     }
+    public static String encriptarContrasenia(String dato) {
+        if (dato != null) {
+            return Base64.getEncoder().encodeToString(dato.getBytes());
+        }
+        return "";
+    }
 
-}
+    /**
+     * Permiute desencriptar la contrasenia
+     * @param dato
+     * @return contrasenia desencriptada
+     */
+    public static String desEncriptarContrasenia(String dato) {
+        if (dato != null) {
+            return new String(Base64.getDecoder().decode(dato));
+        }
+        return "";
+    }
+}   
