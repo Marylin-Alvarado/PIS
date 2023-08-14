@@ -17,65 +17,37 @@ import modelo.Partido_Politico;
  */
 public class PartidoPoliticoDao extends AdaptadorDAO<Partido_Politico> {
 
-    /**
-     * Atributo de partido politico
-     */
     private Partido_Politico datos;
 
-    /**
-     * Constructor de partido politico
-     */
     public PartidoPoliticoDao() {
         super(Partido_Politico.class);
     }
 
-    /**
-     * Metodo de get de Datos de partido politico
-     * @return 
-     */
     public Partido_Politico getDatos() {
         if (this.datos == null) {
             this.datos = new Partido_Politico();
         }
         return datos;
     }
-    
-    /**
-     * Metodo de set de datos del partido politico
-     * @param datos 
-     */
 
     public void setDatos(Partido_Politico datos) {
         this.datos = datos;
     }
-    
-    /**
-     * Metodo de guardar
-     * @return
-     * @throws Exception 
-     */
 
     public Integer guardar() throws Exception {
         return this.guardar(datos);   
     }
 
-    /**
-     * Metodo de modificar 
-     * @return
-     * @throws Exception 
-     */
     public boolean modificar() throws Exception {
          this.modificar(datos);
          return true;
     }
+    
+    public boolean eliminar() throws Exception{
+        this.eliminar(datos);
+        return true;
+    }
 
-    /**
-     * Metodo de buscar por el nombre el partido politico
-     * @param dato
-     * @return
-     * @throws ListaNullException
-     * @throws PosicionNoEncontradaException 
-     */
     public Partido_Politico buscarPorNombre(String dato) throws ListaNullException, PosicionNoEncontradaException {
         Partido_Politico resultado = null;
         ListaEnlazada<Partido_Politico> lista = listar();
@@ -89,13 +61,6 @@ public class PartidoPoliticoDao extends AdaptadorDAO<Partido_Politico> {
         return resultado;
     }
     
-    /**
-     * Metodo de buscar por id el partido politico
-     * @param dato
-     * @return
-     * @throws ListaNullException
-     * @throws PosicionNoEncontradaException 
-     */
     public Partido_Politico buscarPorId(Integer dato) throws ListaNullException, PosicionNoEncontradaException {
         Partido_Politico resultado = null;
         ListaEnlazada<Partido_Politico> lista = listar();
@@ -109,12 +74,6 @@ public class PartidoPoliticoDao extends AdaptadorDAO<Partido_Politico> {
         return resultado;
     }
 
-    /**
-     * Metodo de ordenar por nombre el partido politico
-     * @param lista
-     * @param tipo
-     * @return 
-     */
     public ListaEnlazada<Partido_Politico> ordenarNombre(ListaEnlazada<Partido_Politico> lista, Integer tipo) {
         try {
             Partido_Politico[] matriz = lista.toArray();

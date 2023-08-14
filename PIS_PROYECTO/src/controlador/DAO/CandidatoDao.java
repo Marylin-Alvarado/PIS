@@ -8,10 +8,6 @@ package controlador.DAO;
 import controlador.ed.listas.ListaEnlazada;
 import controlador.ed.listas.exception.ListaNullException;
 import controlador.ed.listas.exception.PosicionNoEncontradaException;
-
-import java.io.IOException;
-import modelo.Candidato;
-
 import modelo.Candidato;
 
 /**
@@ -19,23 +15,12 @@ import modelo.Candidato;
  * @author cobos
  */
 public class CandidatoDao extends AdaptadorDAO<Candidato> {
+ private Candidato datos;
 
-    /*
-     //Atributo de tipo Candidato de datos
-    */
-   
-    private Candidato datos;
-
-    /*
-    //Constructor de Candidato Dao
-    */
     public CandidatoDao() {
         super(Candidato.class);
     }
 
-    /*
-    //Metodo de get de datos del candidato
-    */
     public Candidato getDatos() {
         if (this.datos == null) {
             this.datos = new Candidato();
@@ -43,37 +28,24 @@ public class CandidatoDao extends AdaptadorDAO<Candidato> {
         return datos;
     }
 
-    /*
-    //Metodo de set de datos del candidato
-    */
     public void setDatos(Candidato datos) {
         this.datos = datos;
     }
 
-    /*
-    //Metodo de guardar
-    */
     public Integer guardar() throws Exception {
         return this.guardar(datos);
     }
 
-    /**
-     * 
-    //Metodo de modificar 
-    */
     public boolean modificar() throws Exception {
         this.modificar(datos);
         return true;
     }
     
-    /**
-     * 
-     * @param id
-     * @return 
-     */
-    /*
-    //Metodo para buscar Candidato por el partido politico
-    */
+    public boolean eliminar() throws Exception{
+        this.eliminar(datos);
+        return true;
+    }
+
     public ListaEnlazada<Candidato> buscarCandidatoPorPartidoPolitico(int id) {
         ListaEnlazada<Candidato> cadidatos = listar();
         ListaEnlazada<Candidato> resultado = new ListaEnlazada<>();
@@ -89,31 +61,24 @@ public class CandidatoDao extends AdaptadorDAO<Candidato> {
 
         return resultado;
     }
-    
-    /**
-     * Metodo de buscar por dignidad 
-     * @param id
-     * @param dignidad
-     * @return
-     * @throws Exception 
-     */
+
     public Candidato buscarPorDignidad(int id, String dignidad) throws Exception {
         ListaEnlazada<Candidato> aux = buscarCandidatoPorPartidoPolitico(id);
         Candidato c = new Candidato();
-
+        
         c.setNombre_candidato("");
-
+        
         for (int i = 0; i < aux.size(); i++) {
-            if (new DignidadDao().buscarPorId(aux.obtener(i).getId_dignidad()).getTipo().equals(dignidad)) {
+            if (new DignidadDao().buscarPorId(aux.obtener(i).getId_dignidad()).getTipo().equals(dignidad)){
                 c = aux.obtener(i);
             }
         }
-
+        
         return c;
     }
 
     /**
-     *Metodo de quickSort para ordenar al candidato en una lista
+     *
      * @param lista
      * @param tipoOrden
      * @return
@@ -132,7 +97,7 @@ public class CandidatoDao extends AdaptadorDAO<Candidato> {
     }
 
     /**
-     *Metodo de quickSort para ordenar al candidato en un arreglo
+     *
      * @param arreglo
      * @param bajo
      * @param alto
@@ -151,7 +116,7 @@ public class CandidatoDao extends AdaptadorDAO<Candidato> {
     }
 
     /**
-     * Metodo de division para candidato
+     *
      * @param arreglo
      * @param bajo
      * @param alto
@@ -188,7 +153,7 @@ public class CandidatoDao extends AdaptadorDAO<Candidato> {
     }
 
     /**
-     * Metodo de intercambio de candidato
+     *
      * @param arreglo
      * @param i
      * @param j
@@ -199,14 +164,6 @@ public class CandidatoDao extends AdaptadorDAO<Candidato> {
         arreglo[i] = arreglo[j];
         arreglo[j] = temp;
     }
-    
-    /**
-     * Metodo de buscar por nombre al candidato
-     * @param dato
-     * @return
-     * @throws ListaNullException
-     * @throws PosicionNoEncontradaException 
-     */
 
     public Candidato buscarPorNombre(String dato) throws ListaNullException, PosicionNoEncontradaException {
         Candidato resultado = null;
@@ -221,12 +178,6 @@ public class CandidatoDao extends AdaptadorDAO<Candidato> {
         return resultado;
     }
 
-    /**
-     * Metodo para ordenar el nombre en una lista del candidato
-     * @param lista
-     * @param tipo
-     * @return 
-     */
     public ListaEnlazada<Candidato> ordenarNombre(ListaEnlazada<Candidato> lista, Integer tipo) {
         try {
             Candidato[] matriz = lista.toArray();
